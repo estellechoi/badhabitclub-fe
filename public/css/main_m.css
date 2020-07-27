@@ -1,0 +1,139 @@
+/* smaller than iPad */
+@media (max-width: 767px) {
+	/* HEADER */
+	header.section .container {
+		padding: 0 20px;
+	}
+
+	header .menu-group {
+		display: flex;
+		justify-content: center;
+		margin: 0 auto;
+	}
+
+	header .logo {
+		float: none;
+	}
+
+	header .sign-box {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: 100;
+		height: 65px;
+		background-color: #fff;
+		border-top: 1px solid #e5e5e5;
+		box-sizing: border-box;
+		justify-content: center;
+	}
+
+	header .sign-box__btn {
+		flex-direction: column;
+	}
+
+	header .sign-box__btn .fas {
+		margin: 4px 0;
+	}
+
+	header .sign-box__btn .menu-label {
+		display: block;
+		font-size: 9px;
+		line-height: 12px;
+	}
+
+	header .sign-box.hidden {
+		visibility: hidden;
+	}
+
+	header .nav-group {
+		display: block;
+		position: absolute;
+		top: 12px;
+	}
+
+	#nav-toggle-btn {
+		display: inline-flex;
+		align-items: center;
+	}
+
+	header .nav--main {
+		display: none;
+		padding: 6px 0 6px 12px;
+		margin-top: 12px;
+		background: none;
+	}
+
+	header .nav--main.toggled {
+		display: block;
+	}
+
+	header .nav--main li {
+		margin-right: 10px;
+	}
+
+	header .nav--main li a {
+		font-size: 12px;
+		display: inline-block;
+	}
+
+	#home-search-form {
+		display: none;
+	}
+
+	/* HEADER SCROLLED */
+	header.scrolled .container {
+		height: 56px;
+		padding: 0 20px;
+	}
+
+	header.scrolled .logo {
+		position: static;
+		margin: 0 auto;
+	}
+
+	header.scrolled .sign-box__btn .menu-label {
+		display: block;
+	}
+
+	header.scrolled .nav--main {
+		background-color: #fff;
+		border: 1px solid #e5e5e5;
+	}
+
+	/* VISUAL */
+	.section--visual {
+		background-position: center 280px;
+	}
+
+	.section--visual .container {
+		height: 671px;
+	}
+
+	/* SPOT */
+	.section--spot .container {
+		padding-top: 40px;
+		padding-bottom: 40px;
+	}
+
+	.section--spot .summary {
+		margin-bottom: 33px;
+	}
+
+	#map {
+		margin-left: -40px;
+		margin-right: -40px;
+		width: auto;
+		border-right: none;
+		border-left: none;
+	}
+
+	/* FOOTER */
+	footer .site-information {
+		font-size: 11px;
+	}
+
+	footer .site-information:last-child {
+		display: block;
+	}
+}

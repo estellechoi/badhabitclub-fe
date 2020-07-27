@@ -1,0 +1,24 @@
+/* smaller than iPhone 5/SE, mostly for galaxy fold */
+@media (max-width: 319px) {
+	/* VISUAL */
+	.section--visual {
+		background-position: center 160px;
+	}
+
+	.section--visual .container {
+		height: 420px;
+	}
+
+	/* SPOT */
+	.section--spot .container {
+		padding-top: 30px;
+	}
+
+	.section--spot .summary__title {
+		font-size: 20px;
+	}
+
+	.section--spot .summary__description {
+		font-size: 11px;
+	}
+}
