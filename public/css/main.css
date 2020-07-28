@@ -195,6 +195,16 @@ a {
 	box-sizing: border-box;
 }
 
+.map {
+	width: 100%;
+	height: 400px;
+	margin-top: 40px;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	/* border-bottom: none; */
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+	box-sizing: border-box;
+}
+
 /* BANNER */
 
 .banner {
@@ -439,16 +449,6 @@ header.scrolled #home-search-form {
 .section--spot .summary__description span {
 	display: block;
 	line-height: 2;
-}
-
-#map {
-	width: 100%;
-	height: 400px;
-	margin-top: 40px;
-	border: 1px solid rgba(0, 0, 0, 0.2);
-	/* border-bottom: none; */
-	box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-	box-sizing: border-box;
 }
 
 /* BRAND */

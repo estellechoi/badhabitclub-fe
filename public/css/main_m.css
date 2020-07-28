@@ -1,5 +1,15 @@
 /* smaller than iPad */
 @media (max-width: 767px) {
+	/* COMMON */
+	/* MAP */
+	.map {
+		margin-left: -40px;
+		margin-right: -40px;
+		width: auto;
+		border-right: none;
+		border-left: none;
+	}
+
 	/* HEADER */
 	header.section .container {
 		padding: 0 20px;
@@ -118,14 +128,6 @@
 
 	.section--spot .summary {
 		margin-bottom: 33px;
-	}
-
-	#map {
-		margin-left: -40px;
-		margin-right: -40px;
-		width: auto;
-		border-right: none;
-		border-left: none;
 	}
 
 	/* FOOTER */
