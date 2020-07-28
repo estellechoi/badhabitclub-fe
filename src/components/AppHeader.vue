@@ -36,16 +36,24 @@
           </nav>
         </div>
 
-        <nav class="nav-group">
-          <div id="nav-toggle-btn" class="btn btn--primary" @click="toggleNavBar">
+        <div class="nav-group">
+          <button
+            type="button"
+            aria-label="메뉴토글"
+            id="nav-toggle-btn"
+            class="btn btn--primary"
+            @click="toggleNavBar"
+          >
             <i class="fas fa-bars"></i>
-          </div>
+          </button>
 
-          <ul class="nav--list" ref="navList">
-            <li v-for="(item, index) in navList" :key="index">
-              <a :href="item.url">{{ item.label }}</a>
-            </li>
-          </ul>
+          <nav>
+            <ul class="nav--list" ref="navList">
+              <li v-for="(item, index) in navList" :key="index">
+                <a :href="item.url">{{ item.label }}</a>
+              </li>
+            </ul>
+          </nav>
 
           <form id="home-search-form" action method="get" role="search">
             <label for="home-search-box__input" class="search-box">
@@ -77,7 +85,7 @@
               </div>
             </label>
           </form>
-        </nav>
+        </div>
       </div>
     </header>
   </div>
