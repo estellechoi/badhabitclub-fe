@@ -11,16 +11,12 @@
 <script>
 import AppHeader from "./components/AppHeader.vue";
 import AppFooter from "./components/AppFooter.vue";
-import eventListeners from "./utils/event-listeners";
 
 export default {
   name: "App",
   components: {
     AppHeader,
     AppFooter,
-  },
-  mounted() {
-    eventListeners(window, document);
   },
 };
 </script>
