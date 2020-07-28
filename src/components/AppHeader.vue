@@ -23,10 +23,12 @@
               <i class="fas fa-sign-in-alt"></i>
               <span class="menu-label">JOIN</span>
             </a>
+
             <a href="#" class="sign-box__btn btn btn--primary">
               <i class="fas fa-user"></i>
               <span class="menu-label">MY PAGE</span>
             </a>
+
             <a href="#" class="sign-box__btn btn btn--primary">
               <i class="fas fa-shopping-bag"></i>
               <span class="menu-label">BAG</span>
@@ -38,11 +40,13 @@
           <div id="nav-toggle-btn" class="btn btn--primary" @click="toggleNavBar">
             <i class="fas fa-bars"></i>
           </div>
+
           <ul class="nav--list" ref="navList">
             <li v-for="(item, index) in navList" :key="index">
               <a :href="item.url">{{ item.label }}</a>
             </li>
           </ul>
+
           <form id="home-search-form" action method="get" role="search">
             <label for="home-search-box__input" class="search-box">
               <button
@@ -54,6 +58,7 @@
               >
                 <i class="fas fa-search"></i>
               </button>
+
               <div>
                 <div id="home-search-box__input" class="search-box__input-box" ref="searchInput">
                   <input
