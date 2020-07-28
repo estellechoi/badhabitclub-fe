@@ -12,9 +12,9 @@
         <div class="summary">
           <div class="summary__title">Where is</div>
           <div class="summary__description">
-            <span>Mon - Sat 7PM - 3AM Sunday Off</span>
-            <span>서울시 동대문구 휘경로2길 19 지하 1층</span>
-            <span>hwigyeongro2-gil, Dongdaemun-gu, Seoul, Republic of Korea</span>
+            <span>{{ spotInfo.hours }}</span>
+            <span>{{ spotInfo.address }}</span>
+            <span>{{ spotInfo.addressEng }}</span>
           </div>
         </div>
 
@@ -39,6 +39,11 @@ export default {
   },
   data() {
     return {
+      spotInfo: {
+        hours: "Mon - Sat 7PM - 3AM Sunday Off",
+        address: "서울시 동대문구 휘경로2길 19 지하 1층",
+        addressEng: "hwigyeongro2-gil, Dongdaemun-gu, Seoul, Republic of Korea",
+      },
       center: {
         lat: 37.595152,
         lng: 127.0607246,
