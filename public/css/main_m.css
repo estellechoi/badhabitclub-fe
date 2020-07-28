@@ -10,22 +10,22 @@
 		border-left: none;
 	}
 
-	/* HEADER */
-	header.section .container {
+	/* .section--header */
+	.section--header.section .container {
 		padding: 0 20px;
 	}
 
-	header .menu-group {
+	.section--header .menu-group {
 		display: flex;
 		justify-content: center;
 		margin: 0 auto;
 	}
 
-	header .logo {
+	.section--header .logo {
 		float: none;
 	}
 
-	header .sign-box {
+	.section--header .sign-box {
 		position: fixed;
 		bottom: 0;
 		left: 0;
@@ -38,25 +38,25 @@
 		justify-content: center;
 	}
 
-	header .sign-box__btn {
+	.section--header .sign-box__btn {
 		flex-direction: column;
 	}
 
-	header .sign-box__btn .fas {
+	.section--header .sign-box__btn .fas {
 		margin: 4px 0;
 	}
 
-	header .sign-box__btn .menu-label {
+	.section--header .sign-box__btn .menu-label {
 		display: block;
 		font-size: 9px;
 		line-height: 12px;
 	}
 
-	header .sign-box.hidden {
+	.section--header .sign-box.hidden {
 		visibility: hidden;
 	}
 
-	header .nav-group {
+	.section--header .nav-group {
 		display: block;
 		position: absolute;
 		top: 12px;
@@ -67,22 +67,22 @@
 		align-items: center;
 	}
 
-	header .nav--list {
+	.section--header .nav--list {
 		display: none;
 		padding: 6px 0 6px 12px;
 		margin-top: 12px;
 		background: none;
 	}
 
-	header .nav--list.toggled {
+	.section--header .nav--list.toggled {
 		display: block;
 	}
 
-	header .nav--list li {
+	.section--header .nav--list li {
 		margin-right: 10px;
 	}
 
-	header .nav--list li a {
+	.section--header .nav--list li a {
 		font-size: 12px;
 		display: inline-block;
 	}
@@ -91,22 +91,22 @@
 		display: none;
 	}
 
-	/* HEADER SCROLLED */
-	header.scrolled .container {
+	/* .section--header SCROLLED */
+	.section--header.scrolled .container {
 		height: 56px;
 		padding: 0 20px;
 	}
 
-	header.scrolled .logo {
+	.section--header.scrolled .logo {
 		position: static;
 		margin: 0 auto;
 	}
 
-	header.scrolled .sign-box__btn .menu-label {
+	.section--header.scrolled .sign-box__btn .menu-label {
 		display: block;
 	}
 
-	header.scrolled .nav--list {
+	.section--header.scrolled .nav--list {
 		background-color: #fff;
 		border: 1px solid #e5e5e5;
 	}
@@ -131,11 +131,11 @@
 	}
 
 	/* FOOTER */
-	footer .site-information {
+	.section--footer .site-information {
 		font-size: 11px;
 	}
 
-	footer .site-information:last-child {
+	.section--footer .site-information:last-child {
 		display: block;
 	}
 }

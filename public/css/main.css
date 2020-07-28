@@ -79,6 +79,12 @@ a {
 	}
 }
 
+/* INPUT */
+.input--text {
+	padding: 6px 10px;
+	border: 1px solid #767676;
+}
+
 /* SEARCH BOX */
 .search-box {
 	display: flex;
@@ -233,8 +239,8 @@ a {
 	display: none;
 }
 
-/* HEADER */
-header {
+/* .section--header */
+.section--header {
 	position: absolute;
 	/* top: 49px; */
 	width: 100%;
@@ -242,7 +248,7 @@ header {
 	transition: background-color 0.6s, border-bottom 0.6s;
 }
 
-header::before {
+.section--header::before {
 	content: "";
 	position: absolute;
 	top: 0;
@@ -254,23 +260,23 @@ header::before {
 	transition: opacity 150ms ease;
 }
 
-header .container {
+.section--header .container {
 	max-width: none;
 	height: 130px;
 	box-sizing: border-box;
 }
 
-header .menu-group {
+.section--header .menu-group {
 	height: 50%;
 }
 
-header .logo {
+.section--header .logo {
 	height: 100%;
 	display: flex;
 	align-items: center;
 }
 
-header .logo a {
+.section--header .logo a {
 	display: block;
 	width: 150px;
 	background-image: url("./../img/logo-primary.png");
@@ -281,11 +287,11 @@ header .logo a {
 	box-sizing: border-box;
 }
 
-header .sign-box__btn .fas {
+.section--header .sign-box__btn .fas {
 	margin-right: 5px;
 }
 
-header .nav-group {
+.section--header .nav-group {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -300,21 +306,21 @@ header .nav-group {
 	font-size: 19px;
 }
 
-header .nav-group .fas {
+.section--header .nav-group .fas {
 	font-size: 24px;
 }
 
-header .nav--list {
+.section--header .nav--list {
 	display: flex;
 	/* margin-left: -8px; */
 }
 
-header .nav--list li {
+.section--header .nav--list li {
 	width: auto;
 	margin-right: 24px;
 }
 
-header .nav--list li a {
+.section--header .nav--list li a {
 	display: block;
 	padding: 10px 0;
 	color: black;
@@ -324,25 +330,25 @@ header .nav--list li a {
 	box-sizing: border-box;
 }
 
-header .nav--list li a:hover {
+.section--header .nav--list li a:hover {
 	color: #4078c0;
 	border-bottom: 2px solid #4078c0;
 	padding-bottom: 7px;
 }
 
-/* HEADER - SCROLL */
-header.scrolled {
+/* .section--header - SCROLL */
+.section--header.scrolled {
 	position: fixed;
 	top: 0;
 	background-color: #fff;
 	border-bottom: 1px solid #e5e5e5;
 }
 
-header.scrolled::before {
+.section--header.scrolled::before {
 	opacity: 0;
 }
 
-header.scrolled .container {
+.section--header.scrolled .container {
 	/* max-width: 1240px; */
 	display: flex;
 	justify-content: space-between;
@@ -350,41 +356,41 @@ header.scrolled .container {
 	padding: 0 40px 0 200px;
 }
 
-header.scrolled .menu-group,
-header.scrolled .nav-group {
+.section--header.scrolled .menu-group,
+.section--header.scrolled .nav-group {
 	height: 100%;
 }
 
-header.scrolled .menu-group {
+.section--header.scrolled .menu-group {
 	order: 2;
 }
 
-header.scrolled .nav-group {
+.section--header.scrolled .nav-group {
 	order: 1;
 	/* margin-left: 20px; */
 }
 
-header.scrolled .logo {
+.section--header.scrolled .logo {
 	position: absolute;
 	top: 0;
 	left: 40px;
 }
 
-header.scrolled .logo a {
+.section--header.scrolled .logo a {
 	height: 56%;
 	background-image: url("./../img/logo-ellipse.png");
 	background-position: center center;
 }
 
-header.scrolled .sign-box .menu-label {
+.section--header.scrolled .sign-box .menu-label {
 	display: none;
 }
 
-header.scrolled .sign-box .fas {
+.section--header.scrolled .sign-box .fas {
 	margin-right: 0;
 }
 
-header.scrolled #home-search-form {
+.section--header.scrolled #home-search-form {
 	display: none;
 }
 
@@ -459,12 +465,12 @@ header.scrolled #home-search-form {
 	background-repeat: no-repeat; */
 }
 
-/* FOOTER */
-footer {
+/* .section--footer */
+.section--footer {
 	background-color: #f5f5f5;
 }
 
-footer.section .container {
+.section--footer.section .container {
 	padding-top: 50px;
 	padding-bottom: 50px;
 	font-size: 13px;
@@ -472,25 +478,131 @@ footer.section .container {
 	color: #767676;
 }
 
-footer .site-information:last-child {
+.section--footer .site-information:last-child {
 	display: flex;
 }
 
-footer .site-information:last-child {
+.section--footer .site-information:last-child {
 	margin-top: 22px;
 }
 
-footer .site-information li {
+.section--footer .site-information li {
 	margin-right: 15px;
 	line-height: 1.5;
 	/* display: flex; */
 	/* text-align: right; */
 }
 
-footer .site-information li a {
+.section--footer .site-information li a {
 	cursor: pointer;
 }
 
-footer .site-information li a:hover {
+.section--footer .site-information li a:hover {
 	color: #4078c0;
+}
+
+/* MODAL - SIGNIN */
+
+.signin-box {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	padding: 0 40px;
+}
+
+.signin-box__header {
+	height: 18%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex: 0 0 auto;
+	position: relative;
+}
+
+.signin-box__title {
+	letter-spacing: 1px;
+	font-size: 22px;
+	text-indent: -9999px;
+	position: relative;
+	background-image: url("./../img/logo-ellipse.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center center;
+	width: 120px;
+	height: 100%;
+}
+
+.signin-box__body {
+	flex: 1 1 auto;
+	display: flex;
+	align-items: center;
+	outline: none;
+}
+
+.signin-box__body .container {
+	flex: 1 1;
+}
+
+.img-box {
+}
+
+.img-box__display {
+	width: 120px;
+	height: 120px;
+	margin: 0 auto;
+}
+
+.img-box__display img {
+	display: block;
+	height: 100%;
+	background-color: #d8d8d8;
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+#signin-form {
+	margin-top: 16px;
+}
+
+#signin-form .container {
+	padding: 0 40px;
+}
+
+.signin-fieldset {
+	display: flex;
+	flex-direction: column;
+}
+
+.signin-fieldset__item {
+	width: 100%;
+	margin-bottom: 16px;
+	height: 50px;
+}
+
+.signin-fieldset__item:last-child {
+	margin-bottom: 6px;
+}
+
+label.signin-fieldset__item > * {
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
+}
+
+.signin-fieldset .btn {
+	border-radius: 0;
+	justify-content: center;
+}
+
+.signin-box__footer {
+	flex: 0 0 auto;
+	height: 70px;
+	display: flex;
+	align-items: center;
+	border-top: 1px solid #e5e5e5;
+	margin-bottom: 4px;
+}
+
+.signin-box__footer .btn {
+	margin-left: 6px;
 }
