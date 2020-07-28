@@ -67,8 +67,6 @@
 		<link rel="stylesheet" href="css/main_m.css" />
 		<link rel="stylesheet" href="css/main_s.css" />
 		<link rel="stylesheet" href="css/main_xs.css" />
-
-		<script src="main.js" defer></script>
 	</head>
 	<body>
 		<noscript>
@@ -82,50 +80,6 @@
 		</noscript>
 
 		<div id="app"></div>
-
-		<script>
-			function initMap() {
-				const centerLatLng = {
-					lat: 37.595152,
-					lng: 127.0607246,
-				};
-
-				const map = new google.maps.Map(document.getElementById("map"), {
-					center: centerLatLng,
-					scrollwheel: false,
-					zoom: 17,
-				});
-
-				getPosition(map);
-			}
-
-			function getPosition(map) {
-				var geocoder = new google.maps.Geocoder();
-
-				const addressList = [
-					"서울특별시 동대문구 휘경로2길 19",
-					// "서울특별시 중구 삼일대로 343",
-				];
-
-				addressList.forEach((item) => {
-					geocoder.geocode({ address: item }, (res, status) => {
-						if (status !== "OK") return;
-						console.log(res);
-						const marker = new google.maps.Marker({
-							map,
-							title: "Bad Habit Club",
-							position: res[0].geometry.location,
-						});
-					});
-				});
-			}
-		</script>
-		<!-- defer - after dom content loaded-->
-		<script
-			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTQIlxBn5AfKGvsfJiormAE1esN3fcCkg&callback=initMap"
-			async
-			defer
-		></script>
 		<!-- built files will be auto injected -->
 	</body>
 </html>
