@@ -11,7 +11,7 @@
     </aside>
 
     <!--HEADER-->
-    <header class="section" ref="header">
+    <header class="section section--header" ref="header">
       <div class="container">
         <div class="menu-group clearfix">
           <div class="logo float--left">
@@ -24,7 +24,7 @@
               <span class="menu-label">JOIN</span>
             </a>
 
-            <a href="#" class="sign-box__btn btn btn--primary">
+            <a class="sign-box__btn btn btn--primary" @click="pullModal">
               <i class="fas fa-user"></i>
               <span class="menu-label">MY PAGE</span>
             </a>
@@ -88,15 +88,27 @@
         </div>
       </div>
     </header>
+
+    <!--MODAL-->
+    <modal v-if="showModal" :ariaLabel="'로그인'" @close="closeModal">
+      <sign-in slot="body"></sign-in>
+    </modal>
   </div>
 </template>
 
 <script>
+import Modal from "./common/Modal";
+import SignIn from "./SignIn";
+
 export default {
+  components: {
+    Modal,
+    SignIn,
+  },
   data() {
     return {
       banner: {
-        use: true,
+        use: false,
         title: "카카오 친구 추가하고 3,000 절약해요!",
         msg: "7.31 까지",
       },
@@ -122,6 +134,7 @@ export default {
           url: "#",
         },
       ],
+      showModal: false,
     };
   },
   methods: {
@@ -156,6 +169,12 @@ export default {
 
       if (isAllScrolled) $signBox.classList.add("hidden");
       else $signBox.classList.remove("hidden");
+    },
+    pullModal() {
+      this.showModal = true;
+    },
+    closeModal() {
+      this.showModal = false;
     },
   },
   mounted() {
