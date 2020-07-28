@@ -1,4 +1,4 @@
-export default function(window, document) {
+export default (window, document, input) => {
 	"use strict";
 
 	window.addEventListener("scroll", () => {
@@ -6,7 +6,7 @@ export default function(window, document) {
 		checkScroll();
 	});
 
-	const $input = document.getElementById("home-search-box__input");
+	// const $searchInput = document.getElementById("home-search-box__input");
 
 	function getScrollY() {
 		const y = window.pageYOffset; // IE 10
@@ -16,7 +16,7 @@ export default function(window, document) {
 		if (y > 45) {
 			$header.classList.add("scrolled");
 			// $banner.classList.add("banner--hidden");
-			$input.classList.remove("full-width");
+			input.classList.remove("full-width");
 		} else {
 			$header.classList.remove("scrolled");
 			// $banner.classList.remove("banner--hidden");
@@ -34,19 +34,4 @@ export default function(window, document) {
 		if (isAllScrolled) $signBox.classList.add("hidden");
 		else $signBox.classList.remove("hidden");
 	}
-
-	const $searchBtn = document.getElementById("home-search-box__btn");
-	$searchBtn.addEventListener("click", toggleInputField);
-
-	function toggleInputField() {
-		$input.classList.toggle("full-width");
-	}
-
-	const $toggleBtn = document.getElementById("nav-toggle-btn");
-	$toggleBtn.addEventListener("click", toggleNavBar);
-
-	function toggleNavBar() {
-		const $navMain = document.querySelector(".nav--main");
-		$navMain.classList.toggle("toggled");
-	}
-}
+};
