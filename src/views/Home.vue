@@ -3,6 +3,7 @@
   <main role="main">
     <!-- VISUAL-->
     <section class="section section--visual">
+      {{ bgAlt }}
       <div class="container"></div>
     </section>
 
@@ -39,6 +40,8 @@ export default {
   },
   data() {
     return {
+      bgAlt:
+        "come curious leave connected 라는 문구와 함께 낡은 전화기 사진이 한가운데에 위치한 어두운 흰색의 배경 이미지",
       spotInfo: {
         hours: "Mon - Sat 7PM - 3AM Sunday Off",
         address: "서울시 동대문구 휘경로2길 19 지하 1층",

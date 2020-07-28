@@ -395,6 +395,7 @@ header.scrolled #home-search-form {
 	background-size: 20%;
 	background-position: center 300px;
 	position: relative;
+	text-indent: -9999px;
 }
 
 .section--visual::before {
