@@ -34,7 +34,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .modal-background {
   position: fixed;
   top: 0;
