@@ -1,5 +1,5 @@
 <template>
-  <footer class="section">
+  <footer class="section section--footer">
     <div class="container">
       <ul class="site-information">
         <li>{{ siteInfo.title }}</li>
