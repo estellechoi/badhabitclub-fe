@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- BANNER -->
-    <aside class="banner" v-if="banner.useYn" ref="banner">
+    <aside class="banner" v-if="banner.use" ref="banner">
       <a href="#">
         <div class="banner__content">
           {{ banner.title }}
@@ -83,7 +83,7 @@ export default {
   data() {
     return {
       banner: {
-        useYn: true,
+        use: true,
         title: "카카오 친구 추가하고 3,000 절약해요!",
         msg: "7.31 까지",
       },
