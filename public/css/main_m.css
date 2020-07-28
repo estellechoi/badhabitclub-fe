@@ -67,22 +67,22 @@
 		align-items: center;
 	}
 
-	header .nav--main {
+	header .nav--list {
 		display: none;
 		padding: 6px 0 6px 12px;
 		margin-top: 12px;
 		background: none;
 	}
 
-	header .nav--main.toggled {
+	header .nav--list.toggled {
 		display: block;
 	}
 
-	header .nav--main li {
+	header .nav--list li {
 		margin-right: 10px;
 	}
 
-	header .nav--main li a {
+	header .nav--list li a {
 		font-size: 12px;
 		display: inline-block;
 	}
@@ -106,7 +106,7 @@
 		display: block;
 	}
 
-	header.scrolled .nav--main {
+	header.scrolled .nav--list {
 		background-color: #fff;
 		border: 1px solid #e5e5e5;
 	}
