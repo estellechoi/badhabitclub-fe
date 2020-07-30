@@ -71,7 +71,7 @@
                 />
               </label>
 
-              <div class="sign-fieldset__item sign-fieldset__item--long">
+              <div class="sign-fieldset__item sign-fieldset__item--auto-height">
                 <p class="text-box">
                   배드해빗클럽의 회원 전용 할인, 추천 굿즈 정보, 프로모션 및 정책 변경사항을 이메일로 보내드립니다.
                   계정 관리의 환경설정에서 언제든지 메시지 수신을 거부할 수 있습니다.
