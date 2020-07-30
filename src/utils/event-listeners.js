@@ -29,7 +29,7 @@ export default (window, document, input) => {
 		const docHeight = document.body.scrollHeight;
 		const isAllScrolled = scrollY + innerHeight >= docHeight;
 
-		const $signBox = document.querySelector(".sign-box");
+		const $signBox = document.querySelector(".sign-icon-box");
 
 		if (isAllScrolled) $signBox.classList.add("hidden");
 		else $signBox.classList.remove("hidden");
