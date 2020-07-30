@@ -4,13 +4,15 @@
 
 ## Preview
 
-![Draft Desktop ver.](etc/img/draft1.png)
+![screenshot Desktop ver.](etc/img/screenshot1.png)
 
-![Draft Desktop ver. scrolled](etc/img/draft2.png)
+![screenshot Desktop ver. scrolled](etc/img/screenshot2.png)
 
-![Draft Mobile ver.](etc/img/draft3.png)
+![screenshot Desktop ver. modal](etc/img/screenshot3.png)
 
-![Draft Mobile ver. scrolled](etc/img/draft4.png)
+![screenshot Mobile ver.](etc/img/screenshot4.png)
+
+![screenshot Mobile ver. scrolled](etc/img/screenshot5.png)
 
 <br>
 
