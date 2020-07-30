@@ -18,18 +18,18 @@
             <a href="#">{{ logo.alt }}</a>
           </div>
 
-          <nav class="sign-box float--right" aria-hidden="false" ref="signBox">
-            <a href="#" class="sign-box__btn btn btn--primary">
+          <nav class="sign-icon-box float--right" aria-hidden="false" ref="signBox">
+            <a href="#" class="sign-icon-box__btn btn btn--primary" @click="pullSignUpModal">
               <i class="fas fa-sign-in-alt"></i>
               <span class="menu-label">JOIN</span>
             </a>
 
-            <a class="sign-box__btn btn btn--primary" @click="pullModal">
+            <a class="sign-icon-box__btn btn btn--primary" @click="pullSignInModal">
               <i class="fas fa-user"></i>
               <span class="menu-label">MY PAGE</span>
             </a>
 
-            <a href="#" class="sign-box__btn btn btn--primary">
+            <a href="#" class="sign-icon-box__btn btn btn--primary" @click="goShoppingBag">
               <i class="fas fa-shopping-bag"></i>
               <span class="menu-label">BAG</span>
             </a>
@@ -90,7 +90,11 @@
     </header>
 
     <!--MODAL-->
-    <modal v-if="showModal" :ariaLabel="'로그인'" @close="closeModal">
+    <modal v-if="showSignUp" :ariaLabel="'회원가입'" @close="closeSignUp">
+      <sign-up slot="body"></sign-up>
+    </modal>
+
+    <modal v-if="showSignIn" :ariaLabel="'로그인'" @close="closeSignIn">
       <sign-in slot="body"></sign-in>
     </modal>
   </div>
@@ -99,11 +103,13 @@
 <script>
 import Modal from "./common/Modal";
 import SignIn from "./SignIn";
+import SignUp from "./SignUp";
 
 export default {
   components: {
     Modal,
     SignIn,
+    SignUp,
   },
   data() {
     return {
@@ -134,7 +140,8 @@ export default {
           url: "#",
         },
       ],
-      showModal: false,
+      showSignIn: false,
+      showSignUp: false,
     };
   },
   methods: {
@@ -170,11 +177,21 @@ export default {
       if (isAllScrolled) $signBox.classList.add("hidden");
       else $signBox.classList.remove("hidden");
     },
-    pullModal() {
-      this.showModal = true;
+    pullSignInModal() {
+      this.showSignIn = true;
     },
-    closeModal() {
-      this.showModal = false;
+    closeSignIn() {
+      this.showSignIn = false;
+    },
+    pullSignUpModal() {
+      this.showSignUp = true;
+    },
+    closeSignUp() {
+      this.showSignUp = false;
+    },
+    goShoppingBag() {
+      const isOnline = false;
+      if (!isOnline) return this.pullSignInModal();
     },
   },
   mounted() {
