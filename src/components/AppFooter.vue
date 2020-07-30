@@ -1,7 +1,12 @@
 <template>
   <footer class="section section--footer">
     <div class="container">
-      <ul class="site-information">
+      <div class="site-info site-info--doc">
+        <a>이용약관</a>
+        <a>개인정보처리방침</a>
+      </div>
+
+      <ul class="site-info">
         <li>{{ siteInfo.title }}</li>
         <li>{{ siteInfo.telNo }}</li>
         <li>{{ siteInfo.email }}</li>
@@ -9,17 +14,15 @@
         <li>{{ siteInfo.address }}</li>
       </ul>
 
-      <ul class="site-information">
+      <ul class="site-info">
         <li>사업자등록번호 {{ siteInfo.coRegNo }}</li>
-        <li>통신판매업신고번호 {{ siteInfo.mailOrderRptNo }} 대표 {{ siteInfo.rpsntNm }}</li>
+        <li>통신판매업신고번호 {{ siteInfo.mailOrderRptNo }}</li>
         <li>개인정보보호책임자 {{ siteInfo.rpsntNm }}</li>
-        <li>
-          <a>이용약관</a>
-        </li>
-        <li>
-          <a>개인정보처리방침</a>
-        </li>
       </ul>
+
+      <a href="https://www.instagram.com/xxbadhabitclub" class="sns-link">
+        <i class="fab fa-instagram"></i>
+      </a>
     </div>
   </footer>
 </template>
