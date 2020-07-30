@@ -67,9 +67,10 @@ export default {
 .modal__body {
   position: relative;
   max-height: 100%;
-  max-width: 568px;
-  height: 65vh;
-  width: 80vw;
+  /* max-width: 568px; */
+  /* min-width: 568px; */
+  height: auto;
+  width: 568px;
   background-color: #fff;
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
   animation-name: pullModal;
