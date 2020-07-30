@@ -116,10 +116,10 @@ export default {
     toggleCheckbox(evt) {
       evt.stopPropagation();
       const isChecked = evt.target.checked;
-      const checkbox = this.$refs.checkbox;
+      const $checkbox = this.$refs.checkbox;
 
-      if (isChecked) checkbox.classList.add("checkbox--checked");
-      else checkbox.classList.remove("checkbox--checked");
+      if (isChecked) $checkbox.classList.add("checkbox--checked");
+      else $checkbox.classList.remove("checkbox--checked");
     },
   },
 };
