@@ -25,7 +25,7 @@
 		float: none;
 	}
 
-	.section--header .sign-box {
+	.section--header .sign-icon-box {
 		position: fixed;
 		bottom: 0;
 		left: 0;
@@ -38,21 +38,21 @@
 		justify-content: center;
 	}
 
-	.section--header .sign-box__btn {
+	.section--header .sign-icon-box__btn {
 		flex-direction: column;
 	}
 
-	.section--header .sign-box__btn .fas {
+	.section--header .sign-icon-box__btn .fas {
 		margin: 4px 0;
 	}
 
-	.section--header .sign-box__btn .menu-label {
+	.section--header .sign-icon-box__btn .menu-label {
 		display: block;
 		font-size: 9px;
 		line-height: 12px;
 	}
 
-	.section--header .sign-box.hidden {
+	.section--header .sign-icon-box.hidden {
 		visibility: hidden;
 	}
 
@@ -102,7 +102,7 @@
 		margin: 0 auto;
 	}
 
-	.section--header.scrolled .sign-box__btn .menu-label {
+	.section--header.scrolled .sign-icon-box__btn .menu-label {
 		display: block;
 	}
 
