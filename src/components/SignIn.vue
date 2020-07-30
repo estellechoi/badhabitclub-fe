@@ -45,6 +45,20 @@
                   placeholder="비밀번호"
                 />
               </label>
+              <div class="sign-fieldset__item sign-fieldset__item--auto-height">
+                <label for="signin-check-keep-online" class="text-box">
+                  <span class="checkbox" ref="checkbox">
+                    <input
+                      type="checkbox"
+                      class="input--checkbox"
+                      id="signin-check-keep-online"
+                      aria-invalid="false"
+                      @input="toggleCheckbox"
+                    />
+                  </span>
+                  <span class="checkbox-label">로그인 상태 유지</span>
+                </label>
+              </div>
               <button type="submit" aria-busy="false" class="btn sign-fieldset__item">로그인하기</button>
             </fieldset>
 
@@ -75,6 +89,16 @@ export default {
       },
       isMember: false,
     };
+  },
+  methods: {
+    toggleCheckbox(evt) {
+      evt.stopPropagation();
+      const isChecked = evt.target.checked;
+      const $checkbox = this.$refs.checkbox;
+
+      if (isChecked) $checkbox.classList.add("checkbox--checked");
+      else $checkbox.classList.remove("checkbox--checked");
+    },
   },
 };
 </script>
