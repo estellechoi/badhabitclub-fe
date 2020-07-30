@@ -131,11 +131,11 @@
 	}
 
 	/* FOOTER */
-	.section--footer .site-information {
+	.section--footer .site-info {
 		font-size: 11px;
 	}
 
-	.section--footer .site-information:last-child {
+	.section--footer .site-info:last-child {
 		display: block;
 	}
 }
