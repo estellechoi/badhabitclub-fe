@@ -22,6 +22,7 @@
                   spellcheck="false"
                   autocapitalize="none"
                   placeholder="이메일"
+                  v-model="signUpInfo.email"
                 />
                 <!-- autocomplete="email" idk which is more appropriate -->
               </label>
@@ -38,6 +39,7 @@
                   spellcheck="false"
                   autocapitalize="none"
                   placeholder="이름 (예: 길동)"
+                  v-model="signUpInfo.name"
                 />
               </label>
 
@@ -53,6 +55,7 @@
                   spellcheck="false"
                   autocapitalize="none"
                   placeholder="성 (예: 홍)"
+                  v-model="signUpInfo.familyName"
                 />
               </label>
 
@@ -68,6 +71,7 @@
                   spellcheck="false"
                   autocapitalize="none"
                   placeholder="비밀번호 설정하기"
+                  v-model="signUpInfo.password"
                 />
               </label>
 
@@ -78,18 +82,11 @@
                 </p>
 
                 <div class="sign-fieldset__child">
-                  <label for="signup-agreement--recieve-promotional-email" class="text-box">
-                    <span class="checkbox" ref="checkbox">
-                      <input
-                        type="checkbox"
-                        class="input--checkbox"
-                        id="signup-agreement--recieve-promotional-email"
-                        aria-invalid="false"
-                        @input="toggleCheckbox"
-                      />
-                    </span>
-                    <span class="checkbox-label">마케팅 메시지를 받고 싶지 않습니다.</span>
-                  </label>
+                  <checkbox
+                    label="마케팅 메시지를 받고 싶지 않습니다."
+                    id="signup-agreement--recieve-promotional-email"
+                    @change="togglePromoEmail"
+                  ></checkbox>
                 </div>
               </div>
 
@@ -97,7 +94,12 @@
             </fieldset>
 
             <div>
-              <button type="button" aria-busy="false" class="btn btn--primary">이미 배드해빗클럽 계정이 있나요?</button>
+              <button
+                type="button"
+                aria-busy="false"
+                class="btn btn--primary"
+                @click="goSignIn"
+              >이미 배드해빗클럽 계정이 있나요?</button>
             </div>
           </div>
         </form>
@@ -112,14 +114,23 @@
 
 <script>
 export default {
+  data() {
+    return {
+      signUpInfo: {
+        email: "",
+        name: "",
+        familyName: "",
+        password: "",
+        rcvPromoEmail: false,
+      },
+    };
+  },
   methods: {
-    toggleCheckbox(evt) {
-      evt.stopPropagation();
-      const isChecked = evt.target.checked;
-      const $checkbox = this.$refs.checkbox;
-
-      if (isChecked) $checkbox.classList.add("checkbox--checked");
-      else $checkbox.classList.remove("checkbox--checked");
+    goSignIn() {
+      this.$emit("close", "signin");
+    },
+    togglePromoEmail(val) {
+      this.signUpInfo.rcvPromoEmail = val;
     },
   },
 };
