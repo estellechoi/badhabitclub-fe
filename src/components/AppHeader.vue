@@ -80,6 +80,7 @@
                     role="combobox"
                     placeholder="상품명을 입력하세요."
                     class="search-box__input--text"
+                    v-model="searchText"
                   />
                 </div>
               </div>
@@ -91,11 +92,11 @@
 
     <!--MODAL-->
     <modal v-if="showSignUp" :ariaLabel="'회원가입'" @close="closeSignUp">
-      <sign-up slot="body"></sign-up>
+      <sign-up slot="body" @close="closeSignUp"></sign-up>
     </modal>
 
     <modal v-if="showSignIn" :ariaLabel="'로그인'" @close="closeSignIn">
-      <sign-in slot="body"></sign-in>
+      <sign-in slot="body" @close="closeSignIn"></sign-in>
     </modal>
   </div>
 </template>
@@ -142,6 +143,7 @@ export default {
       ],
       showSignIn: false,
       showSignUp: false,
+      searchText: "",
     };
   },
   methods: {
@@ -161,6 +163,7 @@ export default {
         $header.classList.add("scrolled");
         // this.$refs.banner.classList.add("banner--hidden");
         this.$refs.searchInput.classList.remove("full-width");
+        this.searchText = "";
       } else {
         $header.classList.remove("scrolled");
         // this.$refs.banner.classList.remove("banner--hidden");
@@ -180,14 +183,20 @@ export default {
     pullSignInModal() {
       this.showSignIn = true;
     },
-    closeSignIn() {
-      this.showSignIn = false;
-    },
     pullSignUpModal() {
       this.showSignUp = true;
     },
-    closeSignUp() {
+    closeSignIn(res) {
+      this.showSignIn = false;
+
+      if (!res) return;
+      this.pullSignUpModal();
+    },
+    closeSignUp(res) {
       this.showSignUp = false;
+
+      if (!res) return;
+      this.pullSignInModal();
     },
     goShoppingBag() {
       const isOnline = false;
