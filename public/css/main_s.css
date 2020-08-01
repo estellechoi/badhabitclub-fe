@@ -1,5 +1,9 @@
 /* smaller than iPhone 6,7,8  */
 @media (max-width: 374px) {
+	.text-box {
+		font-size: 11px;
+	}
+
 	/* HEADER */
 	.section--header .logo a {
 		width: 120px;
@@ -20,5 +24,11 @@
 
 	.section--visual .container {
 		height: 535px;
+	}
+
+	/* MODAL - SIGNUP, SIGNIN */
+	#signin-form .container,
+	#signup-form .container {
+		padding: 0;
 	}
 }

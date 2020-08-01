@@ -30,6 +30,7 @@ input:focus {
 
 .text-box {
 	overflow-wrap: break-word;
+	word-break: keep-all;
 	font-size: 13px;
 	font-weight: 400;
 	color: rgb(72, 72, 72);
@@ -619,12 +620,12 @@ input:focus {
 .sign-box {
 	display: flex;
 	flex-direction: column;
-	height: 684px;
+	height: 686px;
 	padding: 0 40px;
 }
 
 .sign-box.sign-box--short {
-	height: 488px;
+	height: 445px;
 }
 
 .sign-box__header {

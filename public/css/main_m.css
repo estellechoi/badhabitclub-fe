@@ -138,4 +138,14 @@
 	.section--footer .site-info:last-child {
 		display: block;
 	}
+
+	/* MODAL - SIGNIN, SIGNUP */
+	.sign-box__body .container {
+		padding: 0;
+	}
+
+	#signin-form .container,
+	#signup-form .container {
+		padding: 0 20px;
+	}
 }

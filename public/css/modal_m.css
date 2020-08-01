@@ -1,0 +1,13 @@
+@media (max-width: 767px) {
+	.modal {
+		padding: 0;
+	}
+
+	.modal__body {
+		width: 100%;
+	}
+
+	.modal__body .btn--primary {
+		font-size: 10px;
+	}
+}
