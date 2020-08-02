@@ -15,11 +15,16 @@
       <div class="container">
         <div class="menu-group clearfix">
           <div class="logo float--left">
-            <a href="#">{{ logo.alt }}</a>
+            <a href="/">{{ logo.alt }}</a>
           </div>
 
           <nav class="sign-icon-box float--right" aria-hidden="false" ref="signBox">
-            <a href="#" class="sign-icon-box__btn btn btn--primary" @click="pullSignUpModal">
+            <a class="sign-icon-box__btn btn btn--primary" v-if="isOnline" @click="signOut">
+              <i class="fas fa-sign-out-alt"></i>
+              <span class="menu-label">SIGN OUT</span>
+            </a>
+
+            <a class="sign-icon-box__btn btn btn--primary" v-else @click="pullSignUpModal">
               <i class="fas fa-sign-in-alt"></i>
               <span class="menu-label">JOIN</span>
             </a>
@@ -29,7 +34,7 @@
               <span class="menu-label">MY PAGE</span>
             </a>
 
-            <a href="#" class="sign-icon-box__btn btn btn--primary" @click="goShoppingBag">
+            <a class="sign-icon-box__btn btn btn--primary" @click="goShoppingBag">
               <i class="fas fa-shopping-bag"></i>
               <span class="menu-label">BAG</span>
             </a>
@@ -50,7 +55,7 @@
           <nav>
             <ul class="nav--list" ref="navList">
               <li v-for="(item, index) in navList" :key="index">
-                <a :href="item.url">{{ item.label }}</a>
+                <a :href="item.path">{{ item.label }}</a>
               </li>
             </ul>
           </nav>
@@ -96,20 +101,20 @@
     </modal>
 
     <modal v-if="showSignIn" :ariaLabel="'로그인'" @close="closeSignIn">
-      <sign-in slot="body" @close="closeSignIn"></sign-in>
+      <sign-in-box slot="body" @close="closeSignIn"></sign-in-box>
     </modal>
   </div>
 </template>
 
 <script>
 import Modal from "./common/Modal";
-import SignIn from "./SignIn";
+import SignInBox from "./SignInBox";
 import SignUp from "./SignUp";
 
 export default {
   components: {
     Modal,
-    SignIn,
+    SignInBox,
     SignUp,
   },
   data() {
@@ -126,24 +131,25 @@ export default {
       navList: [
         {
           label: "ALL",
-          url: "#",
+          path: "/goodsList",
         },
         {
           label: "TOP",
-          url: "#",
+          path: "/goodsList",
         },
         {
           label: "ACCESSORIES",
-          url: "#",
+          path: "/goodsList",
         },
         {
           label: "ARCHIVE",
-          url: "#",
+          path: "/goodsList",
         },
       ],
       showSignIn: false,
       showSignUp: false,
       searchText: "",
+      isOnline: false,
     };
   },
   methods: {
@@ -190,6 +196,7 @@ export default {
       this.showSignIn = false;
 
       if (!res) return;
+      if (res === "signIn") return (this.isOnline = true);
       this.pullSignUpModal();
     },
     closeSignUp(res) {
@@ -201,6 +208,10 @@ export default {
     goShoppingBag() {
       const isOnline = false;
       if (!isOnline) return this.pullSignInModal();
+    },
+    signOut() {
+      // signout api
+      this.isOnline = false;
     },
   },
   mounted() {
