@@ -93,11 +93,14 @@
               <button type="submit" aria-busy="false" class="btn sign-fieldset__item">가입하기</button>
             </fieldset>
 
-            <div>
+            <div class="esc-btn-box">
               <button
                 type="button"
                 aria-busy="false"
                 class="btn btn--primary"
+                :class="{ 'btn--disabled' : isLoading }"
+                :disabled="isLoading"
+                :aria-disabled="isLoading"
                 @click="goSignIn"
               >이미 배드해빗클럽 계정이 있나요?</button>
             </div>
@@ -123,6 +126,7 @@ export default {
         password: "",
         rcvPromoEmail: false,
       },
+      isLoading: false,
     };
   },
   methods: {
