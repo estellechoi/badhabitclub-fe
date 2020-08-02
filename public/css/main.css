@@ -31,11 +31,29 @@ input:focus {
 .text-box {
 	overflow-wrap: break-word;
 	word-break: keep-all;
+	white-space: pre-line;
 	font-size: 13px;
 	font-weight: 400;
 	color: rgb(72, 72, 72);
 	line-height: 1.5;
 	margin: 0;
+}
+
+.text-box--important {
+	font-size: 16px;
+}
+
+.sign-fieldset__item.text-box {
+	height: 35px;
+	margin-bottom: 0;
+}
+
+.text-box--warning {
+	color: #ee6c60;
+}
+
+.text-box--ok {
+	color: #468d36;
 }
 
 /* BTN */
@@ -61,6 +79,25 @@ input:focus {
 
 .btn:hover {
 	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+.btn--disabled {
+	border-color: #767676;
+	cursor: not-allowed;
+}
+
+.btn--disabled::before {
+	position: absolute;
+	content: "";
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(229, 229, 229, 0.5);
+}
+
+.btn--disabled:hover {
+	box-shadow: none;
 }
 
 .btn--primary {
@@ -307,6 +344,21 @@ input:focus {
 	color: #fff;
 	font-size: 18px;
 	cursor: pointer;
+}
+
+/* EMPTY AIRLOCK */
+
+.airlock {
+	height: 30px;
+	margin: 0 auto;
+	background-image: url("./../img/logo-primary.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: bottom;
+}
+
+.airlock--mar-bot {
+	margin-bottom: 30px;
 }
 
 /* BANNER */
@@ -624,12 +676,18 @@ input:focus {
 	padding: 0 40px;
 }
 
-.sign-box.sign-box--short {
-	height: 445px;
+.sign-box--full-page {
+	min-height: 100vh;
+	padding-top: 130px;
+	box-sizing: border-box;
+}
+
+.sign-box--short {
+	height: 485px;
 }
 
 .sign-box__header {
-	height: 18%;
+	height: 130px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -648,6 +706,15 @@ input:focus {
 	background-position: center center;
 	width: 120px;
 	height: 100%;
+}
+
+.sign-box__title--text {
+	background: none;
+	text-indent: 0;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	width: 100%;
 }
 
 .sign-box__body {
@@ -720,6 +787,10 @@ label.sign-fieldset__item > * {
 	box-sizing: border-box;
 }
 
+.sign-fieldset + .esc-btn-box {
+	margin-bottom: 6px;
+}
+
 .sign-fieldset .btn {
 	border-radius: 0;
 	justify-content: center;
@@ -736,4 +807,89 @@ label.sign-fieldset__item > * {
 
 .sign-box__footer .btn {
 	margin-left: 6px;
+}
+
+/* SET PASSWORD */
+#set-password-form .container {
+	padding: 0 130px;
+}
+
+/* GOODS LIST */
+.section--list {
+	/* creating block formatting context to avoid margin offset with parent */
+	overflow-y: auto;
+}
+
+.section--list .container {
+	margin-top: 130px;
+	padding: 20px;
+}
+
+.goods-item-list {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+}
+
+.goods-item {
+	display: inline-block;
+	width: 25%;
+	height: 280px;
+	position: relative;
+	padding: 0 16px;
+	box-sizing: border-box;
+}
+
+.goods-item__img-box {
+	display: flex;
+	align-items: center;
+	height: 100%;
+	overflow: hidden;
+}
+
+.goods-item__img-box img {
+	width: 100%;
+}
+
+.goods-item__label {
+	position: absolute;
+	left: 0;
+	width: 100%;
+	bottom: 5px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	opacity: 0;
+	transition: opacity 0.4s;
+}
+
+.goods-item__label--visible {
+	opacity: 1;
+}
+
+.goods-item__label > * {
+	display: block;
+	margin-top: 8px;
+}
+
+.goods-item__name {
+	font-weight: 700;
+}
+
+.goods-item__price {
+	font-size: 13px;
+}
+
+/* opacify labels for all the devices like iPad Pro */
+@media (max-width: 1024px) {
+	.goods-item__label {
+		opacity: 1;
+	}
+}
+
+@media (max-width: 1023px) {
+	.goods-item {
+		width: 50%;
+		height: 400px;
+	}
 }
