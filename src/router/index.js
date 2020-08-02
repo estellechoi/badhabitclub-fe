@@ -1,7 +1,9 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import Home from "../views/Home.vue";
+import Home from "./../views/Home.vue";
+import SetPassword from "./../views/SetPassword.vue";
+import GoodsList from "./../views/GoodsList.vue";
 
 Vue.use(VueRouter);
 
@@ -12,6 +14,16 @@ export const router = new VueRouter({
 			path: "/",
 			name: "home",
 			component: Home,
+		},
+		{
+			path: "/setPassword",
+			name: "setPassword",
+			component: SetPassword,
+		},
+		{
+			path: "/goodsList",
+			name: "goodsList",
+			component: GoodsList,
 		},
 	],
 });
