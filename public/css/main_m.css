@@ -140,6 +140,18 @@
 	}
 
 	/* MODAL - SIGNIN, SIGNUP */
+	.sign-box--full-page {
+		padding-top: 80px;
+	}
+
+	.sign-box__body--full-page {
+		padding-top: 0;
+	}
+
+	.sign-box__body--full-page .text-box {
+		font-size: 13px;
+	}
+
 	.sign-box__body .container {
 		padding: 0;
 	}
@@ -147,6 +159,10 @@
 	#signin-form .container,
 	#signup-form .container {
 		padding: 0 20px;
+	}
+
+	#set-password-form .container {
+		padding: 0;
 	}
 
 	.goods-item {
