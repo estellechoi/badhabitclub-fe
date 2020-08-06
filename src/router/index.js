@@ -5,6 +5,7 @@ import Home from "./../views/main/Home.vue";
 import SetPassword from "./../views/main/SetPassword.vue";
 import GoodsList from "./../views/main/GoodsList.vue";
 import MyPage from "./../views/main/MyPage.vue";
+import DeleteAccount from "./../views/main/DeleteAccount.vue";
 
 Vue.use(VueRouter);
 
@@ -22,9 +23,14 @@ export const router = new VueRouter({
 			component: SetPassword,
 		},
 		{
-			path: "/mypage",
-			name: "mypage",
+			path: "/myPage",
+			name: "myPage",
 			component: MyPage,
+		},
+		{
+			path: "/deleteAccount",
+			name: "deleteAccount",
+			component: DeleteAccount,
 		},
 		{
 			path: "/goodsList",
