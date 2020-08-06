@@ -16,10 +16,17 @@
           <ul class="profile-menu-box">
             <li class="profile-menu-item" v-for="(item, index) in menuList" :key="index">
               <span v-html="item.icon"></span>
+
               <div class="profile-menu-item__title">{{ item.title }}</div>
+
               <div>{{ item.content }}</div>
             </li>
           </ul>
+
+          <div class="centering-box">
+            계정을 비활성화 하셔야하나요?
+            <a class="btn btn--link" @click="goDeleteAcct">지금 처리하기</a>
+          </div>
         </section>
 
         <section class="order-box">
@@ -41,6 +48,7 @@
                   <a>
                     <strong class="item-name">{{ item.prdtName }}</strong>
                   </a>
+
                   <div class="order-detail">{{ item.cnt }} 개 * ₩ {{ item.prdtPrice }}</div>
                 </div>
 
@@ -49,6 +57,7 @@
                   :class="{ 'order-item__status--active' : item.status !== '3' }"
                 >
                   <strong>{{ item.statusLabel }}</strong>
+
                   <strong>{{ item.arrivalDt }} 도착 {{ item.status !== '3' ? '예정' : ''}}</strong>
                 </div>
               </div>
@@ -123,6 +132,11 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    goDeleteAcct() {
+      this.$router.push("deleteAccount");
+    },
   },
 };
 </script>
