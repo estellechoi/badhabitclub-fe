@@ -29,7 +29,10 @@
               <span class="menu-label">JOIN</span>
             </a>
 
-            <a class="sign-icon-box__btn btn btn--primary" @click="pullSignInModal">
+            <a
+              class="sign-icon-box__btn btn btn--primary"
+              @click="isOnline ? goMyPage() : pullSignInModal()"
+            >
               <i class="fas fa-user"></i>
               <span class="menu-label">MY PAGE</span>
             </a>
@@ -149,7 +152,7 @@ export default {
       showSignIn: false,
       showSignUp: false,
       searchText: "",
-      isOnline: false,
+      isOnline: true,
     };
   },
   methods: {
@@ -185,6 +188,9 @@ export default {
 
       if (isAllScrolled) $signBox.classList.add("hidden");
       else $signBox.classList.remove("hidden");
+    },
+    goMyPage() {
+      this.$router.push("myPage");
     },
     pullSignInModal() {
       this.showSignIn = true;
