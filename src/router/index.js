@@ -1,9 +1,9 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import Home from "./../views/Home.vue";
-import SetPassword from "./../views/SetPassword.vue";
-import GoodsList from "./../views/GoodsList.vue";
+import Home from "./../views/main/Home.vue";
+import SetPassword from "./../views/main/SetPassword.vue";
+import GoodsList from "./../views/main/GoodsList.vue";
 
 Vue.use(VueRouter);
 
