@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import AppHeader from "./components/AppHeader.vue";
-import AppFooter from "./components/AppFooter.vue";
+import AppHeader from "./views/common/AppHeader.vue";
+import AppFooter from "./views/common/AppFooter.vue";
 
 export default {
   name: "App",
