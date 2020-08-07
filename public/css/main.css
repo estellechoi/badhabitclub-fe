@@ -157,6 +157,7 @@ input:focus {
 }
 
 .centering-box {
+	display: block;
 	text-align: center;
 	padding: 10px;
 	box-sizing: border-box;
@@ -883,7 +884,7 @@ label.sign-fieldset__item > * {
 }
 
 .section--mypage .container > .profile-box {
-	width: 30%;
+	width: 26%;
 }
 
 .section--mypage .container > .order-box {
@@ -898,11 +899,13 @@ label.sign-fieldset__item > * {
 
 .profile-box .centering-box {
 	margin-top: 15px;
+	font-size: 13px;
 	/* font-size: 0.8rem; */
 }
 
 .profile-menu-box {
-	margin: 50px auto;
+	padding: 50px 0 14px;
+	border-bottom: 1px solid #e5e5e5;
 }
 
 .profile-menu-item {
@@ -1004,6 +1007,11 @@ label.sign-fieldset__item > * {
 .order-item__status > * {
 	display: block;
 	padding: 5px 0;
+}
+
+/* DELETE ACCOUNT */
+.section--delete .container {
+	padding: 130px 25% 0;
 }
 
 /* GOODS LIST */
