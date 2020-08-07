@@ -1,6 +1,6 @@
 import Vue from "vue";
 import App from "./App.vue";
-import { router } from "./router/index";
+import router from "./router/index";
 
 import componentMixins from "./components/componentMixins";
 Vue.mixin(componentMixins);
