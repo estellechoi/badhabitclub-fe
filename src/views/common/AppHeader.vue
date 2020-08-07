@@ -15,7 +15,7 @@
       <div class="container">
         <div class="menu-group clearfix">
           <div class="logo float--left">
-            <a href="/">{{ logo.alt }}</a>
+            <a @click="$router.push({ path: '/' })">{{ logo.alt }}</a>
           </div>
 
           <nav class="sign-icon-box float--right" aria-hidden="false" ref="signBox">
@@ -58,7 +58,7 @@
           <nav>
             <ul class="nav--list" ref="navList">
               <li v-for="(item, index) in navList" :key="index">
-                <a :href="item.path">{{ item.label }}</a>
+                <a @click="$router.push({ path: item.path })">{{ item.label }}</a>
               </li>
             </ul>
           </nav>
@@ -134,19 +134,19 @@ export default {
       navList: [
         {
           label: "ALL",
-          path: "/goodsList",
+          path: "/goods",
         },
         {
           label: "TOP",
-          path: "/goodsList",
+          path: "/goods",
         },
         {
           label: "ACCESSORIES",
-          path: "/goodsList",
+          path: "/goods",
         },
         {
           label: "ARCHIVE",
-          path: "/goodsList",
+          path: "/goods",
         },
       ],
       showSignIn: false,
@@ -190,7 +190,7 @@ export default {
       else $signBox.classList.remove("hidden");
     },
     goMyPage() {
-      this.$router.push("myPage");
+      this.$router.push("my-page");
     },
     pullSignInModal() {
       this.showSignIn = true;
