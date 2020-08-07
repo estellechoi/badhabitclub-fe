@@ -135,7 +135,7 @@ export default {
   },
   methods: {
     goDeleteAcct() {
-      this.$router.push("deleteAccount");
+      this.$router.push("delete-account");
     },
   },
 };
