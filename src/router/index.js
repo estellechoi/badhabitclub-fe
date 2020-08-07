@@ -7,9 +7,14 @@ import GoodsList from "./../views/main/GoodsList.vue";
 import MyPage from "./../views/main/MyPage.vue";
 import DeleteAccount from "./../views/main/DeleteAccount.vue";
 
+// const originalPush = VueRouter.prototype.push;
+// VueRouter.prototype.push = function push(location) {
+// 	return originalPush.call(this, location).catch((err) => err);
+// };
+
 Vue.use(VueRouter);
 
-export const router = new VueRouter({
+const router = new VueRouter({
 	mode: "history",
 	routes: [
 		{
@@ -18,24 +23,32 @@ export const router = new VueRouter({
 			component: Home,
 		},
 		{
-			path: "/setPassword",
-			name: "setPassword",
+			path: "/set-password",
+			name: "set-password",
 			component: SetPassword,
 		},
 		{
-			path: "/myPage",
-			name: "myPage",
+			path: "/my-page",
+			name: "my-page",
 			component: MyPage,
 		},
 		{
-			path: "/deleteAccount",
-			name: "deleteAccount",
+			path: "/delete-account",
+			name: "delete-account",
 			component: DeleteAccount,
 		},
 		{
-			path: "/goodsList",
-			name: "goodsList",
+			path: "/goods",
+			name: "goods",
 			component: GoodsList,
 		},
 	],
 });
+
+// router.beforeEach((to, from, next) => {
+// 	console.log(to, from);
+// 	if (from.name && to.path === from.path) return console.log("pending");
+// 	next();
+// });
+
+export default router;
