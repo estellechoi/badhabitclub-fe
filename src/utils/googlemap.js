@@ -14,12 +14,17 @@ export default () => {
 	window[CALLBACK] = () => resolvePromise(window.google);
 
 	// Inject a script tag into the `<head>` to load the Google Maps script.
+	const head = document.querySelector("head");
+	if (head.contains(document.querySelector("#google-map-api")))
+		return initPromise;
+
 	const script = document.createElement("script");
+	script.id = "google-map-api";
 	script.async = true;
 	script.defer = true;
 	script.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&callback=${CALLBACK}`;
 	script.onerror = rejectPromise;
-	document.querySelector("head").appendChild(script);
+	head.appendChild(script);
 
 	return initPromise;
 };
