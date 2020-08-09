@@ -15,7 +15,9 @@
       <div class="container">
         <div class="menu-group clearfix">
           <div class="logo float--left">
-            <a @click="$router.push({ path: '/' })">{{ logo.alt }}</a>
+            <a @click="$router.push({ path: '/' })">
+              <span class="blind-box">{{ logo.alt }}</span>
+            </a>
           </div>
 
           <nav class="sign-icon-box float--right" aria-hidden="false" ref="signBox">
