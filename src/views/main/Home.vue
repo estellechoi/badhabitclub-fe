@@ -3,7 +3,7 @@
   <main role="main">
     <!-- VISUAL-->
     <section class="section section--visual">
-      {{ bgAlt }}
+      <span class="blind-box">{{ bgAlt }}</span>
       <div class="container"></div>
     </section>
 
