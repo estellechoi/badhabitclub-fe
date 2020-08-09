@@ -2,11 +2,12 @@
   <main role="main">
     <section class="section section--list">
       <div class="container">
-        <ul class="goods-item-list">
+        <ul class="goods-item-list" @mouseover="showLabel" @mouseout="hideLabel">
           <li class="goods-item" v-for="(item, index) in goodsList" :key="index">
-            <a class="goods-item__img-box" @mouseover="showLabel(item)" @mouseout="hideLabel(item)">
-              <img :src="item.imgPath" :alt="item.imgAlt" />
+            <a class="goods-item__img-box">
+              <img :src="item.imgPath" :alt="item.imgAlt" :data-index="index" />
             </a>
+
             <span
               class="goods-item__label"
               :class="{ 'goods-item__label--visible' : item.showLabel }"
@@ -121,27 +122,21 @@ export default {
     };
   },
   methods: {
-    getGoodsList() {
-      this.goodsList = this.goodsList.map((item) => {
-        item.showLabel = false;
+    showLabel(evt) {
+      if (evt.target.tagName !== "IMG") return;
+      this.goodsList = this.goodsList.map((item, index) => {
+        if (index === parseInt(evt.target.dataset.index)) item.showLabel = true;
         return item;
       });
     },
-    showLabel(target) {
-      this.goodsList = this.goodsList.map((item) => {
-        if (item.id === target.id) item.showLabel = true;
+    hideLabel(evt) {
+      if (evt.target.tagName !== "IMG") return;
+      this.goodsList = this.goodsList.map((item, index) => {
+        if (index === parseInt(evt.target.dataset.index))
+          item.showLabel = false;
         return item;
       });
     },
-    hideLabel(target) {
-      this.goodsList = this.goodsList.map((item) => {
-        if (item.id === target.id) item.showLabel = false;
-        return item;
-      });
-    },
-  },
-  mounted() {
-    this.getGoodsList();
   },
 };
 </script>
