@@ -58,7 +58,7 @@
                 >
                   <strong>{{ item.statusLabel }}</strong>
 
-                  <strong>{{ item.arrivalDt }} 도착 {{ item.status !== '3' ? '예정' : ''}}</strong>
+                  <strong v-if="item.status !== '3'">{{ item.arrivalDt }} 도착 예정</strong>
                 </div>
               </div>
             </li>
@@ -81,7 +81,7 @@ export default {
         },
         {
           icon: `<i class="fas fa-comment-dots"></i>`,
-          title: "내 후기",
+          title: "내가 쓴 후기",
           content: "6 개",
         },
       ],
