@@ -1,12 +1,20 @@
 /* COMMON */
+body {
+	word-break: keep-all;
+}
+
 a {
 	text-decoration: none;
 	cursor: pointer;
 }
 
+*,
 *::before,
 *::after {
+	/* -webkit-box-sizing: border-box; */
+	-moz-box-sizing: border-box;
 	box-sizing: border-box;
+	/* -ms-flex: 0 1 auto; */
 }
 
 input,
@@ -28,9 +36,17 @@ input:focus {
 	position: relative;
 }
 
+/* Alternative text box */
+.blind-box {
+	width: 1px;
+	height: 1px;
+	position: absolute;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+}
+
 .text-box {
 	overflow-wrap: break-word;
-	word-break: keep-all;
 	white-space: pre-line;
 	font-size: 13px;
 	font-weight: 400;
@@ -71,6 +87,7 @@ input:focus {
 	padding: 0 12px;
 	border: 2px solid #333;
 	border-radius: 6px;
+	border-radius: 0;
 	box-sizing: border-box;
 	cursor: pointer;
 	position: relative;
@@ -198,6 +215,31 @@ input:focus {
 	outline: none;
 }
 
+/* SIMPLE SHORT TEXTAREA */
+.text-area {
+	display: block;
+	padding: 22px 10px;
+	font-size: 0.9em;
+	font-weight: 900;
+}
+
+.text-area label,
+.text-area input {
+	display: block;
+}
+
+.text-area label {
+	margin-bottom: 14px;
+}
+
+.text-area input {
+	width: 100%;
+	height: 50px;
+	padding: 5px 10px;
+	border: 1px solid #e5e5e5;
+}
+
+/* CHECKBOX */
 .input--checkbox {
 	position: relative;
 	z-index: -1;
@@ -254,6 +296,69 @@ input:focus {
 
 .checkbox-label {
 	margin-left: 8px;
+}
+
+/* RADIO */
+.radio-box {
+	border-bottom: 1px solid #e5e5e5;
+	box-sizing: border-box;
+}
+
+.radio-box label {
+	display: block;
+	padding: 0;
+	box-sizing: border-box;
+	cursor: pointer;
+}
+
+.radio-box__container {
+	padding: 26px 10px;
+}
+
+.radio-box__label {
+	display: inline-block;
+	width: 90%;
+}
+
+.radio-box__radio {
+	display: inline-block;
+	text-align: right;
+	width: 10%;
+	margin: 0;
+	position: relative;
+}
+
+.input--radio {
+	padding: 0;
+	margin: 0;
+	opacity: 0;
+}
+
+.radio {
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-color: #fff;
+	font-size: 6px;
+	width: 18px;
+	height: 18px;
+	border: 1px solid #e5e5e5;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/* .radio--checked {
+	border: 1px solid #333;
+} */
+
+.radio__dot {
+	width: 1em;
+	height: 1em;
+	display: block;
+	background-color: #333;
+	border-radius: 50%;
 }
 
 /* SEARCH BOX */
@@ -475,12 +580,15 @@ input:focus {
 }
 
 .section--header .logo a {
-	display: block;
+	display: flex;
 	width: 150px;
+	height: 100%;
 	background-image: url("./../img/logo-primary.png");
 	background-size: contain;
 	background-repeat: no-repeat;
-	text-indent: -9999px;
+	background-position: center center;
+	/* .blind-box 로 대체 (성능이슈 - 레이아웃 자체를 크게 잡는다) */
+	/* text-indent: -9999px; */
 	padding: 10px;
 	box-sizing: border-box;
 }
@@ -604,7 +712,7 @@ main {
 	background-size: 20%;
 	background-position: center 300px;
 	position: relative;
-	text-indent: -9999px;
+	/* text-indent: -9999px; */
 }
 
 .section--visual::before {
@@ -750,7 +858,7 @@ main {
 .sign-box__title {
 	letter-spacing: 1px;
 	font-size: 22px;
-	text-indent: -9999px;
+	/* text-indent: -9999px; */
 	position: relative;
 	background-image: url("./../img/logo-ellipse.png");
 	background-size: contain;
@@ -762,7 +870,7 @@ main {
 
 .sign-box__title--text {
 	background: none;
-	text-indent: 0;
+	/* text-indent: 0; */
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -854,7 +962,6 @@ label.sign-fieldset__item > * {
 }
 
 .sign-fieldset .btn {
-	border-radius: 0;
 	justify-content: center;
 }
 
@@ -1014,6 +1121,74 @@ label.sign-fieldset__item > * {
 	padding: 130px 25% 0;
 }
 
+.section--delete .title-box {
+	margin: 50px 0;
+	font-size: 32px;
+	font-weight: 700;
+	text-align: left;
+	line-height: 1.5;
+}
+
+.section--delete .text-area {
+	border-bottom: 1px solid #e5e5e5;
+	opacity: 0;
+	animation-name: opacify;
+	animation-duration: 0.4s;
+	animation-delay: 0.1s;
+	animation-fill-mode: both;
+}
+
+@keyframes opacify {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.section--delete .centering-box {
+	margin: 32px auto;
+}
+
+.section--delete .btn {
+	width: 100%;
+	height: 50px;
+	justify-content: center;
+}
+
+.section--delete .text-box-group {
+	padding: 0 10px;
+}
+
+.section--delete .text-box {
+	font-size: 1rem;
+	line-height: 2;
+	display: flex;
+}
+
+.section--delete .text-box-icon {
+	width: 10%;
+	/* text-align: center; */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.section--delete .text-box-icon .checkbox {
+	width: 20px;
+	height: 20px;
+}
+
+.section--delete .text-box-icon .checkbox,
+.section--delete .text-box-icon .checkbox::before {
+	border-radius: 50%;
+}
+
+.section--delete .text-box-icon .checkbox::after {
+	top: 2px;
+	left: 6px;
+}
 /* GOODS LIST */
 .section--list {
 	/* creating block formatting context to avoid margin offset with parent */
