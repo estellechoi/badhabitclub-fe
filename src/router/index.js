@@ -6,11 +6,12 @@ import SetPassword from "./../views/main/SetPassword.vue";
 import GoodsList from "./../views/main/GoodsList.vue";
 import MyPage from "./../views/main/MyPage.vue";
 import DeleteAccount from "./../views/main/DeleteAccount.vue";
+import DeleteAccountConfirm from "./../views/main/DeleteAccountConfirm.vue";
 
-// const originalPush = VueRouter.prototype.push;
-// VueRouter.prototype.push = function push(location) {
-// 	return originalPush.call(this, location).catch((err) => err);
-// };
+const originalPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function(location) {
+	return originalPush.call(this, location).catch((err) => err);
+};
 
 Vue.use(VueRouter);
 
@@ -38,17 +39,16 @@ const router = new VueRouter({
 			component: DeleteAccount,
 		},
 		{
+			path: "/delete-account-confirm",
+			name: "delete-account-confirm",
+			component: DeleteAccountConfirm,
+		},
+		{
 			path: "/goods",
 			name: "goods",
 			component: GoodsList,
 		},
 	],
 });
-
-// router.beforeEach((to, from, next) => {
-// 	console.log(to, from);
-// 	if (from.name && to.path === from.path) return console.log("pending");
-// 	next();
-// });
 
 export default router;
