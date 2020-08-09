@@ -1,7 +1,9 @@
 <template>
   <div class="sign-box">
     <header class="sign-box__header">
-      <h1 class="sign-box__title">{{ title }}</h1>
+      <h1 class="sign-box__title">
+        <span class="blind-box">{{ title }}</span>
+      </h1>
     </header>
 
     <section class="section sign-box__body" tabindex="0">
