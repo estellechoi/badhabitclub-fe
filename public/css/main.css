@@ -36,6 +36,26 @@ input:focus {
 	position: relative;
 }
 
+.logo {
+	height: 100%;
+	display: inline-flex;
+	align-items: center;
+}
+
+.logo a {
+	display: flex;
+	width: 150px;
+	height: 100%;
+	background-image: url("./../img/logo-primary.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center center;
+	/* .blind-box 로 대체 (성능이슈 - 레이아웃 자체를 크게 잡는다) */
+	/* text-indent: -9999px; */
+	padding: 10px;
+	box-sizing: border-box;
+}
+
 /* Alternative text box */
 .blind-box {
 	width: 1px;
@@ -46,6 +66,8 @@ input:focus {
 }
 
 .text-box {
+	display: flex;
+	align-items: center;
 	overflow-wrap: break-word;
 	white-space: pre-line;
 	font-size: 13px;
@@ -58,6 +80,79 @@ input:focus {
 /* .text-box--important {
 	font-size: 16px;
 } */
+
+.icon--next-step {
+	margin: 0 12px;
+	position: relative;
+	width: 26px;
+	height: 26px;
+}
+
+.icon--next-step::before {
+	content: "";
+	position: absolute;
+	top: 8.3px;
+	left: 7px;
+	z-index: 2000;
+	display: block;
+	width: 8px;
+	height: 8px;
+	background: none;
+	border-color: #767676;
+	border-width: 1px 1px 0 0;
+	border-style: solid;
+	transform: rotate(45deg);
+}
+
+.progress-info-box {
+	margin: 16px 0;
+	font-size: 14px;
+}
+
+.progress-info {
+	display: inline-flex;
+}
+
+.progress-info__status--ok {
+	color: #000;
+	font-weight: 700;
+}
+
+.progress-info ol,
+.progress-info li,
+.progress-info a {
+	display: flex;
+	display: -ms-flex;
+	align-items: center;
+}
+
+.progress-bar {
+	background-color: #d8d8d8;
+	height: 8px;
+	overflow: hidden;
+	width: 100%;
+	position: relative;
+}
+
+.progress-bar__status-bar {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	background-color: #333;
+	/* 성능 이슈 -> will-change 사용 지양 */
+	/* will-change: transform; */
+	transition: -ms-transform 0.5s ease 0s, -webkit-transform 0.5s ease 0s,
+		transform 0.5s ease 0s;
+	transform: translateX(-67%);
+}
+
+.progress-bar__status-bar--2third {
+	transform: translateX(-33%);
+}
+
+.progress-bar__status-bar--cmplt {
+	transform: translateX(0);
+}
 
 .sign-fieldset__item.text-box {
 	height: 35px;
@@ -83,6 +178,7 @@ input:focus {
 	line-height: 1.5;
 	letter-spacing: 1px;
 	display: inline-flex;
+	justify-content: center;
 	align-items: center;
 	padding: 0 12px;
 	border: 2px solid #333;
@@ -120,10 +216,10 @@ input:focus {
 .btn--link {
 	padding: 0;
 	font-size: 0.8rem;
-	border: none;
+	border: 1px solid rgba(0, 0, 0, 0);
 	box-shadow: none;
 	border-radius: 0;
-	box-sizing: border-box;
+	/* box-sizing: border-box; */
 	display: inline-block;
 	height: 17px;
 	color: #767676;
@@ -178,6 +274,11 @@ input:focus {
 	text-align: center;
 	padding: 10px;
 	box-sizing: border-box;
+}
+
+.space-bw-box {
+	display: flex;
+	justify-content: space-between;
 }
 
 /* INPUT */
@@ -254,7 +355,6 @@ input:focus {
 	padding: 0;
 	border: 1px solid #767676;
 	position: relative;
-	top: 2px;
 }
 
 .checkbox::before {
@@ -270,8 +370,7 @@ input:focus {
 .checkbox::after {
 	content: "";
 	position: absolute;
-	top: 1px;
-	left: 5px;
+	left: 4px;
 	width: 6px;
 	height: 11px;
 	background: none;
@@ -571,26 +670,6 @@ input:focus {
 
 .section--header .menu-group {
 	height: 50%;
-}
-
-.section--header .logo {
-	height: 100%;
-	display: flex;
-	align-items: center;
-}
-
-.section--header .logo a {
-	display: flex;
-	width: 150px;
-	height: 100%;
-	background-image: url("./../img/logo-primary.png");
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center center;
-	/* .blind-box 로 대체 (성능이슈 - 레이아웃 자체를 크게 잡는다) */
-	/* text-indent: -9999px; */
-	padding: 10px;
-	box-sizing: border-box;
 }
 
 .section--header .sign-icon-box__btn .fas {
@@ -961,10 +1040,6 @@ label.sign-fieldset__item > * {
 	margin-bottom: 6px;
 }
 
-.sign-fieldset .btn {
-	justify-content: center;
-}
-
 .sign-box__footer {
 	flex: 0 0 auto;
 	height: 70px;
@@ -1132,13 +1207,13 @@ label.sign-fieldset__item > * {
 .section--delete .text-area {
 	border-bottom: 1px solid #e5e5e5;
 	opacity: 0;
-	animation-name: opacify;
+	animation-name: opacifyArea;
 	animation-duration: 0.4s;
 	animation-delay: 0.1s;
 	animation-fill-mode: both;
 }
 
-@keyframes opacify {
+@keyframes opacifyArea {
 	from {
 		opacity: 0;
 	}
@@ -1151,10 +1226,20 @@ label.sign-fieldset__item > * {
 	margin: 32px auto;
 }
 
-.section--delete .btn {
+.section--delete .centering-box .btn {
 	width: 100%;
+}
+
+.section--delete .space-bw-box {
+	padding: 40px 0;
+}
+
+.section--delete .btn {
 	height: 50px;
-	justify-content: center;
+}
+
+.section--delete .btn--link {
+	font-size: 14px;
 }
 
 .section--delete .text-box-group {
@@ -1164,28 +1249,31 @@ label.sign-fieldset__item > * {
 .section--delete .text-box {
 	font-size: 1rem;
 	line-height: 2;
-	display: flex;
+	display: inline-flex;
+	width: 90%;
 }
 
-.section--delete .text-box-icon {
+.section--delete .icon--chk {
 	width: 10%;
 	/* text-align: center; */
-	display: flex;
+	display: inline-flex;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
+	position: relative;
+	top: 4.6px;
 }
 
-.section--delete .text-box-icon .checkbox {
+.section--delete .icon--chk .checkbox {
 	width: 20px;
 	height: 20px;
 }
 
-.section--delete .text-box-icon .checkbox,
-.section--delete .text-box-icon .checkbox::before {
+.section--delete .icon--chk .checkbox,
+.section--delete .icon--chk .checkbox::before {
 	border-radius: 50%;
 }
 
-.section--delete .text-box-icon .checkbox::after {
+.section--delete .icon--chk .checkbox::after {
 	top: 2px;
 	left: 6px;
 }
