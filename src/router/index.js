@@ -6,7 +6,6 @@ import SetPassword from "./../views/main/SetPassword.vue";
 import GoodsList from "./../views/main/GoodsList.vue";
 import MyPage from "./../views/main/MyPage.vue";
 import DeleteAccount from "./../views/main/DeleteAccount.vue";
-import DeleteAccountConfirm from "./../views/main/DeleteAccountConfirm.vue";
 
 const originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function(location) {
@@ -34,14 +33,9 @@ const router = new VueRouter({
 			component: MyPage,
 		},
 		{
-			path: "/delete-account",
+			path: "/delete-account/:step",
 			name: "delete-account",
 			component: DeleteAccount,
-		},
-		{
-			path: "/delete-account-confirm",
-			name: "delete-account-confirm",
-			component: DeleteAccountConfirm,
 		},
 		{
 			path: "/goods",
