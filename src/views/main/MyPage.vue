@@ -135,7 +135,9 @@ export default {
   },
   methods: {
     goDeleteAcct() {
-      this.$router.push("delete-account");
+      this.$router.push({
+        path: "/delete-account/reasons",
+      });
     },
   },
 };
