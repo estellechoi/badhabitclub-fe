@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <div class="body__container">
-      <app-header></app-header>
+      <app-header v-if="showOnlyMain"></app-header>
       <router-view></router-view>
-      <app-footer></app-footer>
+      <app-footer v-if="showOnlyMain"></app-footer>
     </div>
   </div>
 </template>
@@ -17,6 +17,18 @@ export default {
   components: {
     AppHeader,
     AppFooter,
+  },
+  data() {
+    return {
+      showOnlyMain: true,
+    };
+  },
+  watch: {
+    $route(to) {
+      console.log(to);
+      if (to.name === "delete-account") this.showOnlyMain = false;
+      else this.showOnlyMain = true;
+    },
   },
 };
 </script>
