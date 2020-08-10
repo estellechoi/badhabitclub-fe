@@ -1172,7 +1172,7 @@ label.sign-fieldset__item > * {
 }
 
 .order-item__status {
-	width: 25%;
+	width: 140px;
 	padding: 10px;
 	/* text-align: center; */
 	display: flex;
