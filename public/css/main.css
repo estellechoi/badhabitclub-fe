@@ -1066,11 +1066,12 @@ label.sign-fieldset__item > * {
 }
 
 .section--mypage .container > .profile-box {
-	width: 26%;
+	width: 30%;
+	min-width: 280px;
 }
 
 .section--mypage .container > .order-box {
-	width: 65%;
+	width: 70%;
 }
 
 .profile-box {
@@ -1354,4 +1355,8 @@ label.sign-fieldset__item > * {
 		width: 50%;
 		height: 400px;
 	}
+}
+
+.section--goods .container {
+	padding: 180px 40px 40px;
 }
