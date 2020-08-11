@@ -4,8 +4,14 @@ import VueRouter from "vue-router";
 import Home from "./../views/main/Home.vue";
 import SetPassword from "./../views/main/SetPassword.vue";
 import GoodsList from "./../views/main/GoodsList.vue";
+import Goods from "./../views/main/Goods.vue";
+import GoodsDetails from "./../views/main/goods/GoodsDetails.vue";
+
 import MyPage from "./../views/main/MyPage.vue";
 import DeleteAccount from "./../views/main/DeleteAccount.vue";
+import DeleteReasons from "./../views/main/delete-account/DeleteReasons.vue";
+import DeleteConfirm from "./../views/main/delete-account/DeleteConfirm.vue";
+import DeleteComplete from "./../views/main/delete-account/DeleteComplete.vue";
 
 const originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function(location) {
@@ -33,16 +39,48 @@ const router = new VueRouter({
 			component: MyPage,
 		},
 		{
-			path: "/delete-account/:step",
+			path: "/delete-account",
 			name: "delete-account",
 			component: DeleteAccount,
+			children: [
+				{
+					path: "reasons",
+					name: "delete-reasons",
+					component: DeleteReasons,
+				},
+				{
+					path: "confirm",
+					name: "delete-confirm",
+					component: DeleteConfirm,
+				},
+				{
+					path: "complete",
+					name: "delete-complete",
+					component: DeleteComplete,
+				},
+			],
 		},
 		{
-			path: "/goods",
-			name: "goods",
+			path: "/goods-list",
+			name: "goods-list",
 			component: GoodsList,
 		},
+		{
+			path: "/goods/:id",
+			name: "goods",
+			component: Goods,
+			children: [
+				{
+					path: "details",
+					component: GoodsDetails,
+				},
+			],
+		},
 	],
+	scrollBehavior() {
+		// if (savedPosition) return savedPosition;
+		return { x: 0, y: 0 };
+	},
 });
 
 export default router;
