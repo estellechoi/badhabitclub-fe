@@ -29,6 +29,9 @@
 export default {
   name: "radio-group",
   props: {
+    value: {
+      type: String,
+    },
     list: {
       type: Array,
       default() {
@@ -43,6 +46,11 @@ export default {
     return {
       model: null,
     };
+  },
+  watch: {
+    value(newVal) {
+      this.model = newVal;
+    },
   },
   methods: {
     change() {
