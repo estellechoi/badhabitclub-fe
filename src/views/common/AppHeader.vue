@@ -136,19 +136,19 @@ export default {
       navList: [
         {
           label: "ALL",
-          path: "/goods",
+          path: "/goods-list",
         },
         {
           label: "TOP",
-          path: "/goods",
+          path: "/goods-list",
         },
         {
           label: "ACCESSORIES",
-          path: "/goods",
+          path: "/goods-list",
         },
         {
           label: "ARCHIVE",
-          path: "/goods",
+          path: "/goods-list",
         },
       ],
       showSignIn: false,
@@ -221,12 +221,16 @@ export default {
       // signout api
       this.isOnline = false;
     },
-  },
-  mounted() {
-    window.addEventListener("scroll", () => {
+    callScrollFuncs() {
       this.getScrollY();
       this.checkScroll();
-    });
+    },
+  },
+  mounted() {
+    window.addEventListener("scroll", this.callScrollFuncs);
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.callScrollFuncs);
   },
 };
 </script>
