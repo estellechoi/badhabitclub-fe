@@ -6,7 +6,6 @@
       <legend>
         <span class="blind-box">계정 비활성화 이유 선택지 그룹</span>
       </legend>
-      {{ reason }} {{ otherReason }}
       <radio-group
         :list="reasonList"
         :id-prefix="'delete-reason'"
