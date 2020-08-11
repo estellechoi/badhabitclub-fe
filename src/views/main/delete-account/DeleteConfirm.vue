@@ -39,7 +39,7 @@ export default {
     },
     goBack() {
       this.$router.go(-1);
-      //   this.$router.push({ name: "delete-reasons" });
+      // this.$router.push({ name: "delete-reasons" });
     },
     deleteAccount() {
       console.log(this.storedReason);
