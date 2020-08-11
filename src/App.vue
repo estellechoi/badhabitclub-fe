@@ -25,8 +25,7 @@ export default {
   },
   watch: {
     $route(to) {
-      console.log(to);
-      if (to.name === "delete-account") this.showOnlyMain = false;
+      if (to.matched[0].name === "delete-account") this.showOnlyMain = false;
       else this.showOnlyMain = true;
     },
   },
