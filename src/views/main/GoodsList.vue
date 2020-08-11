@@ -2,10 +2,10 @@
   <main role="main">
     <section class="section section--list">
       <div class="container">
-        <ul class="goods-item-list" @mouseover="showLabel" @mouseout="hideLabel">
+        <ul class="goods-item-list" @mouseover="showLabel" @mouseout="hideLabel" @click="goDetails">
           <li class="goods-item" v-for="(item, index) in goodsList" :key="index">
             <a class="goods-item__img-box">
-              <img :src="item.imgPath" :alt="item.imgAlt" :data-index="index" />
+              <img :src="item.imgPath" :alt="item.imgAlt" :data-index="index" :data-id="item.id" />
             </a>
 
             <span
@@ -135,6 +135,14 @@ export default {
         if (index === parseInt(evt.target.dataset.index))
           item.showLabel = false;
         return item;
+      });
+    },
+    goDetails(evt) {
+      console.log(evt);
+      const target = evt.target;
+      if (target.tagName !== "IMG") return;
+      this.$router.push({
+        path: `/goods/${target.dataset.id}/details`,
       });
     },
   },
