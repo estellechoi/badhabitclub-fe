@@ -23,6 +23,23 @@ textarea {
 	font-family: "Nanum Myeongjo", serif;
 }
 
+button,
+[role="button"] {
+	border: 1px solid rgba(0, 0, 0, 0);
+	background: none;
+	cursor: pointer;
+	outline: none;
+}
+
+button[disabled] {
+	cursor: not-allowed;
+}
+
+input,
+summary {
+	outline: none;
+}
+
 input:focus {
 	outline: none;
 }
@@ -1357,6 +1374,280 @@ label.sign-fieldset__item > * {
 	}
 }
 
+/* GOODS */
 .section--goods .container {
-	padding: 180px 40px 40px;
+	padding: 130px 40px 40px;
+}
+
+/* GOODS DETAIL */
+.prdt-detail-box {
+	display: flex;
+}
+
+.prdt-img {
+	height: calc(100vh - 130px);
+	overflow-y: scroll;
+	overflow-x: hidden;
+	width: 47%;
+	padding: 20px;
+}
+
+.prdt-img img {
+	display: block;
+	width: 100%;
+}
+
+.prdt-summary {
+	width: 53%;
+	padding: 20px;
+}
+
+.prdt-summary__content {
+	padding: 20px 0;
+	border-bottom: 1px solid #e5e5e5;
+	position: relative;
+}
+
+.prdt-header__title {
+	font-size: 32px;
+	font-weight: 700;
+}
+
+.prdt-header__info {
+	padding: 20px 0 0;
+	font-size: 12px;
+}
+
+.rating-star {
+	color: #f29a38;
+	margin-right: 12px;
+}
+
+.rating-star-icon--gray {
+	color: #e5e5e5;
+}
+
+.prdt-btn-box {
+	position: absolute;
+	right: 20px;
+	bottom: 18px;
+}
+
+.prdt-fav-btn,
+.prdt-share-btn {
+	font-size: 18px;
+	color: #333;
+}
+
+.discount-rate {
+	margin-right: 8px;
+}
+
+.origin-price {
+	font-size: 12px;
+	color: #767676;
+}
+
+.prdt-sale-price {
+	padding: 12px 0 0;
+	font-size: 21px;
+}
+
+.benefits-box__title {
+	font-weight: 700;
+	font-size: 13px;
+}
+
+.benefits-box__list {
+	font-size: 12px;
+	line-height: 2;
+	padding: 12px 0 0 16px;
+	display: table;
+	width: 100%;
+}
+
+/* .benefits-box__list li {
+	line-height: 2;
+} */
+
+.benefits-box__item > span {
+	margin-right: 5px;
+	display: table-cell;
+}
+
+.benefits-box__item > span:first-child {
+	width: 140px;
+}
+
+.buy-options {
+	border-bottom-width: 0;
+}
+
+.selected-prdts {
+	padding-top: 0;
+}
+
+.selected-prdts-item {
+	display: flex;
+	padding: 8px 0;
+}
+
+.selected-prdts-item > * {
+	width: 33.3%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.selected-prdts-item__amt {
+	justify-content: flex-end;
+}
+
+.selected-prdts-item__disc-btn {
+	color: #767676;
+	margin-left: 12px;
+	padding: 0;
+}
+
+.total-amt-box {
+	text-align: right;
+}
+
+.total-amt {
+	font-size: 1.5em;
+	margin-right: 12px;
+}
+
+.msg-box {
+	padding-bottom: 20px;
+	font-size: 14px;
+	color: #3d63f6;
+}
+
+.buy-btn-box {
+	border-bottom-width: 0;
+	padding-top: 0;
+}
+
+.buy-btn {
+	padding: 20px 0;
+	border: 1px solid #e5e5e5;
+	width: 50%;
+	font-size: 1.2rem;
+	font-weight: 700;
+	position: relative;
+	color: #333;
+}
+
+.buy-btn:first-child {
+	border-right-width: 0;
+}
+
+.buy-btn--buy-now {
+	background-color: #e5e5e5;
+	box-shadow: 3px 3px 6px 2px rgba(0, 0, 0, 0.05);
+}
+
+.buy-btn--buy-now:hover {
+	background: #333;
+	border: 1px solid #333;
+	color: #fff;
+}
+
+/* SPINNER */
+.spinner {
+	display: flex;
+	justify-content: center;
+}
+
+.spinner__cnt {
+	width: 36px;
+	height: 36px;
+	border-radius: 0;
+	border: 1px solid #e5e5e5;
+	border-left-width: 0;
+	border-right-width: 0;
+	padding: 5px;
+	text-align: center;
+	font-size: 1rem;
+}
+
+.spinner__btn {
+	width: 36px;
+	height: 36px;
+	padding: 5;
+	padding: 5px;
+	text-align: center;
+	border: 1px solid #e5e5e5;
+}
+
+/* Deleting stepper in number input field */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+	-moz-appearance: textfield;
+}
+
+/* SELECT BOX */
+.select-box {
+	position: relative;
+	font-size: 0.9rem;
+}
+
+.select-box__selected {
+	display: flex;
+	border: 1px solid #e5e5e5;
+	line-height: 3;
+	text-align: left;
+	padding-left: 12px;
+}
+
+.select-box__label {
+	flex: 1 1 auto;
+	cursor: pointer;
+}
+
+.select-box__title {
+	position: relative;
+}
+
+.select-box__trigger {
+	position: absolute;
+	right: 12px;
+}
+
+.select-box__options {
+	display: none;
+	position: absolute;
+	z-index: 1;
+	left: 0;
+	width: 100%;
+	border: 1px solid #e5e5e5;
+	border-top-width: 0;
+	max-height: 250px;
+	overflow-y: auto;
+}
+
+.select-box__options.expanded {
+	display: block;
+}
+
+.select-box__list {
+	background: #fff;
+	cursor: pointer;
+}
+
+.select-box__list > li {
+	line-height: 3;
+	padding: 0 12px;
+}
+
+.select-box__list > li:hover {
+	background-color: #f7f7f7;
 }
