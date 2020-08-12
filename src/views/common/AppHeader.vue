@@ -192,7 +192,7 @@ export default {
       else $signBox.classList.remove("hidden");
     },
     goMyPage() {
-      this.$router.push("my-page");
+      this.$router.push("/my-page");
     },
     pullSignInModal() {
       this.showSignIn = true;
