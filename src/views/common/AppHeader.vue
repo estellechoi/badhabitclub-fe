@@ -11,7 +11,7 @@
     </aside>
 
     <!--HEADER-->
-    <header class="section section--header" ref="header">
+    <header class="section section--header" :class="{ 'scrolled' : isScrolledMode }" ref="header">
       <div class="container">
         <div class="menu-group clearfix">
           <div class="logo float--left">
@@ -155,7 +155,21 @@ export default {
       showSignUp: false,
       searchText: "",
       isOnline: true,
+      isScrolledMode: false,
+      isHome: true,
     };
+  },
+  watch: {
+    $route(to) {
+      console.log(to);
+      if (to.name === "home") {
+        this.isHome = true;
+        this.isScrolledMode = false;
+      } else {
+        this.isHome = false;
+        this.isScrolledMode = true;
+      }
+    },
   },
   methods: {
     toggleInputField() {
@@ -168,15 +182,17 @@ export default {
     },
     getScrollY() {
       const pageYOffset = window.pageYOffset; // IE 10
-      const $header = this.$refs.header;
+      // const $header = this.$refs.header;
 
       if (pageYOffset > 45) {
-        $header.classList.add("scrolled");
+        this.isScrolledMode = true;
+        // $header.classList.add("scrolled");
         // this.$refs.banner.classList.add("banner--hidden");
         this.$refs.searchInput.classList.remove("full-width");
         this.searchText = "";
       } else {
-        $header.classList.remove("scrolled");
+        this.isScrolledMode = false;
+        // $header.classList.remove("scrolled");
         // this.$refs.banner.classList.remove("banner--hidden");
       }
     },
@@ -222,7 +238,7 @@ export default {
       this.isOnline = false;
     },
     callScrollFuncs() {
-      this.getScrollY();
+      if (this.isHome) this.getScrollY();
       this.checkScroll();
     },
   },
