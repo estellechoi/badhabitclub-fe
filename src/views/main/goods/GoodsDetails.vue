@@ -38,7 +38,7 @@
             <!-- <i class="fas fa-heart"></i> -->
           </button>
 
-          <button class="prdt-share-btn">
+          <button class="prdt-share-btn" @click="showModalShare = true">
             <span class="blind-box">공유하기</span>
             <i class="fas fa-share-alt"></i>
           </button>
@@ -126,8 +126,8 @@
       </div>
     </div>
 
-    <modal v-if="showModal" :aria-label="'상품 정보 공유하기'" @close="showModal = false">
-      <share></share>
+    <modal v-if="showModalShare" :aria-label="'상품 정보 공유하기'" @close="closeModal">
+      <share slot="body"></share>
     </modal>
 
     <!-- <modal v-if="showSignUp" :ariaLabel="'회원가입'" @close="closeSignUp">
@@ -145,6 +145,7 @@ export default {
   },
   data() {
     return {
+      showModalShare: false,
       prdtInfo: {
         id: 2,
         prdtName: "Day Cap",
@@ -214,6 +215,10 @@ export default {
     },
   },
   methods: {
+    closeModal() {
+      console.log("호출!");
+      this.showModalShare = false;
+    },
     toggleLike() {
       this.like = !this.like;
     },
