@@ -1510,7 +1510,9 @@ label.sign-fieldset__item > * {
 }
 
 .total-amt-box {
+	font-weight: 900;
 	text-align: right;
+	border-bottom-width: 0;
 }
 
 .total-amt {
@@ -1544,6 +1546,7 @@ label.sign-fieldset__item > * {
 }
 
 .buy-btn--buy-now {
+	color: #3d63f6;
 	background-color: #e5e5e5;
 	box-shadow: 3px 3px 6px 2px rgba(0, 0, 0, 0.05);
 }
@@ -1650,4 +1653,34 @@ input[type="number"] {
 
 .select-box__list > li:hover {
 	background-color: #f7f7f7;
+}
+
+.share-box {
+	padding: 40px 80px;
+}
+
+.share-box__title {
+	padding: 20px 0;
+	font-size: 22px;
+	font-weight: 700;
+	text-align: center;
+}
+
+.share-mtd-list {
+	margin-top: 26px;
+	font-size: 18px;
+}
+
+.share-mtd-item {
+	line-height: 1.5;
+	padding: 20px 0;
+}
+
+.share-mtd-item a:hover {
+	border-bottom: 0.3px solid #3d63f6;
+	color: #3d63f6;
+}
+
+.share-mtd-item__icon {
+	margin-right: 20px;
 }
