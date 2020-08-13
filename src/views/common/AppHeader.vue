@@ -39,8 +39,8 @@
               <span class="menu-label">MY PAGE</span>
             </a>
 
-            <a class="sign-icon-box__btn btn btn--primary" @click="goShoppingBag">
-              <i class="fas fa-shopping-bag"></i>
+            <a class="sign-icon-box__btn btn btn--primary" ref="bag" @click="goShoppingBag">
+              <i class="fas fa-shopping-bag" :class="{ 'bounce' : isBagChanging }"></i>
               <span class="menu-label">BAG</span>
             </a>
           </nav>
@@ -112,13 +112,12 @@
 </template>
 
 <script>
-import Modal from "./../../components/Modal";
 import SignInBox from "./../modal/SignInBox";
 import SignUp from "./../modal/SignUp";
+import bus from "./../../utils/bus.js";
 
 export default {
   components: {
-    Modal,
     SignInBox,
     SignUp,
   },
@@ -157,6 +156,7 @@ export default {
       isOnline: true,
       isScrolledMode: false,
       isHome: true,
+      isBagChanging: false,
     };
   },
   watch: {
@@ -241,12 +241,20 @@ export default {
       if (this.isHome) this.getScrollY();
       this.checkScroll();
     },
+    getRotatingIcon() {
+      this.isBagChanging = true;
+      window.setTimeout(() => (this.isBagChanging = false), 2000);
+    },
+  },
+  created() {
+    bus.$on("change-bag", this.getRotatingIcon);
   },
   mounted() {
     window.addEventListener("scroll", this.callScrollFuncs);
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.callScrollFuncs);
+    bus.$off("change-bag", this.getRotatingIcon);
   },
 };
 </script>
