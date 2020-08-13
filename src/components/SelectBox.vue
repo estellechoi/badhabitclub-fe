@@ -16,8 +16,8 @@
         <div :id="`${id}-box`" class="select-box__title" aria-invalid="false" aria-disabled="false">
           <span>{{ selectedOption.label || defaultLabel }}</span>
 
-          <span class="select-box__trigger">
-            <i class="fas" :class="isExpanded ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+          <span class="select-box__trigger" :class="{ 'select-box__trigger--down' : isExpanded }">
+            <i class="fas fa-chevron-up"></i>
           </span>
         </div>
       </label>
