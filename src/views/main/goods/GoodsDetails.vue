@@ -121,12 +121,12 @@
       </div>
 
       <div class="buy-btn-box prdt-summary__content">
-        <button type="button" class="buy-btn">Shopping Bag</button>
+        <button type="button" class="buy-btn" @click="putIntoBag">{{ bagStatus }}</button>
         <button type="button" class="buy-btn buy-btn--buy-now" @click="buyNow">Buy Now</button>
       </div>
     </div>
 
-    <modal v-if="showModalShare" :aria-label="'상품 정보 공유하기'" @close="closeModal">
+    <modal v-if="showModalShare" :aria-label="'상품 정보 공유하기'" @close="showModalShare = false">
       <share slot="body"></share>
     </modal>
 
@@ -138,6 +138,7 @@
 
 <script>
 import Share from "./../../modal/Share.vue";
+import bus from "./../../../utils/bus.js";
 
 export default {
   components: {
@@ -146,6 +147,7 @@ export default {
   data() {
     return {
       showModalShare: false,
+      puttingStatus: 0,
       prdtInfo: {
         id: 2,
         prdtName: "Day Cap",
@@ -208,6 +210,21 @@ export default {
       });
       return amt;
     },
+    bagStatus() {
+      let label = "Shopping Bag";
+      switch (this.puttingStatus) {
+        case 0:
+          label = "Shopping Bag";
+          break;
+        case 1:
+          label = "Wait...";
+          break;
+        case 2:
+          label = "Ok!";
+          break;
+      }
+      return label;
+    },
   },
   watch: {
     selectedList(newVal) {
@@ -234,6 +251,21 @@ export default {
         if (item.value === target.dataset.option)
           this.selectedList.splice(index, 1);
       });
+    },
+    putIntoBag() {
+      if (!this.selectedList.length)
+        return (this.alertMsg = "사이즈를 선택해주세요.");
+
+      // 쇼핑백 담기 api
+
+      this.puttingStatus = 1;
+      window.setTimeout(() => {
+        this.puttingStatus = 2;
+        window.setTimeout(() => {
+          this.puttingStatus = 0;
+          bus.$emit("change-bag");
+        }, 1000);
+      }, 1400);
     },
     buyNow() {
       if (!this.selectedList.length)
