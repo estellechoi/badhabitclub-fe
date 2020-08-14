@@ -1,138 +1,226 @@
 <template>
-  <div class="prdt-detail-box">
-    <div class="prdt-img">
-      <img
-        v-for="(item, index) in prdtInfo.imgList"
-        :key="index"
-        :src="item.path"
-        :alt="`${prdtInfo.prdtName} ${item.alt} 사진`"
-      />
-    </div>
-
-    <div class="prdt-summary">
-      <!-- PRDT HEADER -->
-      <div class="prdt-header prdt-summary__content">
-        <h2 class="prdt-header__title">{{ prdtInfo.prdtName }}</h2>
-
-        <div class="prdt-header__info">
-          <span class="prdt-header__review">
-            <a>
-              <span class="rating-star">
-                <i
-                  class="fas fa-star"
-                  v-for="(item, index) in starList"
-                  :key="index"
-                  :class="{ 'rating-star-icon--gray' : item > prdtInfo.starCnt }"
-                ></i>
-              </span>
-
-              <span class="review-cnt">{{ prdtInfo.reviewCnt }} 개 리뷰 보기</span>
-            </a>
-          </span>
+  <div>
+    <div class="prdt-info-box">
+      <div class="prdt-detail">
+        <!-- IMAGE BOX -->
+        <div class="prdt-detail__prdt-img">
+          <img
+            v-for="(item, index) in prdtInfo.imgList"
+            :key="index"
+            :src="item.path"
+            :alt="`${prdtInfo.prdtName} ${item.alt} 사진`"
+          />
         </div>
 
-        <div class="prdt-btn-box">
-          <button class="prdt-fav-btn" @click="toggleLike">
-            <span class="blind-box">찜하기</span>
-            <i class="fa-heart" :class="like ? 'fas' : 'far'"></i>
-            <!-- <i class="fas fa-heart"></i> -->
-          </button>
-
-          <button class="prdt-share-btn" @click="showModalShare = true">
-            <span class="blind-box">공유하기</span>
-            <i class="fas fa-share-alt"></i>
-          </button>
-        </div>
-      </div>
-
-      <!-- PRDT PRICE -->
-      <div class="prdt-price prdt-summary__content">
-        <div class="prdt-origin-price">
-          <span class="discount-rate">{{ prdtInfo.dscntRate * 100 }}%</span>
-          <span class="origin-price">
-            <del>{{ prdtInfo.originPrice }}</del>
-          </span>
-        </div>
-
-        <div class="prdt-sale-price">
-          <span class="total-price">
-            ₩
-            <strong>{{ prdtInfo.salePrice }}</strong>
-          </span>
-        </div>
-      </div>
-
-      <!-- PRDT BENEFITS -->
-      <div class="buy-benefits prdt-summary__content">
-        <details class="benefits-box">
-          <summary class="benefits-box__title">추가 혜택을 확인하세요</summary>
-          <ul class="benefits-box__list">
-            <li class="benefits-box__item" v-for="(item, index) in bnftList" :key="index">
-              <span>{{ item.title }}</span>
-              <span>
-                <span v-html="item.unit"></span>
-                {{ item.benefitRate * prdtInfo.originPrice * prdtInfo.dscntRate }}
-                {{ item.description ? `(${item.description})` : '' }}
-              </span>
-            </li>
-          </ul>
-        </details>
-      </div>
-
-      <!-- SELECT OPTIONS -->
-      <div class="buy-options prdt-summary__content">
-        <select-box
-          id="buy-options"
-          :list="optionsList"
-          :defaultLabel="'사이즈'"
-          @change="pushSelected"
-        ></select-box>
-      </div>
-
-      <div v-if="selectedList.length">
-        <div class="selected-prdts prdt-summary__content">
-          <ul class="selected-prdts-list" @click="discardItem">
-            <li class="selected-prdts-item" v-for="(item, index) in selectedList" :key="index">
-              <div>{{ item.label }}</div>
-
-              <spinner :label="item.label" @change="(val) => item.qty = val"></spinner>
-
-              <div class="selected-prdts-item__amt">
-                <span>{{ item.qty * prdtInfo.salePrice }}</span>
-                <button
-                  type="button"
-                  class="selected-prdts-item__disc-btn"
-                  :aria-label="`${item.label} 옵션 선택 취소`"
-                >
-                  <i class="fas fa-times selected-prdts-item__disc-icon" :data-option="item.value"></i>
-                </button>
+        <!-- DETAILS -->
+        <div class="prdt-detail__desc">
+          <!-- HIGHLIGHTS -->
+          <ul class="prdt-highlights-list">
+            <li
+              class="prdt-highlights-item"
+              v-for="(item, index) in prdtInfo.hightlights"
+              :key="index"
+            >
+              <div class="prdt-highlights-item__icon">
+                <span v-html="item.icon"></span>
+              </div>
+              <div>
+                <div class="prdt-highlights-item__title">{{ item.label }}</div>
+                <div class="prdt-highlights-item__desc">{{ item.desc }}</div>
               </div>
             </li>
           </ul>
-        </div>
 
-        <div class="total-amt-box prdt-summary__content">
-          <span class="total-amt">₩ {{ totalAmt }}</span>
+          <!-- SIZE DETAILS -->
+          <div class="prdt-size-details">
+            <custom-table
+              :caption="'사이즈 상세'"
+              :caption-class="'prdt-details-sub-title'"
+              :columns="[
+            {
+              title: 'Size',
+              data: 'label'
+            },
+            {
+              title: '총길이',
+              data: 'length'
+            },
+            {
+              title: '가슴',
+              data: 'chest'
+            },
+            {
+              title: '어깨',
+              data: 'shoulder'
+            },
+            {
+              title: '소매',
+              data: 'arm'
+            },
+            {
+              title: '암홀',
+              data: 'armhole'
+            }
+            ]"
+              :row-data="prdtInfo.optionsList"
+            ></custom-table>
+          </div>
         </div>
       </div>
 
-      <div class="msg-box" v-if="alertMsg">
-        <span>{{ alertMsg }}</span>
-      </div>
+      <div class="prdt-buy-helper">
+        <div class="prdt-summary">
+          <!-- PRDT HEADER -->
+          <div class="prdt-header prdt-summary__content">
+            <h1 class="prdt-header__title">{{ prdtInfo.prdtName }}</h1>
 
-      <div class="buy-btn-box prdt-summary__content">
-        <button type="button" class="buy-btn" @click="putIntoBag">{{ bagStatus }}</button>
-        <button type="button" class="buy-btn buy-btn--buy-now" @click="buyNow">Buy Now</button>
+            <div class="prdt-header__info">
+              <rating-star
+                :star-cnt="starCnt"
+                :raters-cnt="prdtInfo.reviewList.length"
+                :label="' 개 리뷰 보기'"
+              ></rating-star>
+            </div>
+
+            <div class="prdt-btn-box">
+              <button class="prdt-fav-btn" @click="toggleLike">
+                <span class="blind-box">찜하기</span>
+                <i class="fa-heart" :class="like ? 'fas' : 'far'"></i>
+                <!-- <i class="fas fa-heart"></i> -->
+              </button>
+
+              <button class="prdt-share-btn" @click="showModalShare = true">
+                <span class="blind-box">공유하기</span>
+                <i class="fas fa-share-alt"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- PRDT PRICE -->
+          <div class="prdt-price prdt-summary__content">
+            <div class="prdt-origin-price">
+              <span class="discount-rate">{{ prdtInfo.dscntRate * 100 }}%</span>
+              <span class="origin-price">
+                <del>{{ prdtInfo.originPrice }}</del>
+              </span>
+            </div>
+
+            <div class="prdt-sale-price">
+              <span class="total-price">
+                ₩
+                <strong>{{ prdtInfo.salePrice }}</strong>
+              </span>
+            </div>
+          </div>
+
+          <!-- PRDT BENEFITS -->
+          <div class="buy-benefits prdt-summary__content">
+            <details class="benefits-box">
+              <summary class="benefits-box__title">추가 혜택을 확인하세요</summary>
+              <ul class="benefits-box__list">
+                <li class="benefits-box__item" v-for="(item, index) in bnftList" :key="index">
+                  <span>{{ item.title }}</span>
+                  <span>
+                    <span v-html="item.unit"></span>
+                    {{ item.benefitRate * prdtInfo.originPrice * prdtInfo.dscntRate }}
+                    {{ item.description ? `(${item.description})` : '' }}
+                  </span>
+                </li>
+              </ul>
+            </details>
+          </div>
+
+          <!-- SELECT OPTIONS -->
+          <div class="buy-options prdt-summary__content">
+            <select-box
+              id="buy-options"
+              :list="prdtInfo.optionsList"
+              :defaultLabel="'사이즈'"
+              @change="pushSelected"
+            ></select-box>
+          </div>
+
+          <div v-if="selectedList.length">
+            <div class="selected-prdts prdt-summary__content">
+              <ul class="selected-prdts-list" @click="discardItem">
+                <li class="selected-prdts-item" v-for="(item, index) in selectedList" :key="index">
+                  <div>{{ item.label }}</div>
+
+                  <spinner :label="item.label" @change="(val) => item.qty = val"></spinner>
+
+                  <div class="selected-prdts-item__amt">
+                    <span>{{ item.qty * prdtInfo.salePrice }}</span>
+                    <button
+                      type="button"
+                      class="selected-prdts-item__disc-btn"
+                      :aria-label="`${item.label} 옵션 선택 취소`"
+                    >
+                      <i
+                        class="fas fa-times selected-prdts-item__disc-icon"
+                        :data-option="item.value"
+                      ></i>
+                    </button>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="total-amt-box prdt-summary__content">
+              <span class="total-amt">₩ {{ totalAmt }}</span>
+            </div>
+          </div>
+
+          <div class="msg-box" v-if="alertMsg">
+            <span>{{ alertMsg }}</span>
+          </div>
+
+          <div class="buy-btn-box prdt-summary__content">
+            <button type="button" class="buy-btn" @click="putIntoBag">{{ bagStatus }}</button>
+            <button type="button" class="buy-btn buy-btn--buy-now" @click="buyNow">Buy Now</button>
+          </div>
+        </div>
       </div>
     </div>
 
+    <div class="prdt-review-box">
+      <div>
+        <h2 class="prdt-review prdt-details-sub-title">
+          <rating-star :star-cnt="starCnt" :raters-cnt="prdtInfo.reviewList.length"></rating-star>
+        </h2>
+      </div>
+
+      <div>
+        <ul>
+          <li v-for="(item, index) in prdtInfo.reviewList" :key="index">
+            <article class="prdt-review-artc">
+              <header class="prdt-review-artc__header">
+                <div class="prdt-review-artc__profile-img">
+                  <a :aria-label="item.userName">
+                    <img :src="item.userProfImgPath" :alt="`${item.userName} 프로필 사진`" />
+                  </a>
+                </div>
+
+                <div class="prdt-review-artc__user-info">
+                  {{ item.userName }}
+                  <div class="prdt-review-artc__reg-dt">
+                    <span>{{ item.regDt }}</span>
+                  </div>
+                </div>
+              </header>
+
+              <div class="prdt-review-artc__main-con">
+                <p>{{ item.content }}</p>
+              </div>
+            </article>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- MODAL -->
     <modal v-if="showModalShare" :aria-label="'상품 정보 공유하기'" @close="showModalShare = false">
       <share slot="body"></share>
     </modal>
-
-    <!-- <modal v-if="showSignUp" :ariaLabel="'회원가입'" @close="closeSignUp">
-      <sign-up slot="body" @close="closeSignUp"></sign-up>
-    </modal>-->
   </div>
 </template>
 
@@ -154,8 +242,6 @@ export default {
         originPrice: 30000,
         dscntRate: 0.66,
         salePrice: 30000 * 0.66,
-        starCnt: 3,
-        reviewCnt: 10,
         imgList: [
           {
             path: "/img/prdt1.png",
@@ -166,8 +252,151 @@ export default {
             alt: "상품 상세",
           },
         ],
+        hightlights: [
+          {
+            label: "친환경 소재",
+            value: "0",
+            icon: '<i class="fab fa-pagelines"></i>',
+            desc: "면 100%",
+          },
+          {
+            label: "첫 세탁 단독세탁",
+            value: "1",
+            icon: '<i class="fas fa-tint"></i>',
+            desc: "첫 세탁 단독세탁 필수",
+          },
+          {
+            label: "중고",
+            value: "2",
+            icon: '<i class="fas fa-tshirt"></i>',
+            desc: "업사이클링 상품",
+          },
+          {
+            label: "인기있는 상품",
+            value: "3",
+            icon: '<i class="fas fa-heart"></i>',
+            desc: "100명 이상의 좋아요",
+          },
+          {
+            label: "빠른 배송",
+            value: "4",
+            icon: '<i class="fas fa-fighter-jet"></i>',
+            desc: "오후 2시 이전 주문시 당일 발송",
+          },
+          {
+            label: "무료 배송",
+            value: "5",
+            icon: '<i class="fas fa-comment-dollar"></i>',
+            desc: "주문 금액 상관없이 무료 배송",
+          },
+        ],
+        optionsList: [
+          {
+            label: "S",
+            value: "1",
+            length: 68,
+            chest: 62,
+            shoulder: 69,
+            arm: 58,
+            armhole: 26,
+          },
+          {
+            label: "M",
+            value: "2",
+            length: 68,
+            chest: 62,
+            shoulder: 69,
+            arm: 58,
+            armhole: 26,
+          },
+        ],
+        reviewList: [
+          {
+            userName: "Bomnie",
+            content: "모자 너무 조아용 히히히",
+            userProfImgPath: "/img/profile.png",
+            star: 5,
+            regDt: "2020-08-01",
+          },
+          {
+            userName: "Bomnie",
+            content: "모자 너무 조아용 히히히",
+            userProfImgPath: "/img/profile.png",
+            star: 5,
+            regDt: "2020-08-01",
+          },
+          {
+            userName: "Bomnie",
+            content: "모자 너무 조아용 히히히",
+            userProfImgPath: "/img/profile.png",
+            star: 4,
+            regDt: "2020-08-01",
+          },
+          {
+            userName: "Bomnie",
+            content: "모자 너무 조아용 히히히",
+            userProfImgPath: "/img/profile.png",
+            star: 2,
+            regDt: "2020-08-01",
+          },
+          {
+            userName: "Bomnie",
+            content: "모자 너무 조아용 히히히",
+            userProfImgPath: "/img/profile.png",
+            star: 4,
+            regDt: "2020-08-01",
+          },
+          {
+            userName: "Bomnie",
+            content: "모자 너무 조아용 히히히",
+            userProfImgPath: "/img/profile.png",
+            star: 4,
+            regDt: "2020-08-01",
+          },
+          {
+            userName: "Bomnie",
+            content: "모자 너무 조아용 히히히",
+            userProfImgPath: "/img/profile.png",
+            star: 5,
+            regDt: "2020-08-01",
+          },
+          {
+            userName: "Bomnie",
+            content: "모자 너무 조아용 히히히",
+            userProfImgPath: "/img/profile.png",
+            star: 4,
+            regDt: "2020-08-01",
+          },
+          {
+            userName: "Bomnie",
+            content: "모자 너무 조아용 히히히",
+            userProfImgPath: "/img/profile.png",
+            star: 4,
+            regDt: "2020-08-01",
+          },
+          {
+            userName: "Bomnie",
+            content: "모자 너무 조아용 히히히",
+            userProfImgPath: "/img/profile.png",
+            star: 5,
+            regDt: "2020-08-01",
+          },
+          {
+            userName: "Bomnie",
+            content: "모자 너무 조아용 히히히",
+            userProfImgPath: "/img/profile.png",
+            star: 4,
+            regDt: "2020-08-01",
+          },
+          {
+            userName: "Bomnie",
+            content: "모자 너무 조아용 히히히",
+            userProfImgPath: "/img/profile.png",
+            star: 5,
+            regDt: "2020-08-01",
+          },
+        ],
       },
-      starList: [1, 2, 3, 4, 5],
       bnftList: [
         {
           title: "현대카드로 결제시",
@@ -188,18 +417,10 @@ export default {
         },
       ],
       like: false,
-      optionsList: [
-        {
-          label: "S",
-          value: "1",
-        },
-        {
-          label: "M",
-          value: "2",
-        },
-      ],
       selectedList: [],
       alertMsg: null,
+      starCnt: 0,
+      starList: [1, 2, 3, 4, 5],
     };
   },
   computed: {
@@ -271,6 +492,17 @@ export default {
       if (!this.selectedList.length)
         return (this.alertMsg = "사이즈를 선택해주세요.");
     },
+    getGoodsDetails() {
+      // 상품 정보 GET api
+      const totalStarCnt = this.prdtInfo.reviewList
+        .map((item) => item.star)
+        .reduce((accm, currentVal) => accm + currentVal);
+
+      this.starCnt = totalStarCnt / this.prdtInfo.reviewList.length;
+    },
+  },
+  mounted() {
+    this.getGoodsDetails();
   },
 };
 </script>
