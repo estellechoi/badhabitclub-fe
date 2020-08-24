@@ -7,10 +7,7 @@
       :disabled="valueNow <= min"
       @click="decrease"
     >-</button>
-    <!-- <div>
-                <span aria-hidden="true">1</span>
-                <span aria-live="polite">{{ item.label }} 1 개</span>
-    </div>-->
+
     <input
       type="number"
       class="spinner__cnt"
@@ -24,6 +21,7 @@
       :aria-label="`${label} 수량`"
       v-model="valueNow"
     />
+
     <button
       type="button"
       class="spinner__btn"
@@ -52,6 +50,10 @@ export default {
       type: Number,
       default: 1,
     },
+    value: {
+      type: Number,
+      default: 1,
+    },
   },
   data() {
     return {
@@ -59,6 +61,9 @@ export default {
     };
   },
   watch: {
+    value(newVal) {
+      this.valueNow = newVal;
+    },
     valueNow(newVal) {
       this.$emit("change", parseInt(newVal));
     },
@@ -71,8 +76,10 @@ export default {
       this.valueNow = parseInt(this.valueNow) - this.step;
     },
   },
+  mounted() {
+    if (this.value !== 1) this.valueNow = this.value;
+  },
 };
 </script>
 
-<style>
-</style>
+<style></style>
