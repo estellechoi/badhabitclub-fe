@@ -13,7 +13,7 @@
               :class="{ 'goods-item__label--visible' : item.showLabel }"
             >
               <span class="goods-item__name">{{ item.prdtName }}</span>
-              <span class="goods-item__price">{{ item.price }}</span>
+              <span class="goods-item__price">{{ item.price | addCommas }}</span>
             </span>
           </li>
         </ul>
