@@ -5,6 +5,9 @@ import SelectBox from "./SelectBox.vue";
 import Spinner from "./Spinner.vue";
 import CustomTable from "./Table.vue";
 import RatingStar from "./RatingStar.vue";
+import PriceTag from "./PriceTag.vue";
+import ProgressHeader from "./ProgressHeader.vue";
+import CInput from "./Input.vue";
 
 export default {
 	components: {
@@ -15,5 +18,8 @@ export default {
 		Spinner,
 		CustomTable,
 		RatingStar,
+		PriceTag,
+		ProgressHeader,
+		CInput,
 	},
 };
