@@ -8,6 +8,11 @@ import Goods from "./../views/main/Goods.vue";
 import GoodsDetails from "./../views/main/goods/GoodsDetails.vue";
 
 import MyPage from "./../views/main/MyPage.vue";
+import Order from "./../views/main/Order.vue";
+import Bag from "./../views/main/order/Bag.vue";
+import Checkout from "./../views/main/order/Checkout.vue";
+import OrderComplete from "./../views/main/order/OrderComplete.vue";
+
 import DeleteAccount from "./../views/main/DeleteAccount.vue";
 import DeleteReasons from "./../views/main/delete-account/DeleteReasons.vue";
 import DeleteConfirm from "./../views/main/delete-account/DeleteConfirm.vue";
@@ -37,6 +42,11 @@ const router = new VueRouter({
 			path: "/my-page",
 			name: "my-page",
 			component: MyPage,
+		},
+		{
+			path: "/bag",
+			name: "bag",
+			component: Bag,
 		},
 		{
 			path: "/delete-account",
@@ -73,6 +83,28 @@ const router = new VueRouter({
 				{
 					path: "details",
 					component: GoodsDetails,
+				},
+			],
+		},
+		{
+			path: "/order",
+			name: "order",
+			component: Order,
+			children: [
+				{
+					path: "bag",
+					name: "bag",
+					component: Bag,
+				},
+				{
+					path: "checkout",
+					name: "checkout",
+					component: Checkout,
+				},
+				{
+					path: "order-complete",
+					name: "order-complete",
+					component: OrderComplete,
 				},
 			],
 		},
