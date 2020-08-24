@@ -11,7 +11,7 @@
     </aside>
 
     <!--HEADER-->
-    <header class="section section--header" :class="{ 'scrolled' : isScrolledMode }" ref="header">
+    <header class="section section--header" :class="{ scrolled: isScrolledMode }" ref="header">
       <div class="container">
         <div class="menu-group clearfix">
           <div class="logo float--left">
@@ -40,8 +40,9 @@
             </a>
 
             <a class="sign-icon-box__btn btn btn--primary" ref="bag" @click="goShoppingBag">
-              <i class="fas fa-shopping-bag" :class="{ 'bounce' : isBagChanging }"></i>
+              <i class="fas fa-shopping-bag" :class="{ bounce: isBagChanging }"></i>
               <span class="menu-label">BAG</span>
+              <span class="menu-label--bag-cnt">({{ bagCnt }})</span>
             </a>
           </nav>
         </div>
@@ -60,7 +61,11 @@
           <nav>
             <ul class="nav--list" ref="navList">
               <li v-for="(item, index) in navList" :key="index">
-                <a @click="$router.push({ path: item.path })">{{ item.label }}</a>
+                <a @click="$router.push({ path: item.path })">
+                  {{
+                  item.label
+                  }}
+                </a>
               </li>
             </ul>
           </nav>
@@ -159,6 +164,11 @@ export default {
       isBagChanging: false,
     };
   },
+  computed: {
+    bagCnt() {
+      return this.$store.getters.bagList.length;
+    },
+  },
   watch: {
     $route(to) {
       console.log(to);
@@ -230,8 +240,8 @@ export default {
       this.pullSignInModal();
     },
     goShoppingBag() {
-      const isOnline = false;
-      if (!isOnline) return this.pullSignInModal();
+      if (!this.isOnline) return this.pullSignInModal();
+      this.$router.push({ path: "/order/bag" });
     },
     signOut() {
       // signout api
@@ -259,5 +269,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
