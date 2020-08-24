@@ -1,6 +1,6 @@
 <template>
   <label :for="id" class="text-box">
-    <span class="checkbox" :class="{ 'checkbox--checked' : model }">
+    <span class="checkbox" :class="{ 'checkbox--checked': model }">
       <input
         type="checkbox"
         aria-invalid="false"
@@ -11,7 +11,11 @@
         @change="change"
       />
     </span>
-    <span class="checkbox-label">{{ label ? label : '' }}</span>
+    <span class="checkbox-label" :class="labelClass">
+      {{
+      label ? label : ""
+      }}
+    </span>
   </label>
 </template>
 
@@ -37,6 +41,10 @@ export default {
     label: {
       type: String,
     },
+    labelClass: {
+      type: String,
+      default: "",
+    },
   },
   data() {
     return {
@@ -53,8 +61,10 @@ export default {
       this.$emit("change", this.model);
     },
   },
+  mounted() {
+    this.model = this.checked;
+  },
 };
 </script>
 
-<style>
-</style>
+<style></style>
