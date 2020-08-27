@@ -20,7 +20,7 @@ export default {
       progressList: [
         { label: "쇼핑백", path: "bag" },
         { label: "주문정보 및 결제", path: "checkout" },
-        { label: "완료", path: "complete" },
+        { label: "주문 완료", path: "order-complete" },
       ],
       bagInfo: null,
     };
