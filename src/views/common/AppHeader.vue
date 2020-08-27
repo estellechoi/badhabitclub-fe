@@ -42,8 +42,8 @@
             <a class="sign-icon-box__btn btn btn--primary" ref="bag" @click="goShoppingBag">
               <i class="fas fa-shopping-bag" :class="{ bounce: isBagChanging }"></i>
               <span class="menu-label">BAG</span>
-              <span class="menu-label--bag-cnt">({{ bagCnt }})</span>
             </a>
+            <span class="menu-label--bag-cnt">({{ bagCnt }})</span>
           </nav>
         </div>
 
