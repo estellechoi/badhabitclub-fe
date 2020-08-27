@@ -18,3 +18,13 @@ export const getAddr = (param) => {
 		}
 	);
 };
+
+export const getAddrGoogle = (param) => {
+	const latlng = Object.values(param);
+	return HTTP.get(
+		`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latlng[0]},${latlng[1]}&key=${process.env.VUE_APP_GOOGLEMAP_KEY}`,
+		{
+			"Content-Type": "text/plain;charset=UTF-8",
+		}
+	);
+};
