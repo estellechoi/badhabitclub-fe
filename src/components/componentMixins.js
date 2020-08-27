@@ -7,7 +7,7 @@ import CustomTable from "./Table.vue";
 import RatingStar from "./RatingStar.vue";
 import PriceTag from "./PriceTag.vue";
 import ProgressHeader from "./ProgressHeader.vue";
-import CInput from "./Input.vue";
+import AddrSearchBox from "./AddrSearchBox.vue";
 
 export default {
 	components: {
@@ -20,6 +20,6 @@ export default {
 		RatingStar,
 		PriceTag,
 		ProgressHeader,
-		CInput,
+		AddrSearchBox,
 	},
 };
