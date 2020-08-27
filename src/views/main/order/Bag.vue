@@ -4,7 +4,7 @@
       <h1 class="title">쇼핑백 ({{ bagItemCnt }})</h1>
     </div>
 
-    <div v-if="bagItemCnt">
+    <div class="bag-container" v-if="bagItemCnt">
       <div class="bag-master-chkbox-container">
         <checkbox
           :id="'check-select-all-prdt'"
@@ -28,43 +28,46 @@
                 :checked="item.checked"
                 @change="(val) => toggleChkbox(val, item, index)"
               ></checkbox>
-              <!-- <checkbox label="로그인 상태 유지" id="signin-check-keep-online" @change="toggleKeepOnline"></checkbox> -->
             </div>
 
-            <div class="bag-item-box bag-item__img-box">
-              <div class="bag-item__prdt-img">
-                <img :src="item.prdtInfo.img.path" :alt="item.prdtInfo.img.alt" />
+            <div class="bag-item-container">
+              <div class="bag-item-box bag-item__img-box">
+                <div class="bag-item__prdt-img">
+                  <img :src="item.prdtInfo.img.path" :alt="item.prdtInfo.img.alt" />
+                </div>
+              </div>
+
+              <div class="bag-item-info-container">
+                <div class="bag-item-box bag-item__prdt-info">
+                  <div class="bag-item__prdt-name" aria-hidden="true">{{ item.prdtInfo.prdtName }}</div>
+                  <div>
+                    <price-tag
+                      :dscntRate="item.prdtInfo.dscntRate"
+                      :originPrice="item.prdtInfo.originPrice"
+                      :salePrice="item.prdtInfo.salePrice"
+                      :container-class="'bag-item__price-tag'"
+                    ></price-tag>
+                  </div>
+                  <div class="bag-item__selected">
+                    <div>{{ item.optionLabel }} : {{ item.label }}</div>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div class="bag-item-box bag-item__prdt-info">
-              <div class="bag-item__prdt-name" aria-hidden="true">{{ item.prdtInfo.prdtName }}</div>
-              <div>
-                <price-tag
-                  :dscntRate="item.prdtInfo.dscntRate"
-                  :originPrice="item.prdtInfo.originPrice"
-                  :salePrice="item.prdtInfo.salePrice"
-                  :container-class="'bag-item__price-tag'"
-                ></price-tag>
+            <div class="bag-item-qty-cntr-container">
+              <div class="bag-item-box bag-item__qty-cntr">
+                <spinner
+                  :label="item.prdtInfo.prdtName"
+                  v-model="item.qty"
+                  @change="(val) => (item.qty = val)"
+                ></spinner>
               </div>
-              <div class="bag-item__selected">
-                <div>{{ item.optionLabel }} : {{ item.label }}</div>
-              </div>
+
+              <div
+                class="bag-item-box bag-item__amt"
+              >₩ {{ item.qty * item.prdtInfo.salePrice | addCommas }}</div>
             </div>
-
-            <div class="bag-item-box bag-item__qty-cntr">
-              <spinner
-                :label="item.prdtInfo.prdtName"
-                v-model="item.qty"
-                @change="(val) => (item.qty = val)"
-              ></spinner>
-            </div>
-
-            <div
-              class="bag-item-box bag-item__amt"
-            >₩ {{ item.qty * item.prdtInfo.salePrice | addCommas }}</div>
-
-            <div class="bag-item-box bag-item__deli-chrg">₩ {{ 3000 | addCommas }}</div>
           </div>
         </li>
       </ul>
