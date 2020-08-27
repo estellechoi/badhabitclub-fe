@@ -7,7 +7,9 @@ import filter from "./filter.js";
 filter.init(Vue);
 
 import componentMixins from "./components/componentMixins";
-Vue.mixin(componentMixins);
+import CONST from "./const.js";
+
+Vue.mixin({ ...componentMixins, ...CONST });
 
 Vue.config.productionTip = false;
 
