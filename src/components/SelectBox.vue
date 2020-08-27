@@ -15,7 +15,9 @@
     >
       <label :for="`${id}-box`" class="select-box__label">
         <div :id="`${id}-box`" class="select-box__title" aria-invalid="false" aria-disabled="false">
-          <span>{{ selectedOption.label || defaultLabel }}</span>
+          <div class="select-box__title-text">
+            <span>{{ selectedOption.label || defaultLabel }}</span>
+          </div>
 
           <span class="select-box__trigger" :class="{ 'select-box__trigger--down' : isExpanded }">
             <i class="fas fa-chevron-down"></i>
@@ -46,6 +48,10 @@
 export default {
   name: "select-box",
   props: {
+    value: {
+      type: String,
+      default: "",
+    },
     outerClass: {
       type: String,
       default: "",
@@ -74,7 +80,20 @@ export default {
       selectedOption: {},
     };
   },
+  watch: {
+    value() {
+      this.setValue();
+    },
+  },
   methods: {
+    setValue() {
+      this.list.some((item) => {
+        if (item.value === this.value) {
+          this.selectedOption = item;
+          return true;
+        }
+      });
+    },
     toggleSelectBox() {
       if (this.disabled) return;
       this.isExpanded = !this.isExpanded;
@@ -85,6 +104,9 @@ export default {
       this.isExpanded = false;
       this.$emit("change", this.selectedOption);
     },
+  },
+  mounted() {
+    this.setValue();
   },
 };
 </script>
