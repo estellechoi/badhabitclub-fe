@@ -165,8 +165,270 @@
 		padding: 0;
 	}
 
+	/* GOODS LIST */
 	.goods-item {
 		width: 100%;
 		height: 500px;
+	}
+
+	/* GOODS DETAIL */
+	.prdt-info-box {
+		flex-direction: column;
+	}
+
+	.prdt-detail,
+	.prdt-buy-helper,
+	.prdt-review-box {
+		width: auto;
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.prdt-buy-helper {
+		order: -1;
+	}
+
+	/* SHARE BOX */
+	.share-box {
+		padding-left: 40px;
+		padding-right: 40px;
+	}
+
+	.title:not(.title--center) {
+		position: absolute;
+		opacity: 0;
+	}
+
+	/* SHOPPING BAG */
+	.section .container {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+
+	.bag-master-chkbox-container {
+		padding: 0 6px;
+	}
+
+	.bag-master-chkbox-label {
+		margin-left: 10px;
+	}
+
+	.bag-item .container {
+		padding-left: 0;
+		padding-right: 0;
+		flex-direction: column;
+	}
+
+	.bag-item-box {
+		justify-content: flex-start;
+		width: auto;
+	}
+
+	.bag-item__checkbox {
+		align-items: flex-start;
+		padding-bottom: 12px;
+	}
+
+	.bag-master-chkbox-container .checkbox,
+	.bag-item__checkbox .checkbox {
+		transform: scale(1.2);
+	}
+
+	.bag-item__img-box {
+		padding-right: 6px;
+	}
+
+	.bag-item-info-container {
+		flex-direction: column;
+		order: -1;
+	}
+
+	.bag-item-qty-cntr-container {
+		width: auto;
+		padding-top: 12px;
+	}
+
+	.bag-item__amt {
+		font-size: 20px;
+		padding-right: 20px;
+	}
+
+	.btn-box {
+		order: -1;
+		padding: 0;
+		position: absolute;
+		right: 6px;
+	}
+
+	.btn-box .btn {
+		font-size: 12px;
+		height: 32px;
+	}
+
+	/* CHCKOUT */
+	.chkout-container {
+		flex-direction: column;
+	}
+
+	.chkout-order-info-box {
+		order: -1;
+		position: static;
+		width: auto;
+		padding-right: 0;
+	}
+
+	.chkout-prdt-box {
+		border-bottom-width: 0;
+	}
+
+	.chkout-total-box {
+		display: none;
+	}
+
+	.chkout-form-box {
+		width: auto;
+		padding: 0;
+	}
+
+	.chkout-form-box .btn {
+		font-size: 12px;
+	}
+
+	.chkout-fs__item .input-label,
+	.chkout-fs__item--sel-box .input-label {
+		width: 110px;
+		min-width: 110px;
+	}
+
+	.chkout-fs__item .text-input__input,
+	.chkout-fs__item .input-label,
+	.chkout-fs__item--sel-box .input-label,
+	.chkout-fs__item--sel-box .select-box {
+		font-size: 12px;
+	}
+
+	.chkout-fs__item .select-box {
+		width: calc(100% - 110px);
+	}
+
+	.chkout-fs__item--coupon .select-box {
+		width: 100%;
+	}
+
+	.chkout-fs__item--coupon,
+	.chkout-fs__item--cm {
+		height: auto;
+	}
+
+	.chkout-fs__item--coupon .input-field,
+	.chkout-fs__item--cm .input-field {
+		width: 100%;
+		flex-wrap: wrap;
+	}
+
+	.chkout-fs__item--coupon .input-label,
+	.chkout-fs__item--cm .input-label {
+		width: 100%;
+		padding: 12px 0;
+	}
+
+	.chkout-fs-direc {
+		padding-left: 0;
+	}
+
+	.chkout-fs-direc-list {
+		margin-top: 24px;
+	}
+
+	.chkout-confirm-box {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+	}
+
+	.chkout-confirm-sel-box {
+		padding-left: 16px;
+		padding-right: 16px;
+		background-color: #fff;
+		border-top: 1px solid #e5e5e5;
+	}
+
+	.chkout-confirmed-amt {
+		display: inline;
+	}
+
+	.chkout-confirm-box .em-btn--buy-now.checkout-ready:hover {
+		transform: translateY(0);
+	}
+
+	.pay-mtd-item {
+		width: calc(50% - 12px);
+	}
+
+	.pay-mtd-item__desc-box {
+		padding-bottom: 135px;
+		top: 280px;
+	}
+
+	/* ORDER COMPLETE */
+	.section--order-complt {
+		padding: 0;
+	}
+
+	.section--delete .title-box,
+	.section--order-complt .title-box {
+		margin-top: 0;
+		font-size: 26px;
+	}
+
+	.order-complt-details {
+		font-size: 14px;
+	}
+
+	/* MY PAGE */
+	.section--mypage .container {
+		flex-direction: column;
+		align-items: center;
+		padding-top: 100px;
+	}
+
+	.order-list {
+		margin-top: 20px;
+	}
+
+	.order-box {
+		order: -1;
+		width: 100vw;
+	}
+
+	.order-box .img-box__display {
+		width: 80px;
+		height: 80px;
+	}
+
+	.order-detail {
+		font-size: 0.7rem;
+	}
+
+	.order-item__status {
+		font-size: 1rem;
+		padding-right: 0;
+	}
+
+	.profile-box {
+		width: auto;
+		margin-right: 0;
+		margin-top: 40px;
+	}
+
+	/* DELETING ACCOUNT */
+	.section--delete .text-box {
+		font-size: 0.85rem;
+	}
+
+	/* PROGRESS BAR HEADER */
+	.progress-info {
+		display: none;
 	}
 }
