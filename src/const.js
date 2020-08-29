@@ -338,6 +338,13 @@ const userLevel = {
 	},
 };
 
+const itemCondition = {
+	IC001: "http://schema.org/DamagedCondition",
+	IC002: "http://schema.org/NewCondition",
+	IC003: "http://schema.org/RefurbishedCondition",
+	IC004: "http://schema.org/UsedCondition",
+};
+
 export default {
 	data() {
 		return {
@@ -345,6 +352,7 @@ export default {
 				country,
 				payMtd,
 				userLevel,
+				itemCondition,
 			},
 		};
 	},

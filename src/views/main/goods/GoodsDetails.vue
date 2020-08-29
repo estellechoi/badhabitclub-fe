@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div itemscope itemtype="http://schema.org/Product">
+    <meta itemprop="description" :content="prdtInfo.description" />
+    <meta itemprop="brand" :content="prdtInfo.brand" />
+
     <div class="prdt-info-box">
       <section class="prdt-detail">
         <!-- IMAGE BOX -->
@@ -9,6 +12,7 @@
             :key="index"
             :src="item.path"
             :alt="`${prdtInfo.prdtName} ${item.alt} 사진`"
+            itemprop="image"
           />
         </div>
 
@@ -72,7 +76,7 @@
         <div class="prdt-summary">
           <!-- PRDT HEADER -->
           <div class="prdt-header prdt-summary__content">
-            <h1 class="prdt-header__title">{{ prdtInfo.prdtName }}</h1>
+            <h1 class="prdt-header__title" itemprop="name">{{ prdtInfo.prdtName }}</h1>
 
             <div class="prdt-header__info">
               <rating-star
@@ -97,7 +101,26 @@
           </div>
 
           <!-- PRDT PRICE -->
-          <div class="prdt-price prdt-summary__content">
+          <div
+            class="prdt-price prdt-summary__content"
+            itemprop="offers"
+            itemtype="http://schema.org/Offer"
+            itemscope
+          >
+            <link itemprop="url" :href="$route.fullPath" />
+            <span
+              class="blind-box"
+              itemprop="seller"
+              itemtype="http://schema.org/Organization"
+              itemscope
+            >
+              <meta itemprop="name" :content="prdtInfo.seller" />
+            </span>
+            <meta itemprop="itemCondition" :content="CONST.itemCondition[prdtInfo.conditionCd]" />
+            <meta itemprop="price" :content="prdtInfo.salePrice" />
+            <meta itemprop="priceCurrency" :content="prdtInfo.currency" />
+            <meta itemprop="priceValidUntil" :content="prdtInfo.dscntValidUntil" />
+
             <price-tag
               :dscntRate="prdtInfo.dscntRate"
               :originPrice="prdtInfo.originPrice"
@@ -184,7 +207,9 @@
     </div>
 
     <div class="prdt-review-box">
-      <div>
+      <div itemprop="aggregateRating" itemtype="http://schema.org/AggregateRating" itemscope>
+        <meta itemprop="reviewCount" :content="prdtInfo.reviewList.length" />
+        <meta itemprop="ratingValue" :content="starCnt" />
         <h2 class="prdt-review prdt-details-sub-title">
           <rating-star :star-cnt="starCnt" :raters-cnt="prdtInfo.reviewList.length"></rating-star>
         </h2>
@@ -193,7 +218,22 @@
       <div>
         <ul>
           <li v-for="(item, index) in prdtInfo.reviewList" :key="index">
-            <article class="prdt-review-artc">
+            <article
+              class="prdt-review-artc"
+              itemprop="review"
+              itemtype="http://schema.org/Review"
+              itemscope
+            >
+              <span
+                class="blind-box"
+                itemprop="reviewRating"
+                itemtype="http://schema.org/Rating"
+                itemscope
+              >
+                <meta itemprop="ratingValue" :content="item.star" />
+                <meta itemprop="bestRating" content="5" />
+              </span>
+
               <header class="prdt-review-artc__header">
                 <div class="prdt-review-artc__profile-img">
                   <a :aria-label="item.userName">
@@ -201,8 +241,14 @@
                   </a>
                 </div>
 
-                <div class="prdt-review-artc__user-info">
-                  {{ item.userName }}
+                <div
+                  class="prdt-review-artc__user-info"
+                  itemprop="author"
+                  itemtype="http://schema.org/Person"
+                  itemscope
+                >
+                  <span itemprop="name">{{ item.userName }}</span>
+
                   <div class="prdt-review-artc__reg-dt">
                     <span>{{ item.regDt }}</span>
                   </div>
@@ -240,8 +286,15 @@ export default {
       prdtInfo: {
         id: 2,
         prdtName: "Day Cap",
+        description:
+          "배드해빗클럽에서 만든 캡퍼/제트캡, 짧은 바이저길이와 비교적 낮은 깊이로 가벼운 착화감을 자랑합니다",
+        brand: "배드해빗클럽",
+        conditionCd: "IC002",
+        seller: "배드해빗클럽",
         originPrice: 30000,
         dscntRate: 0.66,
+        dscntValidUntil: "2020-12-31",
+        currency: "KRW",
         salePrice: 30000 * 0.66,
         imgList: [
           {
