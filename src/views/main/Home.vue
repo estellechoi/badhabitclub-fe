@@ -9,7 +9,29 @@
 
     <!-- SECTION SPOT-->
     <section class="section section--spot">
-      <div class="container">
+      <div class="container" itemscope itemtype="http://schema.org/Place">
+        <meta itemprop="address" />
+        <span itemprop="logo" itemtype="http://schema.org/ImageObject" itemscope></span>
+        <meta itemprop="slogan" />
+        <meta itemprop="telephone" />
+        <meta itemprop="smokingAllowed" content="False" />
+        <span itemprop="event" itemtype="http://schema.org/Event" itemscope></span>
+        <span itemprop="photo" itemtype="http://schema.org/ImageObject" itemscope></span>
+        <span itemprop="foodEstablishment" itemtype="http://schema.org/FoodEstablishment" itemscope>
+          <meta itemprop="acceptsReservations" />
+          <meta itemprop="hasMenu" />
+          <meta itemprop="openingHours" />
+          <meta itemprop="paymentAccepted" />
+          <meta itemprop="priceRange" />
+          <meta itemprop="areaServed" />
+          <meta itemprop="brand" />
+          <meta itemprop="contactPoint" />
+          <meta itemprop="email" />
+          <span itemprop="founder" itemtype="http://schema.org/Person" itemscope>
+            <meta itemprop="name" content="채영빈" />
+          </span>
+        </span>
+
         <div class="summary">
           <div class="summary__title">Where is</div>
           <div class="summary__description">
