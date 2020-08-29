@@ -84,7 +84,7 @@
 
             <div class="prdt-btn-box">
               <button class="prdt-fav-btn" @click="toggleLike">
-                <span class="blind-box">좋아요</span>
+                <span class="blind-box">{{ like ? '좋아요 목록에서 상품 삭제하기' : '좋아요 목록에 상품 추가하기'}}</span>
                 <i class="fa-heart" :class="like ? 'fas' : 'far'"></i>
                 <!-- <i class="fas fa-heart"></i> -->
               </button>
