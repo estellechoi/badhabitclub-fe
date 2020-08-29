@@ -2087,7 +2087,6 @@ label.sign-fieldset__item > * {
 	display: inline-block;
 	width: 25%;
 	height: 280px;
-	position: relative;
 	padding: 0 16px;
 	box-sizing: border-box;
 }
@@ -2097,6 +2096,7 @@ label.sign-fieldset__item > * {
 	align-items: center;
 	height: 100%;
 	overflow: hidden;
+	position: relative;
 }
 
 .goods-item__img-box img {
