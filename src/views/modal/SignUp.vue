@@ -44,7 +44,7 @@
                     spellcheck="false"
                     autocapitalize="none"
                     placeholder="이름 (예: 길동)"
-                    v-model="signUpInfo.name"
+                    v-model="signUpInfo.givenName"
                   />
                 </div>
               </label>
@@ -149,7 +149,7 @@ export default {
     return {
       signUpInfo: {
         email: "",
-        name: "",
+        givenName: "",
         familyName: "",
         password: "",
         rcvPromoEmail: false,
