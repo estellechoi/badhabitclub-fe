@@ -20,7 +20,7 @@
           type="text"
           id="delete-reason-text"
           placeholder="계정을 해지하려는 이유가 무엇인가요?"
-          v-model="otherReason"
+          v-model="desc"
         />
       </div>
     </fieldset>
@@ -61,7 +61,7 @@ export default {
         },
       ],
       reason: null,
-      otherReason: "",
+      desc: "",
     };
   },
   computed: {
@@ -72,7 +72,7 @@ export default {
   watch: {
     reason(newVal) {
       if (newVal !== "0") {
-        this.otherReason = "";
+        this.desc = "";
       }
     },
   },
@@ -83,7 +83,7 @@ export default {
     goConfirm() {
       this.$emit("select-reason", {
         reason: this.reason,
-        otherReason: this.otherReason,
+        desc: this.desc,
       });
       this.$router.push({ name: "delete-confirm" });
     },
@@ -91,7 +91,7 @@ export default {
   mounted() {
     if (this.storedReason) {
       this.reason = this.storedReason.reason;
-      this.otherReason = this.storedReason.otherReason;
+      this.desc = this.storedReason.desc;
     }
   },
 };
