@@ -523,8 +523,8 @@ export default {
         telNo: "",
         deliReq: "",
         cm: 0,
-        coupontDscnt: 0,
-        saveAsBasic: false,
+        couponDscnt: 0,
+        saveAsBasicAddr: false,
         payMtd: "PM001",
       },
       myInfo: {
@@ -657,7 +657,7 @@ export default {
       return this.myInfo.couponList.length - 1;
     },
     couponDscntAmt() {
-      return this.orderInfo.coupontDscnt * this.bagInfo.totalAmt;
+      return this.orderInfo.couponDscnt * this.bagInfo.totalAmt;
     },
     totalPayAmt() {
       return (
@@ -706,10 +706,10 @@ export default {
       this.orderInfo.telCountryCd = val.value;
     },
     selectCoupon(val) {
-      this.orderInfo.coupontDscnt = val.rate;
+      this.orderInfo.couponDscnt = val.rate;
     },
     toggleKeepAddr(val) {
-      this.orderInfo.saveAsBasic = val;
+      this.orderInfo.saveAsBasicAddr = val;
     },
     toggleCm() {
       this.useAllCm = !this.useAllCm;
