@@ -23,6 +23,7 @@
                 spellcheck="false"
                 autocapitalize="none"
                 placeholder="이메일"
+                v-model="signInInfo.email"
               />
             </div>
           </label>
@@ -40,6 +41,7 @@
                 spellcheck="false"
                 autocapitalize="none"
                 placeholder="비밀번호"
+                v-model="signInInfo.password"
               />
               <button
                 type="button"
@@ -91,6 +93,11 @@ export default {
   name: "sign-in",
   data() {
     return {
+      signInInfo: {
+        email: "",
+        password: "",
+        keepOnline: false,
+      },
       ariaBusy: false,
       img: {
         src: "./img/brand.png",
@@ -109,6 +116,7 @@ export default {
   methods: {
     toggleKeepOnline(val) {
       console.log(val);
+      this.signInInfo.keepOnline = val;
     },
     goSignUp() {
       this.$emit("close", "signUp");
