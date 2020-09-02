@@ -49,7 +49,7 @@
                     <strong class="item-name">{{ item.prdtName }}</strong>
                   </a>
 
-                  <div class="order-detail">{{ item.cnt }} 개 * ₩ {{ item.prdtPrice }}</div>
+                  <div class="order-detail">{{ item.qty }} 개 * ₩ {{ item.prdtPrice }}</div>
                 </div>
 
                 <div
@@ -91,7 +91,7 @@ export default {
           prdtId: 1,
           prdtName: "Day Cap",
           prdtPrice: "10000",
-          cnt: 1,
+          qty: 1,
           imgPath: "img/prdt1.png",
           status: "2",
           statusLabel: "배송중",
@@ -102,7 +102,7 @@ export default {
           prdtId: 1,
           prdtName: "Day Cap",
           prdtPrice: "10000",
-          cnt: 1,
+          qty: 1,
           imgPath: "img/prdt1.png",
           status: "3",
           statusLabel: "배송완료",
@@ -113,7 +113,7 @@ export default {
           prdtId: 1,
           prdtName: "Day Cap",
           prdtPrice: "10000",
-          cnt: 1,
+          qty: 1,
           imgPath: "img/prdt1.png",
           status: "3",
           statusLabel: "배송완료",
@@ -124,7 +124,7 @@ export default {
           prdtId: 1,
           prdtName: "Day Cap",
           prdtPrice: "10000",
-          cnt: 1,
+          qty: 1,
           imgPath: "img/prdt1.png",
           status: "3",
           statusLabel: "배송완료",
