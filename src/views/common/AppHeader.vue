@@ -20,14 +20,19 @@
             </a>
           </div>
 
-          <nav class="sign-icon-box float--right" aria-hidden="false" ref="signBox">
+          <nav
+            class="sign-icon-box float--right"
+            :class="{ 'hidden' : isAllScrolled }"
+            aria-hidden="false"
+            ref="signBox"
+          >
             <a class="sign-icon-box__btn btn btn--primary" v-if="isOnline" @click="signOut">
-              <i class="fas fa-sign-out-alt"></i>
+              <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
               <span class="menu-label">SIGN OUT</span>
             </a>
 
             <a class="sign-icon-box__btn btn btn--primary" v-else @click="pullSignUpModal">
-              <i class="fas fa-sign-in-alt"></i>
+              <i class="fas fa-sign-in-alt" aria-hidden="true"></i>
               <span class="menu-label">JOIN</span>
             </a>
 
@@ -35,15 +40,20 @@
               class="sign-icon-box__btn btn btn--primary"
               @click="isOnline ? goMyPage() : pullSignInModal()"
             >
-              <i class="fas fa-user"></i>
+              <i class="fas fa-user" aria-hidden="true"></i>
               <span class="menu-label">MY PAGE</span>
             </a>
 
             <a class="sign-icon-box__btn btn btn--primary" ref="bag" @click="goShoppingBag">
               <i class="fas fa-shopping-bag" :class="{ bounce: isBagChanging }"></i>
-              <span class="menu-label">BAG</span>
+              <span class="menu-label" aria-hidden="true">BAG</span>
+              <span class="menu-label__cnt">{{ bagCnt }}</span>
             </a>
-            <span class="menu-label--bag-cnt">({{ bagCnt }})</span>
+
+            <a class="sign-icon-box__btn btn btn--primary" @click="goAdmin" v-if="isAdmin">
+              <i class="fas fa-cog" aria-hidden="true"></i>
+              <span class="menu-label">ADMIN</span>
+            </a>
           </nav>
         </div>
 
@@ -59,9 +69,9 @@
           </button>
 
           <nav>
-            <ul class="nav--list" ref="navList">
+            <ul class="nav--list" :class="{ 'toggled' : isNavToggled }" @click="goMenu">
               <li v-for="(item, index) in navList" :key="index">
-                <a @click="$router.push({ path: item.path })">
+                <a :data-path="item.path">
                   {{
                   item.label
                   }}
@@ -83,7 +93,11 @@
               </button>
 
               <div>
-                <div id="home-search-box__input" class="search-box__input-box" ref="searchInput">
+                <div
+                  id="home-search-box__input"
+                  class="search-box__input-box"
+                  :class="{ 'full-width' : showSearchBox }"
+                >
                   <input
                     type="text"
                     aria-label="검색어 입력"
@@ -128,6 +142,8 @@ export default {
   },
   data() {
     return {
+      isAdmin: true,
+      isNavToggled: false,
       banner: {
         use: false,
         title: "카카오 친구 추가하고 3,000 절약해요!",
@@ -160,8 +176,10 @@ export default {
       searchText: "",
       isOnline: true,
       isScrolledMode: false,
+      isAllScrolled: false,
       isHome: true,
       isBagChanging: false,
+      showSearchBox: false,
     };
   },
   computed: {
@@ -183,26 +201,28 @@ export default {
   },
   methods: {
     toggleInputField() {
-      const $searchInput = this.$refs.searchInput;
-      $searchInput.classList.toggle("full-width");
+      this.showSearchBox = !this.showSearchBox;
     },
     toggleNavBar() {
-      const $navList = this.$refs.navList;
-      $navList.classList.toggle("toggled");
+      this.isNavToggled = !this.isNavToggled;
+    },
+    goMenu(evt) {
+      const target = evt.target;
+      if (target.tagName !== "A") return evt.stopPropagation();
+
+      this.isNavToggled = false;
+      this.$router.push({ path: target.dataset.path });
     },
     getScrollY() {
       const pageYOffset = window.pageYOffset; // IE 10
-      // const $header = this.$refs.header;
 
       if (pageYOffset > 45) {
         this.isScrolledMode = true;
-        // $header.classList.add("scrolled");
         // this.$refs.banner.classList.add("banner--hidden");
-        this.$refs.searchInput.classList.remove("full-width");
+        this.showSearchBox = false;
         this.searchText = "";
       } else {
         this.isScrolledMode = false;
-        // $header.classList.remove("scrolled");
         // this.$refs.banner.classList.remove("banner--hidden");
       }
     },
@@ -210,12 +230,7 @@ export default {
       const scrollY = window.scrollY;
       const innerHeight = window.innerHeight;
       const docHeight = document.body.scrollHeight;
-      const isAllScrolled = scrollY + innerHeight >= docHeight;
-
-      const $signBox = this.$refs.signBox;
-
-      if (isAllScrolled) $signBox.classList.add("hidden");
-      else $signBox.classList.remove("hidden");
+      this.isAllScrolled = scrollY + innerHeight >= docHeight;
     },
     goMyPage() {
       this.$router.push("/my-page");
@@ -246,6 +261,9 @@ export default {
     signOut() {
       // signout api
       this.isOnline = false;
+    },
+    goAdmin() {
+      this.$router.push({ path: "/admin/dash-board" });
     },
     callScrollFuncs() {
       if (this.isHome) this.getScrollY();
