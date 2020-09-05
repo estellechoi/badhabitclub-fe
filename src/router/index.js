@@ -18,6 +18,11 @@ import DeleteReasons from "./../views/main/delete-account/DeleteReasons.vue";
 import DeleteConfirm from "./../views/main/delete-account/DeleteConfirm.vue";
 import DeleteComplete from "./../views/main/delete-account/DeleteComplete.vue";
 
+import Admin from "./../views/main/Admin.vue";
+import DashBoard from "./../views/main/admin/DashBoard.vue";
+import PrdtList from "./../views/main/admin/PrdtList.vue";
+import Prdt from "./../views/main/admin/Prdt.vue";
+
 const originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function(location) {
 	return originalPush.call(this, location).catch((err) => err);
@@ -105,6 +110,28 @@ const router = new VueRouter({
 					path: "order-complete",
 					name: "order-complete",
 					component: OrderComplete,
+				},
+			],
+		},
+		{
+			path: "/admin",
+			name: "admin",
+			component: Admin,
+			children: [
+				{
+					path: "prdt-list",
+					name: "prdt-list",
+					component: PrdtList,
+				},
+				{
+					path: "prdt",
+					name: "prdt",
+					component: Prdt,
+				},
+				{
+					path: "dash-board",
+					name: "dash-board",
+					component: DashBoard,
 				},
 			],
 		},
