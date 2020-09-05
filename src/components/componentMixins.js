@@ -8,6 +8,8 @@ import RatingStar from "./RatingStar.vue";
 import PriceTag from "./PriceTag.vue";
 import ProgressHeader from "./ProgressHeader.vue";
 import AddrSearchBox from "./AddrSearchBox.vue";
+import DonutChart from "./DonutChart.vue";
+import LineChart from "./LineChart.vue";
 
 export default {
 	components: {
@@ -21,5 +23,7 @@ export default {
 		PriceTag,
 		ProgressHeader,
 		AddrSearchBox,
+		DonutChart,
+		LineChart,
 	},
 };
