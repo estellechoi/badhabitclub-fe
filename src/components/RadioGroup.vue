@@ -1,5 +1,5 @@
 <template>
-  <div class="radio-group">
+  <div class="radio-group" :class="outerClass">
     <div class="radio-box" v-for="(item, index) in list" :key="index">
       <label :for="`${idPrefix}-radio-${index}`">
         <div class="radio-box__container">
@@ -40,6 +40,10 @@ export default {
     },
     idPrefix: {
       type: String,
+    },
+    outerClass: {
+      type: String,
+      default: "",
     },
   },
   data() {
