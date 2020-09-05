@@ -20,11 +20,7 @@
         <div class="prdt-detail__desc">
           <!-- HIGHLIGHTS -->
           <ul class="prdt-highlights-list">
-            <li
-              class="prdt-highlights-item"
-              v-for="(item, index) in prdtInfo.hightlights"
-              :key="index"
-            >
+            <li class="prdt-highlights-item" v-for="(item, index) in prdtInfo.badges" :key="index">
               <div class="prdt-highlights-item__icon">
                 <span v-html="item.icon"></span>
               </div>
@@ -306,7 +302,7 @@ export default {
             alt: "상품 상세",
           },
         ],
-        hightlights: [
+        badges: [
           {
             label: "친환경 소재",
             value: "0",
