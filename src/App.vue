@@ -25,7 +25,7 @@ export default {
   },
   watch: {
     $route(to) {
-      if ("delete-account order".indexOf(to.matched[0].name) > -1)
+      if ("delete-account order admin".indexOf(to.matched[0].name) > -1)
         this.showOnlyMain = false;
       else this.showOnlyMain = true;
     },
