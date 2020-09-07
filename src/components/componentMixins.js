@@ -10,6 +10,7 @@ import ProgressHeader from "./ProgressHeader.vue";
 import AddrSearchBox from "./AddrSearchBox.vue";
 import DonutChart from "./DonutChart.vue";
 import LineChart from "./LineChart.vue";
+import Progress3dBar from "./Progress3dBar.vue";
 
 export default {
 	components: {
@@ -25,5 +26,6 @@ export default {
 		AddrSearchBox,
 		DonutChart,
 		LineChart,
+		Progress3dBar,
 	},
 };
