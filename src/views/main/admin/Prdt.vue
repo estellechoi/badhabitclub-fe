@@ -5,6 +5,10 @@
         <h1 class="blind-box">상품 등록</h1>
       </div>
 
+      <!-- PROGRESS BAR -->
+      <progress-3d-bar outer-class="reg-progress-box shadow-box" :valuenow="progressValuenow"></progress-3d-bar>
+
+      <!-- MAIN SECTION -->
       <section>
         <fieldset class="prdt-fs">
           <legend class="prdt-fs__title">
@@ -30,6 +34,7 @@
                   autocorrect="off"
                   spellcheck="false"
                   autocapitalize="none"
+                  v-model="regInfo.prdtName"
                 />
               </div>
             </label>
@@ -54,6 +59,7 @@
                   autocorrect="off"
                   spellcheck="false"
                   autocapitalize="none"
+                  v-model="regInfo.originPrice"
                 />
               </div>
             </label>
@@ -79,6 +85,7 @@
                   spellcheck="false"
                   autocapitalize="none"
                   placeholder="예) 50"
+                  v-model="regInfo.dscntRate"
                 />
               </div>
             </label>
@@ -96,6 +103,8 @@
               :list="deliveries"
               :id-prefix="'prdt-deli-opt'"
               outer-class="radio-group--prdt"
+              v-model="regInfo.delivery"
+              @change="changeDelivery"
             ></radio-group>
           </div>
 
@@ -129,6 +138,7 @@
                     spellcheck="false"
                     autocapitalize="none"
                     placeholder="예) 사이즈"
+                    v-model="optLabel"
                   />
                 </div>
 
@@ -197,7 +207,7 @@
                   spellcheck="false"
                   autocapitalize="none"
                   :readonly="hasOpt"
-                  v-model="prdtInfo.inventory"
+                  v-model="regInfo.inventory"
                 />
               </div>
             </label>
@@ -305,6 +315,16 @@
 export default {
   data() {
     return {
+      regInfo: {
+        prdtName: "",
+        originPrice: null,
+        dscntRate: null,
+        delivery: "DV002",
+        inventory: null,
+      },
+      hasOpt: false,
+      optLabel: "",
+      optList: [],
       deliveries: [
         {
           label: "무료배송",
@@ -370,11 +390,6 @@ export default {
         },
       ],
       selectedMaterials: [],
-      hasOpt: false,
-      optList: [],
-      prdtInfo: {
-        inventory: 0,
-      },
     };
   },
   computed: {
@@ -384,16 +399,54 @@ export default {
         0
       );
     },
+    basicFsDone() {
+      const requiredDone =
+        this.regInfo.prdtName.length &&
+        (this.regInfo.originPrice > 0 || this.regInfo.originPrice === 0) &&
+        (this.regInfo.dscntRate > 0 || this.regInfo.dscntRate === 0) &&
+        this.deliveries
+          .map((item) => item.value)
+          .indexOf(this.regInfo.delivery) > -1 &&
+        (this.regInfo.inventory > 0 || this.regInfo.inventory === 0);
+
+      const optionalDone = this.hasOpt
+        ? this.optLabel.length &&
+          this.optList.length &&
+          this.optList.every(
+            (item) =>
+              item.label.length && (item.inventory > 0 || item.inventory === 0)
+          )
+        : true;
+
+      console.log(
+        this.optLabel.length,
+        this.optList.length,
+        this.optList.every(
+          (item) =>
+            item.label.length &&
+            (item.label.inventory > 0 || item.label.inventory === 0)
+        )
+      );
+
+      return requiredDone && optionalDone;
+    },
+    progressValuenow() {
+      return this.basicFsDone ? 100 / 3 : 0;
+    },
   },
   watch: {
     inventoryCnt(newVal) {
-      this.prdtInfo.inventory = newVal;
+      this.regInfo.inventory = newVal;
     },
   },
   methods: {
+    changeDelivery(val) {
+      this.regInfo.delivery = val;
+      console.log(this.regInfo.delivery);
+    },
     setOption() {
       this.hasOpt = !this.hasOpt;
-      this.prdtInfo.inventory = 0;
+      this.regInfo.inventory = 0;
       this.optList = [];
     },
     addOption() {
