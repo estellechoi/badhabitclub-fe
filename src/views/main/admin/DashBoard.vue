@@ -61,6 +61,7 @@
         <div class="admin-status-box__table admin-status-box__table--recent shadow-box">
           <h2 class="title title--min">새로운 주문</h2>
           <custom-table
+            table-class="table--light-line"
             caption="최근 주문 5건"
             caption-class="blind-box"
             :columns="[
@@ -98,6 +99,7 @@
         <div class="admin-status-box__table admin-status-box__table--tracking shadow-box">
           <h2 class="title title--min">도시 순위</h2>
           <custom-table
+            table-class="table--light-line"
             caption="누적 주문금액이 큰 도시 5곳"
             caption-class="blind-box"
             :columns="[
@@ -115,6 +117,41 @@
           ></custom-table>
         </div>
       </div>
+
+      <div class="admin-status-box">
+        <div class="admin-status-box__prdt shadow-box">
+          <h2 class="title title--min">이번주 인기 상품</h2>
+          <div class="content">
+            <ul class="popular-prdt-list">
+              <li class="popular-prdt-item" v-for="(item, index) in prdtList" :key="index">
+                <div class="popular-prdt-item__name">
+                  <span>{{ item.prdtName }}</span>
+                </div>
+
+                <div class="img-box">
+                  <div class="img-box__display">
+                    <img :src="item.imgPath" :alt="`${item.prdtName} 상품 사진`" />
+                  </div>
+                </div>
+
+                <div class="popular-prdt-item__details">
+                  <div class="popular-prdt-item__cate">{{ item.category }}</div>
+                  <!-- :class="{ 'marker--visible' : item.scrolled }" -->
+                  <div class="marker" ref="animatedItem">
+                    {{ item.buyRatio }}
+                    <span class="marker__sub-text">%</span>
+                  </div>
+
+                  <div>
+                    <span class="popular-prdt-item__unit">{{ item.unit}}</span>
+                    {{ item.salePrice | addCommas }}
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </template>
@@ -123,6 +160,7 @@
 export default {
   data() {
     return {
+      scrolled: false,
       overviewList: [
         {
           cd: "OV001", // 방문자수
@@ -161,18 +199,18 @@ export default {
         "12월": 9.0,
       },
       outcome: {
-        "1": 20,
-        "2": 15.9,
-        "3": 10,
-        "4": 16.0,
-        "5": 9.3,
-        "6": 10.4,
-        "7": 6.7,
-        "8": 16.0,
-        "9": 8.0,
-        "10": 6.0,
-        "11": 6.0,
-        "12": 6.0,
+        1: 20,
+        2: 15.9,
+        3: 10,
+        4: 16.0,
+        5: 9.3,
+        6: 10.4,
+        7: 6.7,
+        8: 16.0,
+        9: 8.0,
+        10: 6.0,
+        11: 6.0,
+        12: 6.0,
       },
       progressList: [
         {
@@ -252,6 +290,53 @@ export default {
           totalAmount: 10000,
         },
       ],
+      prdtList: [
+        {
+          prdtId: "PR001",
+          prdtName: "Day Cap",
+          imgPath: "/img/prdt1.png",
+          salePrice: 16000,
+          unit: "KRW",
+          category: "CT001",
+          buyRatio: 66,
+        },
+        {
+          prdtId: "PR001",
+          prdtName: "Day Cap",
+          imgPath: "/img/prdt1.png",
+          salePrice: 16000,
+          unit: "KRW",
+          category: "CT001",
+          buyRatio: 46,
+        },
+        {
+          prdtId: "PR001",
+          prdtName: "Day Cap",
+          imgPath: "/img/prdt1.png",
+          salePrice: 16000,
+          unit: "KRW",
+          category: "CT001",
+          buyRatio: 32,
+        },
+        {
+          prdtId: "PR001",
+          prdtName: "Day Cap",
+          imgPath: "/img/prdt1.png",
+          salePrice: 16000,
+          unit: "KRW",
+          category: "CT001",
+          buyRatio: 10,
+        },
+        {
+          prdtId: "PR001",
+          prdtName: "Day Cap",
+          imgPath: "/img/prdt1.png",
+          salePrice: 16000,
+          unit: "KRW",
+          category: "CT001",
+          buyRatio: 9,
+        },
+      ],
     };
   },
   computed: {
@@ -297,9 +382,21 @@ export default {
       }
       return className;
     },
+    animateMarkers() {
+      const windowHeight = window.innerHeight;
+      this.$refs.animatedItem.forEach((item) => {
+        const top = item.getBoundingClientRect().top;
+        if (windowHeight > top) item.classList.add("marker--visible");
+        else item.classList.remove("marker--visible");
+      });
+    },
   },
   mounted() {
     this.animateNumbers();
+    window.addEventListener("scroll", this.animateMarkers);
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.animateMarkers);
   },
 };
 </script>
