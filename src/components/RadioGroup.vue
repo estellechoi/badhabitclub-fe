@@ -61,6 +61,9 @@ export default {
       this.$emit("change", this.model);
     },
   },
+  mounted() {
+    if (this.value) this.model = this.value;
+  },
 };
 </script>
 
