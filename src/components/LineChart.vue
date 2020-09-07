@@ -1,40 +1,62 @@
 <template>
   <div class="line-chart-container">
-    <div class="line-chart-graph" ref="lineChart">
-      <span class="line-chart-graph__dot-label">
-        <span class="line-chart-graph-dot">
-          <span class="line-chart-graph-dot-text">수입</span>
-        </span>
-        <span class="line-chart-graph-dot line-chart-graph-dot--pink">
-          <span class="line-chart-graph-dot-text">지출</span>
-        </span>
-      </span>
+    <div
+      class="line-chart-graph"
+      ref="lineChart"
+      tabindex="0"
+      role="graphics-document"
+      aria-roledescription="line-chart-box"
+    >
+      <!-- Color Labels -->
+      <div class="line-chart-graph__dot-label-box">
+        <div class="line-chart__dot-label">
+          <span
+            class="line-chart-graph-dot"
+            tabindex="0"
+            role="graphics-symbol"
+            aria-roledescription="dot"
+            aria-label="파란색 점과 선"
+          ></span>
+          <span class="line-chart-graph-dot-text" tabindex="0">수입</span>
+        </div>
 
-      <ul>
-        <li class="line-chart-graph__y-line" v-for="(item, index) in yRange" :key="index">
-          <span class="line-chart-graph__y-label">{{ item }}</span>
-        </li>
-      </ul>
-      <!-- Labels -->
+        <div class="line-chart__dot-label">
+          <span
+            class="line-chart-graph-dot line-chart-graph-dot--pink"
+            tabindex="0"
+            role="graphics-symbol"
+            aria-roledescription="dot"
+            aria-label="분홍색 점과 선"
+          ></span>
+          <span class="line-chart-graph-dot-text" tabindex="0">지출</span>
+        </div>
+      </div>
+
+      <!-- Y-Axis Labels -->
+      <div class="line-chart-graph__y-line" v-for="(item) in yRange" :key="item">
+        <span class="line-chart-graph__y-label">{{ item }}</span>
+      </div>
+
+      <!-- X-Axis Labels -->
       <span
         class="line-chart-graph__x-label"
         v-for="(item, index) in xLabels"
-        :key="index"
-        :style="`left: ${(index + 0.5) * xInterval - 5}px`"
+        :key="item"
+        :style="xLabelStyle(index)"
       >{{ item }}</span>
 
       <!-- Income -->
       <span
         class="line-chart-graph-dot"
         v-for="(item, index) in incValList"
-        :key="index"
+        :key="`income-${index}`"
         :title="`매출 ${item}`"
-        :style="`bottom: ${item * yHeightRatio}px; left: ${(index + 0.5) * xInterval}px`"
+        :style="dotStyle(item, index)"
       >
         <span
           class="line-chart-graph-line"
           v-if="index < incValList.length"
-          :style="`width: ${Math.sqrt((((incValList[index + 1] - item) * yHeightRatio) * ((incValList[index + 1] - item) * yHeightRatio)) + (xInterval * xInterval))}px; transform: rotate(${incValList[index + 1] > item ? '-' : '' }${180 / Math.PI * Math.atan((incValList[index + 1] - item) * yHeightRatio * (incValList[index + 1] > item ? 1 : -1)/ xInterval)}deg);`"
+          :style="lineStyle(item, index, incValList)"
         ></span>
       </span>
 
@@ -42,14 +64,14 @@
       <span
         class="line-chart-graph-dot line-chart-graph-dot--pink"
         v-for="(item, index) in outcValList"
-        :key="index"
-        :title="`매출 ${item}`"
-        :style="`bottom: ${item * yHeightRatio}px; left: ${(index + 0.5) * xInterval}px`"
+        :key="`outcome-${index}`"
+        :title="`비용 ${item}`"
+        :style="dotStyle(item, index)"
       >
         <span
           class="line-chart-graph-line"
           v-if="index < outcValList.length"
-          :style="`width: ${Math.sqrt((((outcValList[index + 1] - item) * yHeightRatio) * ((outcValList[index + 1] - item) * yHeightRatio)) + (xInterval * xInterval))}px; transform: rotate(${outcValList[index + 1] > item ? '-' : '' }${180 / Math.PI * Math.atan((outcValList[index + 1] - item) * yHeightRatio * (outcValList[index + 1] > item ? 1 : -1)/ xInterval)}deg);`"
+          :style="lineStyle(item, index, outcValList)"
         ></span>
       </span>
     </div>
@@ -74,34 +96,6 @@ export default {
   },
   data() {
     return {
-      //   income: {
-      //     "1월": 10,
-      //     "2월": 39.9,
-      //     "3월": 17,
-      //     "4월": 30.0,
-      //     "5월": 5.3,
-      //     "6월": 38.4,
-      //     "7월": 15.7,
-      //     "8월": 9.0,
-      //     "9월": 9.0,
-      //     "10월": 9.0,
-      //     "11월": 9.0,
-      //     "12월": 9.0,
-      //   },
-      //   outcome: {
-      //     "1": 20,
-      //     "2": 15.9,
-      //     "3": 10,
-      //     "4": 16.0,
-      //     "5": 9.3,
-      //     "6": 10.4,
-      //     "7": 6.7,
-      //     "8": 16.0,
-      //     "9": 8.0,
-      //     "10": 6.0,
-      //     "11": 6.0,
-      //     "12": 6.0,
-      //   },
       incValList: [],
       outcValList: [],
       yRange: [],
@@ -127,6 +121,37 @@ export default {
       for (let i = 4; i >= 1; i--) {
         this.yRange.push(Math.ceil(((this.yMax - this.yMin) * i) / 4));
       }
+    },
+    xLabelStyle(index) {
+      return `left: ${(index + 0.5) * this.xInterval - 5}px`;
+    },
+    dotStyle(item, index) {
+      return `bottom: ${item * this.yHeightRatio}px; left: ${
+        (index + 0.5) * this.xInterval
+      }px`;
+    },
+    lineStyle(item, index, list) {
+      return `width: ${this.lineLength(
+        item,
+        index,
+        list
+      )}px; transform: rotate(${this.lineDeg(item, index, list)}deg)`;
+    },
+    lineLength(item, index, list) {
+      return Math.sqrt(
+        ((list[index + 1] - item) * this.yHeightRatio) ** 2 +
+          this.xInterval ** 2
+      );
+    },
+    lineDeg(item, index, list) {
+      const posiNega = list[index + 1] > item ? -1 : 1;
+      return -(
+        (180 / Math.PI) *
+        Math.atan(
+          ((list[index + 1] - item) * this.yHeightRatio) / this.xInterval
+        ) *
+        posiNega ** 2
+      );
     },
   },
   mounted() {
