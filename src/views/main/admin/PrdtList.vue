@@ -1,15 +1,43 @@
 <template>
   <section class="section section--prdt">
     <div class="container">
-      <div>
-        <h1 class="title title--center">상품 조회</h1>
+      <h1 class="blind-box">상품 조회</h1>
+
+      <div class="shadow-box admin-prdt-search-box">
+        <h2 class="title title--min">상품 검색</h2>
+
+        <label class="input-field">
+          <div class="input-label blind-box">
+            <span id="admin-prdt-search-text">검색어</span>
+          </div>
+
+          <div class="text-input">
+            <input
+              type="text"
+              class="text-input__input"
+              aria-labelledby="admin-prdt-search-text"
+              aria-required="true"
+              autocomplete="off"
+              autocorrect="off"
+              spellcheck="false"
+              autocapitalize="none"
+              placeholder="상품ID / 상품명"
+            />
+          </div>
+
+          <button type="button" class="btn btn--primary" aria-label="검색">
+            <i class="fas fa-search"></i>
+          </button>
+        </label>
       </div>
 
-      <div></div>
-
-      <custom-table
-        head-class="table-head-row--black"
-        :columns="[
+      <div class="shadow-box">
+        <custom-table
+          :has-filters="true"
+          table-class="table--light-line"
+          caption="전체 상품 목록"
+          caption-class="blind-box"
+          :columns="[
         {
             title: '상품 ID',
             data: 'prdtId'
@@ -40,8 +68,10 @@
         },
 
       ]"
-        :row-data="goodsList"
-      ></custom-table>
+          :row-data="goodsList"
+          @reorder="reorderTable"
+        ></custom-table>
+      </div>
     </div>
   </section>
 </template>
@@ -170,6 +200,12 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    reorderTable(val) {
+      console.log("reorderTable", val);
+      // api + val.orderBy val.col
+    },
   },
 };
 </script>
