@@ -6,7 +6,9 @@
       </div>
 
       <!-- PROGRESS BAR -->
-      <progress-3d-bar outer-class="reg-progress-box shadow-box" :valuenow="progressValuenow"></progress-3d-bar>
+      <div class="reg-progress-box shadow-box" :style="`right: ${fixedBarRight}px`">
+        <progress-3d-bar :valuenow="progressValuenow"></progress-3d-bar>
+      </div>
 
       <!-- MAIN SECTION -->
       <section>
@@ -315,6 +317,7 @@
 export default {
   data() {
     return {
+      fixedBarRight: 40,
       regInfo: {
         prdtName: "",
         originPrice: null,
@@ -418,16 +421,6 @@ export default {
           )
         : true;
 
-      console.log(
-        this.optLabel.length,
-        this.optList.length,
-        this.optList.every(
-          (item) =>
-            item.label.length &&
-            (item.label.inventory > 0 || item.label.inventory === 0)
-        )
-      );
-
       return requiredDone && optionalDone;
     },
     progressValuenow() {
@@ -442,7 +435,6 @@ export default {
   methods: {
     changeDelivery(val) {
       this.regInfo.delivery = val;
-      console.log(this.regInfo.delivery);
     },
     setOption() {
       this.hasOpt = !this.hasOpt;
@@ -458,7 +450,6 @@ export default {
       this.optList.splice(target.dataset.optIndex, 1);
     },
     selectMaterials(val, item) {
-      console.log(val);
       if (val) return this.selectedMaterials.push(item.value);
 
       const index = this.selectedMaterials.indexOf(item.value);
@@ -467,6 +458,17 @@ export default {
     selecLaundries(val, item) {
       console.log(val, item);
     },
+    getFixedBarRight() {
+      if (window.innerWidth > 1240)
+        this.fixedBarRight += (window.innerWidth - 1240) / 2;
+      else this.fixedBarRight = 40;
+    },
+  },
+  mounted() {
+    window.addEventListener("resize", this.getFixedBarRight);
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.getFixedBarRight);
   },
 };
 </script>
