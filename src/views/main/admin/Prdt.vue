@@ -36,10 +36,90 @@
                   autocorrect="off"
                   spellcheck="false"
                   autocapitalize="none"
-                  v-model="regInfo.prdtName"
+                  v-model="basicInfo.prdtName"
                 />
               </div>
             </label>
+          </div>
+
+          <div class="prdt-input-box prdt-input-box--brand">
+            <label class="input-field">
+              <div class="input-label">
+                <span id="prdt-brand-name">
+                  브랜드
+                  <span class="icon--required">*</span>
+                </span>
+              </div>
+
+              <div class="text-input">
+                <input
+                  type="text"
+                  class="text-input__input"
+                  aria-labelledby="prdt-brand-name"
+                  aria-required="true"
+                  autocomplete="off"
+                  autocorrect="off"
+                  spellcheck="false"
+                  autocapitalize="none"
+                  v-model="basicInfo.brandName"
+                  readonly
+                />
+              </div>
+
+              <button
+                type="button"
+                class="btn"
+                @click="openBrandBox = !openBrandBox"
+              >{{ openBrandBox ? '검색창 닫기' : '검색' }}</button>
+            </label>
+          </div>
+
+          <div class="prdt-input-box prdt-input-box--desc" v-if="openBrandBox">
+            <div class="chkout-addr-box">
+              <div class="chkout-addr-search-box">
+                <div class="text-input">
+                  <input
+                    type="text"
+                    aria-label="브랜드 검색"
+                    autocomplete="off"
+                    autocorrect="off"
+                    spellcheck="false"
+                    autocapitalize="none"
+                    class="text-input__input"
+                    v-model="brandSearchText"
+                  />
+                  <!-- @input="search" -->
+                </div>
+                <button type="button" aria-label="검색" class="btn btn--primary" @click="search">
+                  <i aria-hidden="true" class="fas fa-search"></i>
+                </button>
+                <button type="button" class="blind-box" @click="openBrandBox = false">검색창 닫기</button>
+              </div>
+
+              <div class="chkout-addr-rslt-box">
+                <div class="chkout-addr-no-rslt" v-if="!searchedBrandList.length">
+                  검색결과가 없습니다. 검색어로 입력한 브랜드명을 사용하려면
+                  <button
+                    type="button"
+                    class="btn btn--text"
+                    @click="selectNewBrand"
+                  >여기를 클릭</button>
+                  하세요.
+                </div>
+                <ul class="chkout-addr-rslt-list" @click="(evt) => selectBrand(evt)">
+                  <li v-for="(item, index) in searchedBrandList" :key="index">
+                    <div>
+                      <button
+                        type="button"
+                        class="chkout-addr-rslt__addr-sel-btn chkout-addr-rslt__addr-sel-btn--text"
+                        :data-cd="item.cd"
+                        :data-brand-name="item.brandName"
+                      >{{ item.cd }} {{ item.brandName }} ({{ item.brandNameEn }})</button>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
 
           <div class="prdt-input-box">
@@ -61,10 +141,24 @@
                   autocorrect="off"
                   spellcheck="false"
                   autocapitalize="none"
-                  v-model="regInfo.originPrice"
+                  v-model="basicInfo.originPrice"
                 />
               </div>
             </label>
+          </div>
+
+          <div class="prdt-input-box">
+            <div class="input-label">
+              <span class="blind-box">통화</span>
+            </div>
+
+            <select-box
+              id="prdt-price-currency"
+              :list="[{label: 'KRW (₩)', value: 'KRW'}]"
+              default-label="통화를 선택하세요"
+              v-model="basicInfo.currency"
+              @change="selectCurrency"
+            ></select-box>
           </div>
 
           <div class="prdt-input-box">
@@ -87,7 +181,7 @@
                   spellcheck="false"
                   autocapitalize="none"
                   placeholder="예) 50"
-                  v-model="regInfo.dscntRate"
+                  v-model="basicInfo.dscntRate"
                 />
               </div>
             </label>
@@ -105,7 +199,7 @@
               :list="deliveries"
               :id-prefix="'prdt-deli-opt'"
               outer-class="radio-group--prdt"
-              v-model="regInfo.delivery"
+              v-model="basicInfo.delivery"
               @change="changeDelivery"
             ></radio-group>
           </div>
@@ -192,7 +286,7 @@
           <div class="prdt-input-box">
             <label class="input-field">
               <div class="input-label">
-                <span id="prdt-name">
+                <span id="prdt-inventory">
                   재고수량
                   <span class="icon--required">*</span>
                 </span>
@@ -202,14 +296,14 @@
                 <input
                   type="text"
                   class="text-input__input"
-                  aria-labelledby="prdt-name"
+                  aria-labelledby="prdt-inventory"
                   aria-required="true"
                   autocomplete="off"
                   autocorrect="off"
                   spellcheck="false"
                   autocapitalize="none"
                   :readonly="hasOpt"
-                  v-model="regInfo.inventory"
+                  v-model="basicInfo.inventory"
                 />
               </div>
             </label>
@@ -234,6 +328,8 @@
               :list="conditions"
               :id-prefix="'prdt-condi-opt'"
               outer-class="radio-group--prdt"
+              v-model="prdtCondition"
+              @change="changePrdtCondition"
             ></radio-group>
           </div>
 
@@ -264,7 +360,7 @@
                 <div
                   class="prdt-material-info-field__label"
                   :id="`prdt-material-${index + 1}`"
-                >{{ item }}</div>
+                >{{ item.material }}</div>
 
                 <div class="text-input">
                   <input
@@ -276,6 +372,7 @@
                     autocorrect="off"
                     spellcheck="false"
                     autocapitalize="none"
+                    v-model="item.content"
                   />
                 </div>
                 <div class="prdt-material-info-field__unit">%</div>
@@ -307,7 +404,70 @@
           <legend class="prdt-fs__title">
             <h2 class="title title--min">검색엔진최적화 정보</h2>
           </legend>
+
+          <div class="prdt-input-box">
+            <label class="input-field">
+              <div class="input-label">
+                <span id="prdt-description">
+                  상품 설명
+                  <span class="icon--required">*</span>
+                </span>
+              </div>
+
+              <div class="text-input">
+                <input
+                  type="text"
+                  class="text-input__input"
+                  aria-labelledby="prdt-description"
+                  aria-required="true"
+                  autocomplete="off"
+                  autocorrect="off"
+                  spellcheck="false"
+                  autocapitalize="none"
+                  v-model="seoInfo.description"
+                />
+              </div>
+            </label>
+          </div>
+
+          <div class="prdt-input-box">
+            <label class="input-field">
+              <div class="input-label">
+                <span id="prdt-seller">
+                  판매자
+                  <span class="icon--required">*</span>
+                </span>
+              </div>
+
+              <div class="text-input">
+                <input
+                  type="text"
+                  class="text-input__input"
+                  aria-labelledby="prdt-seller"
+                  aria-required="true"
+                  autocomplete="off"
+                  autocorrect="off"
+                  spellcheck="false"
+                  autocapitalize="none"
+                  v-model="seoInfo.seller"
+                />
+              </div>
+            </label>
+          </div>
+          <div
+            class="prdt-input-box prdt-input-box--desc"
+          >해당 입력란은 추가적인 정보이며, 상품 등록시 저장한 거의 모든 정보가 검색엔진최적화에 사용됩니다.</div>
         </fieldset>
+
+        <div class="centering-box centering-box--pad-40">
+          <button
+            type="button"
+            class="em-btn em-btn--buy-now"
+            :class="{ 'btn--disabled' : !formDone }"
+            :disabled="!formDone"
+            @click="saveData"
+          >상품 등록</button>
+        </div>
       </section>
     </div>
   </section>
@@ -318,16 +478,30 @@ export default {
   data() {
     return {
       fixedBarRight: 40,
-      regInfo: {
+      basicInfo: {
         prdtName: "",
+        brandCd: "",
+        brandName: "",
         originPrice: null,
+        currency: "KRW",
         dscntRate: null,
         delivery: "DV002",
         inventory: null,
       },
+      prdtCondition: "CO002",
+      selectedMaterials: [],
+      selectedLaundries: [],
       hasOpt: false,
       optLabel: "",
       optList: [],
+      seoInfo: {
+        description: "",
+        seller: "배드해빗클럽",
+      },
+      openBrandBox: false,
+      brandSearchText: "",
+      fetchedBrandList: [],
+      searchedBrandList: [],
       deliveries: [
         {
           label: "무료배송",
@@ -392,7 +566,6 @@ export default {
           value: "LD005",
         },
       ],
-      selectedMaterials: [],
     };
   },
   computed: {
@@ -404,13 +577,14 @@ export default {
     },
     basicFsDone() {
       const requiredDone =
-        this.regInfo.prdtName.length &&
-        (this.regInfo.originPrice > 0 || this.regInfo.originPrice === 0) &&
-        (this.regInfo.dscntRate > 0 || this.regInfo.dscntRate === 0) &&
+        this.basicInfo.prdtName.length &&
+        this.basicInfo.brandName.length &&
+        (this.basicInfo.originPrice > 0 || this.basicInfo.originPrice === 0) &&
+        (this.basicInfo.dscntRate > 0 || this.basicInfo.dscntRate === 0) &&
         this.deliveries
           .map((item) => item.value)
-          .indexOf(this.regInfo.delivery) > -1 &&
-        (this.regInfo.inventory > 0 || this.regInfo.inventory === 0);
+          .indexOf(this.basicInfo.delivery) > -1 &&
+        (this.basicInfo.inventory > 0 || this.basicInfo.inventory === 0);
 
       const optionalDone = this.hasOpt
         ? this.optLabel.length &&
@@ -423,22 +597,102 @@ export default {
 
       return requiredDone && optionalDone;
     },
+    detailsFsDone() {
+      return (
+        this.conditions.map((item) => item.value).indexOf(this.prdtCondition) >
+          -1 &&
+        this.selectedMaterials.length &&
+        this.selectedLaundries.length
+      );
+    },
+    seoFsDone() {
+      return this.seoInfo.description.length && this.seoInfo.seller.length;
+    },
     progressValuenow() {
-      return this.basicFsDone ? 100 / 3 : 0;
+      return (
+        ([this.basicFsDone, this.detailsFsDone, this.seoFsDone].filter(
+          (item) => item
+        ).length /
+          3) *
+        100
+      );
+    },
+    formDone() {
+      return this.progressValuenow === 100;
     },
   },
   watch: {
     inventoryCnt(newVal) {
-      this.regInfo.inventory = newVal;
+      this.basicInfo.inventory = newVal;
+    },
+    openBrandBox(newVal) {
+      if (!newVal) return;
+
+      // api + this.brandSearchText
+      this.fetchedBrandList = [
+        {
+          brandName: "배드해빗클럽",
+          cd: "BR001",
+          brandNameEn: "Bad Habit Club",
+        },
+        {
+          brandName: "배드보이",
+          cd: "BR002",
+          brandNameEn: "Bad Boy",
+        },
+        {
+          brandName: "오아이오아이",
+          cd: "BR001",
+          brandNameEn: "OiOi",
+        },
+        {
+          brandName: "콤팍트",
+          cd: "BR001",
+          brandNameEn: "Kompakt",
+        },
+        {
+          brandName: "배비",
+          cd: "BR001",
+          brandNameEn: "Baby",
+        },
+      ];
+    },
+    brandSearchText(newVal) {
+      if (!newVal.length) return (this.searchedBrandList = []);
+      this.search();
     },
   },
   methods: {
+    selectNewBrand() {
+      this.basicInfo.brandCd = "";
+      this.basicInfo.brandName = this.brandSearchText;
+      this.openBrandBox = false;
+    },
+    selectBrand(evt) {
+      const target = evt.target;
+      if (target.tagName !== "BUTTON") return;
+
+      this.basicInfo.brandCd = target.dataset.cd;
+      this.basicInfo.brandName = target.dataset.brandName;
+      this.openBrandBox = false;
+    },
+    search() {
+      this.searchedBrandList = this.fetchedBrandList.filter(
+        (item) =>
+          `${item.brandName} ${item.brandNameEn} ${item.cd}`.indexOf(
+            this.brandSearchText
+          ) > -1
+      );
+    },
+    selectCurrency(val) {
+      this.basicInfo.currency = val.value;
+    },
     changeDelivery(val) {
-      this.regInfo.delivery = val;
+      this.basicInfo.delivery = val;
     },
     setOption() {
       this.hasOpt = !this.hasOpt;
-      this.regInfo.inventory = 0;
+      this.basicInfo.inventory = 0;
       this.optList = [];
     },
     addOption() {
@@ -449,14 +703,30 @@ export default {
       if (target.tagName !== "BUTTON") return;
       this.optList.splice(target.dataset.optIndex, 1);
     },
+    changePrdtCondition(val) {
+      this.prdtCondition = val;
+    },
     selectMaterials(val, item) {
-      if (val) return this.selectedMaterials.push(item.value);
+      if (val)
+        return this.selectedMaterials.push({
+          material: item.value,
+          content: 0,
+        });
 
-      const index = this.selectedMaterials.indexOf(item.value);
+      const index = this.selectedMaterials
+        .map((item) => item.material)
+        .indexOf(item.value);
       this.selectedMaterials.splice(index, 1);
     },
     selecLaundries(val, item) {
-      console.log(val, item);
+      if (val) return this.selectedLaundries.push(item.value);
+
+      const index = this.selectedLaundries.indexOf(item.value);
+      this.selectedLaundries.splice(index, 1);
+    },
+    saveData() {
+      // api
+      this.$router.push("dash-board");
     },
     getFixedBarRight() {
       if (window.innerWidth > 1240)
