@@ -431,6 +431,20 @@ input[type="tel"] {
 	box-shadow: none;
 }
 
+.btn--text {
+	font-size: 1.7em;
+	padding: 0;
+	color: #3d63f6;
+	font-weight: 700;
+	border-width: 0;
+	transition: all 0.4s;
+}
+
+.btn--text:hover {
+	box-shadow: none;
+	transform: translateY(-4px);
+}
+
 .btn--link {
 	padding: 0;
 	font-size: 0.8rem;
@@ -529,6 +543,10 @@ input[type="tel"] {
 	text-align: center;
 	padding: 10px 0;
 	box-sizing: border-box;
+}
+
+.centering-box--pad-40 {
+	padding: 40px 0;
 }
 
 .space-bw-box {
@@ -1869,7 +1887,7 @@ label.sign-fieldset__item > * {
 
 .chkout-addr-box {
 	min-height: 362px;
-	/* height: 42px; */
+	width: 100%;
 	border: 2px solid #333;
 	padding: 16px;
 	padding: 16px 24px 24px;
@@ -1940,6 +1958,13 @@ label.sign-fieldset__item > * {
 
 .chkout-addr-rslt__addr-sel-btn:hover {
 	text-decoration: underline;
+}
+
+.chkout-addr-rslt__addr-sel-btn--text {
+	padding: 18px 0 0;
+	font-size: 1rem;
+	color: #333;
+	cursor: pointer;
 }
 
 .chkout-addr-no-rslt {
@@ -2853,6 +2878,11 @@ label.sign-fieldset__item > * {
 	padding: 40px;
 }
 
+.section--prdt .em-btn {
+	width: 100%;
+	max-width: 360px;
+}
+
 .admin-prdt-search-box {
 	display: flex;
 	align-items: center;
@@ -2925,8 +2955,17 @@ label.sign-fieldset__item > * {
 	display: flex;
 }
 
+.prdt-input-box .select-box {
+	width: 100%;
+}
+
 .prdt-input-box .btn {
 	height: 100%;
+}
+
+.prdt-input-box--brand .btn {
+	width: 140px;
+	margin-left: 12px;
 }
 
 .prdt-input-box .input-field {
@@ -2942,6 +2981,11 @@ label.sign-fieldset__item > * {
 	margin-left: 140px;
 	color: #767676;
 	font-size: 0.9rem;
+}
+
+.prdt-input-search-box {
+	border: 2px solid #333;
+	padding: 20px;
 }
 
 .prdt-input-box--chckbox {
