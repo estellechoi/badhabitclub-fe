@@ -13,7 +13,6 @@
             class="text-input__input"
             v-model="addrSearchText"
             @input="searchAddr"
-            @keyup.enter="searchAddr"
           />
         </div>
 
