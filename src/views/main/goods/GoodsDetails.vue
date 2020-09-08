@@ -1,7 +1,7 @@
 <template>
   <div itemscope itemtype="http://schema.org/Product">
     <meta itemprop="description" :content="prdtInfo.description" />
-    <meta itemprop="brand" :content="prdtInfo.brand" />
+    <meta itemprop="brand" :content="prdtInfo.brandName" />
 
     <div class="prdt-info-box">
       <section class="prdt-detail">
@@ -115,7 +115,6 @@
             <meta itemprop="itemCondition" :content="CONST.itemCondition[prdtInfo.conditionCd]" />
             <meta itemprop="price" :content="prdtInfo.salePrice" />
             <meta itemprop="priceCurrency" :content="prdtInfo.currency" />
-            <meta itemprop="priceValidUntil" :content="prdtInfo.dscntValidUntil" />
 
             <price-tag
               :dscntRate="prdtInfo.dscntRate"
@@ -284,7 +283,7 @@ export default {
         prdtName: "Day Cap",
         description:
           "배드해빗클럽에서 만든 캡퍼/제트캡, 짧은 바이저길이와 비교적 낮은 깊이로 가벼운 착화감을 자랑합니다",
-        brand: "배드해빗클럽",
+        brandName: "배드해빗클럽",
         conditionCd: "IC002",
         seller: "배드해빗클럽",
         originPrice: 30000,
