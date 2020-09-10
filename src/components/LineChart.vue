@@ -33,47 +33,50 @@
       </div>
 
       <!-- Y-Axis Labels -->
-      <div class="line-chart-graph__y-line" v-for="(item) in yRange" :key="item">
-        <span class="line-chart-graph__y-label">{{ item }}</span>
-      </div>
+      <ul>
+        <li v-for="(item) in yRange" :key="item">
+          <div class="line-chart-graph__y-line">
+            <span class="line-chart-graph__y-label">{{ item }}</span>
+          </div>
+        </li>
+      </ul>
 
       <!-- X-Axis Labels -->
-      <span
-        class="line-chart-graph__x-label"
-        v-for="(item, index) in xLabels"
-        :key="item"
-        :style="xLabelStyle(index)"
-      >{{ item }}</span>
+      <ol class="line-chart-graph__x-label">
+        <li v-for="(item) in xLabels" :key="item">
+          <span class="line-chart-graph__x-label">{{ item }}</span>
+        </li>
+      </ol>
 
       <!-- Income -->
-      <span
-        class="line-chart-graph-dot"
-        v-for="(item, index) in incValList"
-        :key="`income-${index}`"
-        :title="`매출 ${item}`"
-        :style="dotStyle(item, index)"
-      >
-        <span
-          class="line-chart-graph-line"
-          v-if="index < incValList.length"
-          :style="lineStyle(item, index, incValList)"
-        ></span>
-      </span>
+      <ol class="line-chart-graph__values">
+        <li v-for="(item, index) in incValList" :key="`income-${index}`">
+          <span class="line-chart-graph-dot" :title="`매출 ${item}`" :style="dotStyle(item)">
+            <span
+              class="line-chart-graph-line"
+              v-if="index < incValList.length"
+              :style="lineStyle(item, index, incValList)"
+            ></span>
+          </span>
+        </li>
+      </ol>
 
       <!-- Outcome -->
-      <span
-        class="line-chart-graph-dot line-chart-graph-dot--pink"
-        v-for="(item, index) in outcValList"
-        :key="`outcome-${index}`"
-        :title="`비용 ${item}`"
-        :style="dotStyle(item, index)"
-      >
-        <span
-          class="line-chart-graph-line"
-          v-if="index < outcValList.length"
-          :style="lineStyle(item, index, outcValList)"
-        ></span>
-      </span>
+      <ol class="line-chart-graph__values">
+        <li v-for="(item, index) in outcValList" :key="`outcome-${index}`">
+          <span
+            class="line-chart-graph-dot line-chart-graph-dot--pink"
+            :title="`비용 ${item}`"
+            :style="dotStyle(item)"
+          >
+            <span
+              class="line-chart-graph-line"
+              v-if="index < outcValList.length"
+              :style="lineStyle(item, index, outcValList)"
+            ></span>
+          </span>
+        </li>
+      </ol>
     </div>
   </div>
 </template>
@@ -100,11 +103,12 @@ export default {
       outcValList: [],
       yRange: [],
       xLabels: [],
+      width: 0,
     };
   },
   computed: {
     xInterval() {
-      return this.$refs.lineChart.clientWidth / this.incValList.length;
+      return (this.width - 7) / (this.incValList.length - 1);
     },
     yHeightRatio() {
       return (this.$refs.lineChart.clientHeight * 0.8) / this.yMax;
@@ -118,17 +122,15 @@ export default {
   },
   methods: {
     getIncRange() {
-      for (let i = 4; i >= 1; i--) {
-        this.yRange.push(Math.ceil(((this.yMax - this.yMin) * i) / 4));
+      console.log(this.yMin);
+      for (let i = 3; i >= 0; i--) {
+        this.yRange.push(
+          Math.ceil(((this.yMax - this.yMin) / 4) * i + this.yMin)
+        );
       }
     },
-    xLabelStyle(index) {
-      return `left: ${(index + 0.5) * this.xInterval - 5}px`;
-    },
-    dotStyle(item, index) {
-      return `bottom: ${item * this.yHeightRatio}px; left: ${
-        (index + 0.5) * this.xInterval
-      }px`;
+    dotStyle(item) {
+      return `bottom: ${item * this.yHeightRatio}px;`;
     },
     lineStyle(item, index, list) {
       return `width: ${this.lineLength(
@@ -153,12 +155,21 @@ export default {
         posiNega ** 2
       );
     },
+    getWidth() {
+      this.width = this.$refs.lineChart.clientWidth;
+    },
   },
   mounted() {
     this.xLabels = Object.keys(this.income);
     this.incValList = Object.values(this.income);
     this.outcValList = Object.values(this.outcome);
     this.getIncRange();
+    this.getWidth();
+
+    window.addEventListener("resize", this.getWidth);
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.getWidth);
   },
 };
 </script>
