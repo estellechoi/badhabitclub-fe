@@ -18,13 +18,11 @@
                 :src="item.imgPath"
                 :alt="`Main image of ${item.prdtName}`"
                 :data-index="index"
-                :data-id="item.id"
+                :data-prdt-id="item.prdtId"
                 itemprop="image"
               />
 
               <span
-                aria-hidden="true"
-                tabindex="-1"
                 class="goods-item__label"
                 :class="{ 'goods-item__label--visible': item.showLabel }"
               >
@@ -49,79 +47,79 @@ export default {
     return {
       goodsList: [
         {
-          id: 1,
+          prdtId: "PR001",
           prdtName: "Day Cap",
           price: 100000,
           imgPath: "./img/prdt1.png",
         },
         {
-          id: 2,
+          prdtId: "PR002",
+          prdtName: "Original Logo T-shirts White/Red",
+          price: 100000,
+          imgPath: "./img/prdt2.png",
+        },
+        {
+          prdtId: "PR001",
           prdtName: "Day Cap",
           price: 100000,
           imgPath: "./img/prdt1.png",
         },
         {
-          id: 3,
+          prdtId: "PR001",
           prdtName: "Day Cap",
           price: 100000,
           imgPath: "./img/prdt1.png",
         },
         {
-          id: 4,
+          prdtId: "PR001",
           prdtName: "Day Cap",
           price: 100000,
           imgPath: "./img/prdt1.png",
         },
         {
-          id: 5,
+          prdtId: "PR001",
           prdtName: "Day Cap",
           price: 100000,
           imgPath: "./img/prdt1.png",
         },
         {
-          id: 6,
+          prdtId: "PR001",
           prdtName: "Day Cap",
           price: 100000,
           imgPath: "./img/prdt1.png",
         },
         {
-          id: 7,
+          prdtId: "PR001",
           prdtName: "Day Cap",
           price: 100000,
           imgPath: "./img/prdt1.png",
         },
         {
-          id: 8,
+          prdtId: "PR001",
           prdtName: "Day Cap",
           price: 100000,
           imgPath: "./img/prdt1.png",
         },
         {
-          id: 9,
+          prdtId: "PR001",
           prdtName: "Day Cap",
           price: 100000,
           imgPath: "./img/prdt1.png",
         },
         {
-          id: 10,
+          prdtId: "PR001",
           prdtName: "Day Cap",
           price: 100000,
           imgPath: "./img/prdt1.png",
         },
         {
-          id: 11,
+          prdtId: "PR001",
           prdtName: "Day Cap",
           price: 100000,
           imgPath: "./img/prdt1.png",
         },
         {
-          id: 12,
-          prdtName: "Day Cap",
-          price: 100000,
-          imgPath: "./img/prdt1.png",
-        },
-        {
-          id: 13,
+          prdtId: "PR001",
           prdtName: "Day Cap",
           price: 100000,
           imgPath: "./img/prdt1.png",
@@ -150,7 +148,7 @@ export default {
       const target = evt.target;
       if (target.tagName !== "IMG") return;
       this.$router.push({
-        path: `/goods/${target.dataset.id}/details`,
+        path: `/goods/${target.dataset.prdtId}/details`,
       });
     },
   },
