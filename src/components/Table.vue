@@ -21,30 +21,32 @@
           {{ col.title }}
           <div
             class="table-icon-box"
-            v-if="hasFilters"
+            v-if="hasFilters && !col.cannotReorder"
             @mouseover="col.slideIcon = true"
             @mouseout="col.slideIcon = false"
           >
-            <span
-              class="table-icon table-icon--asc"
-              :class="{ 'table-icon--active' : col.orderBy === 'asc'}"
-              role="button"
-              :aria-label="`${col.title} 열을 기준으로 오름차순 정렬하기`"
-              tabindex="0"
-              @click="reorderData('asc', col)"
-            >
-              <span class="table-icon__content"></span>
-            </span>
+            <span class="table-icon-container">
+              <span
+                class="table-icon table-icon--asc"
+                :class="{ 'table-icon--active' : col.orderBy === 'asc'}"
+                role="button"
+                :aria-label="`${col.title} 열을 기준으로 오름차순 정렬하기`"
+                tabindex="0"
+                @click="reorderData('asc', col)"
+              >
+                <span class="table-icon__content"></span>
+              </span>
 
-            <span
-              class="table-icon"
-              :class="{ 'table-icon--desc' : col.slideIcon || col.orderBy === 'desc', 'table-icon--active' : col.orderBy === 'desc' }"
-              role="button"
-              :aria-label="`${col.title} 열을 기준으로 내림차순 정렬하기`"
-              tabindex="0"
-              @click="reorderData('desc', col)"
-            >
-              <span class="table-icon__content table-icon__content--desc"></span>
+              <span
+                class="table-icon"
+                :class="{ 'table-icon--desc' : col.slideIcon || col.orderBy === 'desc', 'table-icon--active' : col.orderBy === 'desc' }"
+                role="button"
+                :aria-label="`${col.title} 열을 기준으로 내림차순 정렬하기`"
+                tabindex="0"
+                @click="reorderData('desc', col)"
+              >
+                <span class="table-icon__content table-icon__content--desc"></span>
+              </span>
             </span>
           </div>
         </th>
@@ -52,7 +54,12 @@
     </thead>
 
     <tbody>
-      <tr class="table-body-row" :class="bodyClass" v-for="(item, index) in rowData" :key="index">
+      <tr
+        class="table-body-row"
+        v-for="(item, index) in rowData"
+        :key="index"
+        :class="{ bodyClass, 'table-body-row--hover-st' : hasHoverStyle }"
+      >
         <td v-for="(col, colIndex) in cols" :key="colIndex">
           <span :title="cellTitle(item, col)" v-html="cellContent(item, col)"></span>
         </td>
@@ -66,6 +73,10 @@ export default {
   name: "custom-table",
   props: {
     hasFilters: {
+      type: Boolean,
+      default: false,
+    },
+    hasHoverStyle: {
       type: Boolean,
       default: false,
     },
@@ -129,6 +140,13 @@ export default {
 
       if (col.type && col.type === "number")
         val = this.$options.filters.addCommas(val);
+
+      if (col.type && col.type === "image")
+        val = `<div class='img-box'><div class='img-box__display' style='width: ${
+          col.size
+        }px; height: ${col.size}px;'><img src='${val}' alt='${
+          item[col.alt]
+        }'/></div></div>`;
 
       return col.formatter ? col.formatter(val, item) : val;
     },
