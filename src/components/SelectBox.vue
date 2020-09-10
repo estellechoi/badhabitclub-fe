@@ -11,7 +11,7 @@
       aria-haspopup="true"
       :aria-expanded="isExpanded"
       @click="toggleSelectBox"
-      @keydown="toggleSelectBox"
+      @keyup="toggleSelectBox"
     >
       <label :for="`${id}-box`" class="select-box__label">
         <div :id="`${id}-box`" class="select-box__title" aria-invalid="false" aria-disabled="false">
