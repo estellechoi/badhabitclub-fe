@@ -10,7 +10,7 @@
         ></i>
       </span>
 
-      <span class="review-cnt">{{ ratersCnt }} {{ label }}</span>
+      <span class="review-cnt">{{ ratersCnt ? ratersCnt : '' }} {{ label }}</span>
     </a>
   </span>
 </template>
@@ -32,7 +32,7 @@ export default {
     },
     label: {
       type: String,
-      default: " 개 리뷰",
+      default: "",
     },
   },
 };
