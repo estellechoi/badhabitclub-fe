@@ -179,6 +179,7 @@ input[type="tel"] {
 /* TABLE */
 .table {
 	width: 100%;
+	margin-top: 12px;
 }
 
 .table-caption {
@@ -195,22 +196,45 @@ input[type="tel"] {
 .table th,
 .table td {
 	padding: 12px 6px;
+	vertical-align: middle;
+	white-space: pre-line;
+	line-height: 1.4;
+	position: relative;
 }
 
 .table tr,
 .table th,
 .table td {
 	text-align: center;
-	vertical-align: center;
 }
 
 .table-head-row {
 	font-size: 14px;
 }
 
+.table-body-row--hover-st {
+	cursor: pointer;
+}
+
+.table-body-row--hover-st:hover {
+	color: #3d63f6;
+	font-weight: 700;
+}
+
 .table-icon-box {
+	position: absolute;
+	left: 0;
+	top: -12px;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.table-icon-container {
 	position: relative;
-	top: -16px;
+	width: 20px;
+	height: 20px;
+	/* display: block; */
 }
 
 .table-icon {
@@ -225,7 +249,8 @@ input[type="tel"] {
 	border-width: 0;
 	cursor: pointer;
 	position: absolute;
-	right: 20px;
+	left: 0;
+	top: 0;
 	transition: transform 0.75s;
 }
 
@@ -499,6 +524,10 @@ input[type="tel"] {
 	to {
 		transform: translateY(-6px);
 	}
+}
+
+.btn--rotate-x-180 > * {
+	transform: rotateX(180deg);
 }
 
 .em-btn {
@@ -2321,6 +2350,7 @@ label.sign-fieldset__item > * {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	align-content: center;
 	opacity: 0;
 	transition: opacity 0.4s;
 }
@@ -2332,6 +2362,7 @@ label.sign-fieldset__item > * {
 .goods-item__label > * {
 	display: block;
 	margin-top: 8px;
+	text-align: center;
 }
 
 .goods-item__name {
@@ -2570,6 +2601,16 @@ label.sign-fieldset__item > * {
 	padding-bottom: 40px;
 }
 
+.prdt-review-artc .img-box__display {
+	width: 80px;
+	height: 80px;
+}
+
+.prdt-review-artc__container {
+	display: flex;
+	justify-content: space-between;
+}
+
 .prdt-review-artc__header {
 	display: flex;
 	padding-bottom: 6px;
@@ -2607,6 +2648,10 @@ label.sign-fieldset__item > * {
 	padding-top: 6px;
 	font-size: 11px;
 	color: #767676;
+}
+
+.prdt-review-artc__star {
+	padding: 6px;
 }
 
 .prdt-review-artc__main-con {
@@ -2658,7 +2703,8 @@ label.sign-fieldset__item > * {
 	padding: 40px;
 }
 
-.section--admin-dash .title {
+.section--admin-dash .title,
+.section--review .title {
 	padding-top: 0;
 }
 
@@ -2874,7 +2920,8 @@ label.sign-fieldset__item > * {
 
 /* ADMIN PRDT LIST */
 
-.section--prdt .container {
+.section--prdt .container,
+.section--review .container {
 	padding: 40px;
 }
 
@@ -3090,6 +3137,64 @@ label.sign-fieldset__item > * {
 	align-items: center;
 }
 
+/* ADMIN REVIEW */
+.section--review .shadow-box {
+	margin-top: 40px;
+}
+
+.admin-total-star {
+	font-size: 30px;
+}
+
+.admin-best-worst-box {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+
+.admin-best-worst-box .img-box {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.admin-best-worst-box .btn {
+	width: 100%;
+	margin-top: 12px;
+	font-size: 20px;
+	color: #7d7d7d;
+}
+
+.admin-best-worst-box .btn .admin-best-worst-box .img-box__display {
+	margin: 0;
+}
+
+.admin-best-worst-box__item {
+	max-width: 48%;
+	flex: 1 1 auto;
+}
+
+.admin-best-worst-box__title {
+	padding-bottom: 20px;
+	color: #7d7d7d;
+	text-align: left;
+}
+
+.admin-best-worst-box__star {
+	margin-bottom: 12px;
+}
+
+.admin-best-worst-box__prdt-name {
+	font-size: 1.5rem;
+	font-weight: 700;
+	display: block;
+}
+
+.admin-best-worst-box__info {
+	margin-top: 12px;
+	display: flex;
+	justify-content: space-between;
+}
+
 /* SPINNER */
 .spinner {
 	display: flex;
@@ -3282,6 +3387,7 @@ label.sign-fieldset__item > * {
 .line-chart-graph {
 	width: 100%;
 	height: 100%;
+	padding-left: 12px;
 	position: relative;
 	top: -10px;
 }
@@ -3315,20 +3421,27 @@ label.sign-fieldset__item > * {
 	position: relative;
 }
 
-.line-chart-graph__y-label,
-.line-chart-graph__x-label {
+.line-chart-graph__y-label {
 	position: absolute;
 	font-size: 12px;
 	color: #767676;
-}
-
-.line-chart-graph__y-label {
+	left: -20px;
 	bottom: 0;
 }
 
 .line-chart-graph__x-label {
-	bottom: 4px;
+	display: flex;
+	justify-content: space-between;
+	position: relative;
+	top: 6px;
+	color: #767676;
 	font-size: 10px;
+}
+
+.line-chart-graph__values {
+	display: flex;
+	justify-content: space-between;
+	position: relative;
 }
 
 .line-chart-graph-dot {
@@ -3338,7 +3451,7 @@ label.sign-fieldset__item > * {
 	background-color: #3d63f6;
 	border-radius: 50%;
 	border: 2px solid #3d63f6;
-	position: absolute;
+	position: relative;
 }
 
 .line-chart-graph-line {
