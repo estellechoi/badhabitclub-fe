@@ -5,7 +5,7 @@
 
       <div class="admin-overview-box">
         <div>
-          <h2 class="title title--min">주요 지표</h2>
+          <h2 class="title title--min">오늘의 지표</h2>
         </div>
 
         <div>
@@ -15,7 +15,7 @@
               v-for="(item, index) in overviewList"
               :key="index"
             >
-              <div class="admin-overview-item__label">{{ item.cd }}</div>
+              <div class="admin-overview-item__label">{{ item.cd | codeLabel }}</div>
               <div class="admin-overview-item__value">
                 <span class="admin-overview-item__unit" v-if="item.unit">{{ item.unit }}</span>
                 <span class="blind-box">{{ item.value }}</span>
@@ -30,14 +30,13 @@
       <div class="admin-status-box">
         <div class="admin-status-box__revenue shadow-box">
           <h2 class="title title--min">손익</h2>
-          <!-- line-chart -->
           <div class="content">
             <line-chart :income="income" :outcome="outcome"></line-chart>
           </div>
         </div>
 
         <div class="admin-status-box__status shadow-box">
-          <h2 class="title title--min">주문 처리상태</h2>
+          <h2 class="title title--min">주문 현황</h2>
           <div class="content">
             <div class="admin-status-summary">
               <donut-chart label="배송완료" :prop-ratio="receivedRatio"></donut-chart>
@@ -163,24 +162,25 @@ export default {
       scrolled: false,
       overviewList: [
         {
-          cd: "OV001", // 방문자수
-          value: 100,
-          desc: "전주대비 10% 증가",
-        },
-        {
-          cd: "OV002", // 회원수
-          value: 100,
-          desc: "전주대비 10% 증가",
-        },
-        {
-          cd: "OV003", // 주문
-          value: 50,
-          desc: "전주대비 10% 증가",
-        },
-        {
-          cd: "OV004", // 매출
+          cd: "OV001", // 매출
           value: 1000000,
           unit: "₩",
+          desc: "전일대비 10% 증가",
+        },
+        {
+          cd: "OV002", // 주문건수
+          value: 50,
+          desc: "전일대비 10% 증가",
+        },
+        {
+          cd: "OV003", // 건당 결제금액
+          value: 1000000 / 50,
+          unit: "₩",
+          desc: "전일대비 10% 증가",
+        },
+        {
+          cd: "OV004", // 방문자수
+          value: 900,
           desc: "전주대비 10% 증가",
         },
       ],
