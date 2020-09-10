@@ -34,6 +34,7 @@
       <div class="shadow-box">
         <custom-table
           :has-filters="true"
+          :has-hover-style="true"
           table-class="table--light-line"
           caption="전체 상품 목록"
           caption-class="blind-box"
