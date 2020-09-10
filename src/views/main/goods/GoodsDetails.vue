@@ -211,51 +211,7 @@
       </div>
 
       <div>
-        <ul>
-          <li v-for="(item, index) in prdtInfo.reviewList" :key="index">
-            <article
-              class="prdt-review-artc"
-              itemprop="review"
-              itemtype="http://schema.org/Review"
-              itemscope
-            >
-              <span
-                class="blind-box"
-                itemprop="reviewRating"
-                itemtype="http://schema.org/Rating"
-                itemscope
-              >
-                <meta itemprop="ratingValue" :content="item.star" />
-                <meta itemprop="bestRating" content="5" />
-              </span>
-
-              <header class="prdt-review-artc__header">
-                <div class="prdt-review-artc__profile-img">
-                  <a :aria-label="item.userName">
-                    <img :src="item.userProfImgPath" :alt="`${item.userName} 프로필 사진`" />
-                  </a>
-                </div>
-
-                <div
-                  class="prdt-review-artc__user-info"
-                  itemprop="author"
-                  itemtype="http://schema.org/Person"
-                  itemscope
-                >
-                  <span itemprop="name">{{ item.userName }}</span>
-
-                  <div class="prdt-review-artc__reg-dt">
-                    <span>{{ item.regDt }}</span>
-                  </div>
-                </div>
-              </header>
-
-              <div class="prdt-review-artc__main-con">
-                <p>{{ item.content }}</p>
-              </div>
-            </article>
-          </li>
-        </ul>
+        <comment-list :list="prdtInfo.reviewList"></comment-list>
       </div>
     </div>
 
@@ -279,7 +235,7 @@ export default {
       showModalShare: false,
       puttingStatus: 0,
       prdtInfo: {
-        id: 2,
+        prdtId: "PR001",
         prdtName: "Day Cap",
         description:
           "배드해빗클럽에서 만든 캡퍼/제트캡, 짧은 바이저길이와 비교적 낮은 깊이로 가벼운 착화감을 자랑합니다",
@@ -290,7 +246,7 @@ export default {
         dscntRate: 0.66,
         dscntValidUntil: "2020-12-31",
         currency: "KRW",
-        salePrice: 30000 * 0.66,
+        salePrice: 30000 * 0.44,
         imgList: [
           {
             path: "/img/prdt1.png",
@@ -541,7 +497,7 @@ export default {
             ...item,
             optionLabel: this.prdtInfo.optionLabel,
             prdtInfo: {
-              id: this.prdtInfo.id,
+              prdtId: this.prdtInfo.prdtId,
               prdtName: this.prdtInfo.prdtName,
               originPrice: this.prdtInfo.originPrice,
               dscntRate: this.prdtInfo.dscntRate,
@@ -562,7 +518,7 @@ export default {
         ...item,
         optionLabel: this.prdtInfo.optionLabel,
         prdtInfo: {
-          id: this.prdtInfo.id,
+          prdtId: this.prdtInfo.prdtId,
           prdtName: this.prdtInfo.prdtName,
           originPrice: this.prdtInfo.originPrice,
           dscntRate: this.prdtInfo.dscntRate,
