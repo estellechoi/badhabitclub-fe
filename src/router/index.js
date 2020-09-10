@@ -22,6 +22,9 @@ import Admin from "./../views/main/Admin.vue";
 import DashBoard from "./../views/main/admin/DashBoard.vue";
 import PrdtList from "./../views/main/admin/PrdtList.vue";
 import Prdt from "./../views/main/admin/Prdt.vue";
+import Review from "./../views/main/admin/Review.vue";
+import Claim from "./../views/main/admin/Claim.vue";
+import UserList from "./../views/main/admin/UserList.vue";
 
 const originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function(location) {
@@ -132,6 +135,21 @@ const router = new VueRouter({
 					path: "dash-board",
 					name: "dash-board",
 					component: DashBoard,
+				},
+				{
+					path: "review",
+					name: "review",
+					component: Review,
+				},
+				{
+					path: "claim",
+					name: "claim",
+					component: Claim,
+				},
+				{
+					path: "user-list",
+					name: "user-list",
+					component: UserList,
 				},
 			],
 		},
