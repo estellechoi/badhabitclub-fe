@@ -11,6 +11,7 @@ import AddrSearchBox from "./AddrSearchBox.vue";
 import DonutChart from "./DonutChart.vue";
 import LineChart from "./LineChart.vue";
 import Progress3dBar from "./Progress3dBar.vue";
+import CommentList from "./CommentList.vue";
 
 export default {
 	components: {
@@ -27,5 +28,6 @@ export default {
 		DonutChart,
 		LineChart,
 		Progress3dBar,
+		CommentList,
 	},
 };
