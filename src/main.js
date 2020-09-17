@@ -5,8 +5,9 @@ import store from "./store/index.js";
 
 import componentMixins from "./components/componentMixins";
 import CONST from "./const.js";
+import mixins from "./mixins.js";
 
-Vue.mixin({ ...componentMixins, ...CONST });
+Vue.mixin({ ...componentMixins, ...CONST, ...mixins });
 
 import filter from "./filter.js";
 filter.init(Vue);
