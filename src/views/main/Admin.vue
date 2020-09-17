@@ -34,6 +34,11 @@ export default {
     return {
       adminMenuList: [
         {
+          label: "대시보드",
+          value: "",
+          path: "dashboard",
+        },
+        {
           label: "상품조회",
           value: "",
           path: "prdt-list",
@@ -49,12 +54,12 @@ export default {
           path: "review",
         },
         {
-          label: "클레임 관리",
+          label: "클레임",
           value: "",
           path: "claim",
         },
         {
-          label: "프로모션 관리",
+          label: "프로모션",
           value: "",
           path: "promotion",
         },
@@ -69,7 +74,7 @@ export default {
           path: "seo",
         },
         {
-          label: "쇼핑몰 설정",
+          label: "설정",
           value: "",
           path: "settings",
         },
