@@ -263,7 +263,7 @@ export default {
       this.isOnline = false;
     },
     goAdmin() {
-      this.$router.push({ path: "/admin/dash-board" });
+      this.$router.push({ path: "/admin/dashboard" });
     },
     callScrollFuncs() {
       if (this.isHome) this.getScrollY();
