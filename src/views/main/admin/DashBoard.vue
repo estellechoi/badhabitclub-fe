@@ -349,24 +349,6 @@ export default {
     },
   },
   methods: {
-    animateNumbers() {
-      const counters = this.$refs.counter;
-      counters.forEach((item) => {
-        const updateCount = () => {
-          const targetVal = +item.getAttribute("data-target");
-          const count = +item.innerText.replace(",", "");
-          const speed = targetVal > 10000 ? 200 : 100;
-          const inc = targetVal / speed;
-
-          if (count < targetVal) {
-            item.innerText = this.$options.filters.addCommas(count + inc);
-            window.setTimeout(updateCount, 2);
-          } else item.innerText = this.$options.filters.addCommas(targetVal);
-        };
-
-        updateCount();
-      });
-    },
     getStatusClass(val) {
       let className = "";
       switch (val) {
@@ -392,7 +374,7 @@ export default {
     },
   },
   mounted() {
-    this.animateNumbers();
+    this.animateNumbers(this.$refs.counter);
     window.addEventListener("scroll", this.animateMarkers);
   },
   beforeDestroy() {
