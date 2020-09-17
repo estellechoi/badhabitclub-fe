@@ -75,7 +75,7 @@ export default {
     return {
       menuList: [
         {
-          icon: `<i class="fab fa-bitcoin"></i>`,
+          icon: `<i class='fas fa-coins'></i>`,
           title: "클럽 머니",
           content: "₩ 10,000",
         },
