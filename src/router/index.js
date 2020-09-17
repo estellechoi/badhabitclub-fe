@@ -25,6 +25,7 @@ import Prdt from "./../views/main/admin/Prdt.vue";
 import Review from "./../views/main/admin/Review.vue";
 import Claim from "./../views/main/admin/Claim.vue";
 import UserList from "./../views/main/admin/UserList.vue";
+import User from "./../views/main/admin/User.vue";
 
 const originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function(location) {
@@ -132,8 +133,8 @@ const router = new VueRouter({
 					component: Prdt,
 				},
 				{
-					path: "dash-board",
-					name: "dash-board",
+					path: "dashboard",
+					name: "dashboard",
 					component: DashBoard,
 				},
 				{
@@ -150,6 +151,11 @@ const router = new VueRouter({
 					path: "user-list",
 					name: "user-list",
 					component: UserList,
+				},
+				{
+					path: "user/:userId",
+					name: "user",
+					component: User,
 				},
 			],
 		},
