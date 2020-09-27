@@ -595,7 +595,11 @@ details > summary::-webkit-details-marker {
 }
 
 .shadow-box:hover {
-	transform: translateY(-10px);
+	transform: translateY(-6px);
+}
+
+.shadow-box .title {
+	padding-top: 0;
 }
 
 /* INPUT */
@@ -686,15 +690,19 @@ details > summary::-webkit-details-marker {
 	font-size: 12px;
 }
 
+.text-badge--blue {
+	background-color: rgba(61, 99, 246, 0.1);
+	color: #3d63f6;
+}
+
 .text-badge--late {
 	background-color: rgba(245, 118, 165, 0.1);
 	color: #f576a5;
 }
 
-.text-badge--blue {
-	background-color: rgba(61, 99, 246, 0.1);
-	color: #3d63f6;
-	font-size: 13px;
+.text-badge--red {
+	background-color: rgba(220, 20, 60, 0.1);
+	color: #dc143c;
 }
 
 .text-badge--black {
@@ -1305,6 +1313,26 @@ main {
 	display: none;
 }
 
+/* MODAL - ALERT */
+.alert-container {
+	padding: 80px 40px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 320px;
+}
+
+.alert-text {
+	margin-bottom: 40px;
+	font-size: 22px;
+}
+
+.alert-btn {
+	width: 30%;
+	height: 52px;
+}
+
 /* MODAL - SIGNIN, SIGNUP */
 
 .sign-box {
@@ -1383,12 +1411,15 @@ main {
 	margin: 0 auto;
 	border-radius: 50%;
 	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .img-box__img {
 	width: 100%;
 	height: 100%;
-	border-radius: 50%;
+	border-radius: inherit;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -1399,7 +1430,7 @@ main {
 	display: block;
 	width: 100%;
 	background-color: #d8d8d8;
-	border-radius: 50%;
+	border-radius: inherit;
 	overflow: hidden;
 }
 
@@ -1497,6 +1528,10 @@ label.sign-fieldset__item > * {
 }
 
 /* MY PAGE */
+.section--user .container {
+	padding-top: 130px;
+}
+
 .section--mypage .container {
 	padding: 180px 40px 40px;
 	display: flex;
@@ -2816,13 +2851,8 @@ label.sign-fieldset__item > * {
 	padding: 40px;
 }
 
-.section--admin-dash .title,
-.section--review .title,
-.section--user .title {
-	padding-top: 0;
-}
-
-.admin-overview-box .title {
+.admin-overview-box .title,
+.order-processing .title {
 	padding-left: 40px;
 }
 
@@ -3033,10 +3063,7 @@ label.sign-fieldset__item > * {
 }
 
 /* ADMIN PRDT LIST */
-
-.section--prdt .container,
-.section--review .container,
-.section--user .container {
+.section--prdt .container {
 	padding: 40px;
 }
 
@@ -3048,6 +3075,11 @@ label.sign-fieldset__item > * {
 
 .section--prdt .unfold-btn-box {
 	margin: 40px 0;
+}
+
+.prdt-add-btn-box > .btn {
+	font-size: 34px;
+	height: 40px;
 }
 
 .admin-prdt-search-box {
@@ -3257,6 +3289,10 @@ label.sign-fieldset__item > * {
 }
 
 /* ADMIN REVIEW */
+.section--review .container {
+	padding: 40px;
+}
+
 .section--review .shadow-box,
 .section--user .shadow-box {
 	margin-top: 40px;
@@ -3316,6 +3352,10 @@ label.sign-fieldset__item > * {
 }
 
 /* ADMIN USER */
+.section--admin .section--user .container {
+	padding-top: 40px;
+}
+
 .section--user .order-list .img-box__display {
 	width: 80px;
 	height: 80px;
@@ -3545,8 +3585,248 @@ label.sign-fieldset__item > * {
 	margin-right: 0;
 }
 
-/* UNFOLD BTN */
+/* ADMIN ORDER DETAILS */
+.title.order-title {
+	display: flex;
+	align-items: center;
+	padding-bottom: 6vh;
+}
 
+.order-badge {
+	margin-left: 20px;
+}
+
+.order-badge--date {
+	border-left: 1px solid #e5e5e5;
+	padding: 0 20px;
+	font-size: 13px;
+}
+
+.order-info {
+	width: 65%;
+}
+
+.order-info .shadow-box {
+	margin-top: 40px;
+}
+
+.order-info .shadow-box:first-child {
+	margin-top: 0;
+}
+
+.order-info .img-box__display {
+	width: 80px;
+	height: 80px;
+}
+
+.order-delivery-info {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.order-delivery-info .img-box__display {
+	width: 60px;
+	height: 60px;
+	border-radius: 10px;
+	box-shadow: 2px 2px 6px 2px rgba(0, 0, 0, 0.06);
+}
+
+.order-delivery-info__co-name {
+	width: 60%;
+	font-weight: 700;
+}
+
+.order-pay-info .credit-card-box {
+	display: inline-block;
+	position: absolute;
+	top: 26px;
+	padding-left: 20px;
+	transform: scale(0.5);
+	transform-origin: top left;
+}
+
+.order-pay-details-list {
+}
+
+.order-pay-details-item {
+	display: flex;
+	justify-content: space-between;
+	padding: 16px 0;
+}
+
+.order-pay-details-item--total {
+	border-top: 1px solid #e5e5e5;
+}
+
+.order-pay-details-item__label {
+	font-weight: 700;
+}
+
+.order-processing .title {
+	padding-top: 8vh;
+}
+
+.order-processing .shadow-box {
+	margin-top: 0;
+}
+
+.order-processing__inner {
+	position: relative;
+}
+
+.order-processing-axis {
+	width: 1px;
+	height: 500px;
+	position: relative;
+	left: 19.5px;
+	background-color: #e5e5e5;
+}
+
+.order-processing-list {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+}
+
+.order-processing-item {
+	display: flex;
+	margin-bottom: 40px;
+}
+
+.order-processing-item > .shadow-box {
+	flex: 1 1 auto;
+	position: relative;
+	top: 20px;
+}
+
+.order-processing-dot-container {
+	width: 40px;
+	display: flex;
+	justify-content: center;
+}
+
+.order-processing-dot {
+	display: block;
+	position: relative;
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	background-color: #fff;
+	box-shadow: 2px 2px 6px 2px rgba(0, 0, 0, 0.1);
+}
+
+.order-processing-dot--inner {
+	position: absolute;
+	top: 25%;
+	left: 25%;
+	width: 50%;
+	height: 50%;
+	background-color: #3d63f6;
+	box-shadow: none;
+}
+
+.order-processing-dot-label {
+	position: absolute;
+	left: 40px;
+	font-size: 12px;
+	color: #7d7d7d;
+}
+
+.order-processing-content {
+	height: 60px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+}
+
+.order-processing-content > * {
+	margin: 10px 0;
+}
+
+.order-processing-content .text-badge {
+	font-size: 15px;
+}
+
+.order-processing-content__desc {
+	color: #7d7d7d;
+	font-size: 0.9em;
+}
+
+.order-user-info {
+	width: 30%;
+}
+
+.order-user-info .shadow-box {
+	position: sticky;
+	top: 40px;
+}
+
+.order-user-info__item {
+	border-bottom: 1px solid #e5e5e5;
+	padding: 8px 0;
+}
+
+.order-user-info__item:last-child {
+	border-bottom-width: 0;
+}
+
+.order-user-info__item .title {
+	font-size: 17px;
+	padding: 1.6vh 0;
+}
+
+.order-user-link {
+	display: flex;
+	align-items: center;
+	height: 46px;
+}
+
+.order-user-link .img-box {
+	margin-right: 20px;
+	font-size: 20px;
+}
+
+.order-user-link .img-box__display {
+	width: 40px;
+	height: 40px;
+	border: 1px solid #e5e5e5;
+	transition: all 0.4s;
+}
+
+.order-user-link:hover .img-box__display {
+	border-color: #3d63f6;
+}
+
+.order-user-link__label {
+	flex: 1 1 auto;
+	display: flex;
+	justify-content: space-between;
+}
+
+.order-user-info__text {
+	line-height: 2;
+	font-size: 0.9em;
+}
+
+/* ROW FLEX CONTAINER */
+.row-flex-container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.row-flex-section {
+	flex: 1 1 auto;
+	margin-left: 40px;
+}
+
+.row-flex-section:first-child {
+	margin-left: 0;
+}
+
+/* UNFOLD BTN */
 .unfold-btn-box {
 	text-align: center;
 }
@@ -3899,4 +4179,87 @@ label.sign-fieldset__item > * {
 	height: 2em;
 	background-color: rgba(254, 254, 254, 0.6);
 	transition: width 0.3s ease-in-out;
+}
+
+/* CREDIT CARD  */
+.credit-card-box .flip {
+	position: relative;
+	transition: 0.6s;
+	width: 80px;
+	height: 50px;
+	transform-style: preserve-3d;
+}
+
+.credit-card-box .flip:hover {
+	transform: rotateY(180deg);
+}
+
+.credit-card-box .front,
+.credit-card-box .back {
+	width: 100%;
+	height: 100%;
+	border-radius: 5px;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	background: linear-gradient(135deg, #bd6772, #53223f);
+	color: #fff;
+	box-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.credit-card-box .front {
+	transform: rotateY(0deg);
+}
+
+.credit-card-box .chip {
+	position: absolute;
+	top: 14%;
+	left: 10%;
+	width: 14%;
+	height: 17%;
+	background: linear-gradient(135deg, #ddccf0 0%, #d1e9f5 44%, #f8ece7 100%);
+	border-radius: 2px;
+}
+
+.credit-card-box .holder,
+.credit-card-box .expiration-date {
+	position: absolute;
+	bottom: 14%;
+	font-size: 0.2em;
+	text-transform: uppercase;
+}
+
+.credit-card-box .holder {
+	left: 10%;
+}
+
+.credit-card-box .expiration-date {
+	left: 10%;
+}
+
+.credit-card-box .back {
+	transform: rotateY(180deg);
+}
+
+.credit-card-box .mag-strip {
+	position: absolute;
+	top: 20%;
+	left: 0;
+	width: 100%;
+	height: 20%;
+	background: linear-gradient(135deg, #404040, #1a1a1a);
+}
+
+.credit-card-box .cvc {
+	position: absolute;
+	top: 46%;
+	left: 0;
+	right: 0;
+	width: 80%;
+	height: 10%;
+	margin: 0 auto;
+	background-color: #fff;
+	border-radius: 5px;
 }
