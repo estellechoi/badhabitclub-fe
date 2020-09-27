@@ -11,20 +11,19 @@
         <div class="img-box">
           <div class="img-box__display">
             <div class="img-box__img">
-              <img :src="userInfo.userProfImgPath" :alt="`${userInfo.userName} 프로필 사진`" />
+              <img
+                :src="userInfo.userProfImgPath"
+                :alt="`${userInfo.userName} 프로필 사진`"
+                ref="profileImg"
+              />
             </div>
 
-            <details class="img-box__hover-effect" for="profile-img-uploader">
-              <summary
-                role="button"
-                aria-haspopup="menu"
-                aria-label="프로필 사진 바꾸기"
-                @click="changeImage"
-              >
+            <details class="img-box__hover-effect" ref="profileImgHoverSkin">
+              <summary role="button" aria-haspopup="menu" aria-label="프로필 사진 바꾸기">
                 <i class="fas fa-camera" aria-hidden="true"></i>
               </summary>
 
-              <ul class="img-update-menu-list" role="menu">
+              <ul class="img-update-menu-list" role="menu" @mouseleave="resetHoverMenus">
                 <li class="img-update-menu-item">
                   <label
                     class="img-update-menu-item__btn"
@@ -34,13 +33,19 @@
                   >사진 업로드</label>
                   <input
                     type="file"
+                    class="blind-box"
                     id="profile-img-uploader"
                     accept="image/png, image/jpeg"
-                    hidden
+                    @change="selectImg"
                   />
                 </li>
                 <li class="img-update-menu-item">
-                  <button class="img-update-menu-item__btn" type="button" role="menuitem">사진 삭제</button>
+                  <button
+                    class="img-update-menu-item__btn"
+                    type="button"
+                    role="menuitem"
+                    @click="deleteImg"
+                  >사진 삭제</button>
                 </li>
               </ul>
             </details>
@@ -217,15 +222,19 @@
       </div>
     </div>
 
-    <!-- 프로필 사진 바꾸기 모달-->
-    <modal v-if="showModal" aria-label="프로필 사진 바꾸기" @close="showModal = false">
-      <sign-up slot="body" @close="showModal = false"></sign-up>
-    </modal>
+    <!-- <modal v-if="showModal" aria-label="확인 알림창" @close="closeModal">
+      <alert slot="body" text="사진이 삭제됩니다." @close="closeModal"></alert>
+    </modal>-->
   </section>
 </template>
 
 <script>
+// import Alert from "./../../modal/Alert.vue";
+
 export default {
+  components: {
+    // Alert,
+  },
   data() {
     return {
       userInfo: {},
@@ -233,6 +242,7 @@ export default {
       moveLeft: 0,
       page: 1,
       showModal: false,
+      files: null,
     };
   },
   computed: {
@@ -496,20 +506,17 @@ export default {
         this.userInfo.orderList
       );
     },
-    changeImage() {
-      // 페이지 이동 ?
+    selectImg(evt) {
+      this.files = this.selectImgFile(evt, this.$refs.profileImg);
     },
-    pastDays(val) {
-      const today = new Date();
-      const year = today.getFullYear();
-      let month = today.getMonth() + 1;
-      month = month >= 10 ? month : `0${month}`;
-      let day = today.getDate();
-      day = day >= 10 ? day : `0${day}`;
-
-      val = val.split("-").join("");
-
-      return parseInt(`${year}${month}${day}`) - parseInt(val);
+    deleteImg() {
+      // this.showModal = true;
+      // 비동기 Modal 필요
+      this.$refs.profileImg.src = this.CONST.defaultUserImg;
+      this.files = null;
+    },
+    resetHoverMenus() {
+      this.$refs.profileImgHoverSkin.open = false;
     },
     goLikeList(evt) {
       const target = evt.path.filter(
@@ -546,6 +553,9 @@ export default {
         path: "/delete-account/reasons",
       });
     },
+    // closeModal(val) {
+    //   console.log(val);
+    // },
   },
   mounted() {
     window.addEventListener("resize", this.resizeListBox);
