@@ -7,7 +7,7 @@ import GoodsList from "./../views/main/GoodsList.vue";
 import Goods from "./../views/main/Goods.vue";
 import GoodsDetails from "./../views/main/goods/GoodsDetails.vue";
 
-import MyPage from "./../views/main/MyPage.vue";
+// import MyPage from "./../views/main/MyPage.vue";
 import Order from "./../views/main/Order.vue";
 import Bag from "./../views/main/order/Bag.vue";
 import Checkout from "./../views/main/order/Checkout.vue";
@@ -26,6 +26,8 @@ import Review from "./../views/main/admin/Review.vue";
 import Claim from "./../views/main/admin/Claim.vue";
 import UserList from "./../views/main/admin/UserList.vue";
 import User from "./../views/main/admin/User.vue";
+import OrderList from "./../views/main/admin/OrderList.vue";
+import OrderDetails from "./../views/main/admin/OrderDetails.vue";
 
 const originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function(location) {
@@ -50,7 +52,7 @@ const router = new VueRouter({
 		{
 			path: "/my-page",
 			name: "my-page",
-			component: MyPage,
+			component: User,
 		},
 		{
 			path: "/bag",
@@ -156,6 +158,16 @@ const router = new VueRouter({
 					path: "user/:userId",
 					name: "user",
 					component: User,
+				},
+				{
+					path: "order-list",
+					name: "order-list",
+					component: OrderList,
+				},
+				{
+					path: "order-details/:orderId",
+					name: "order-details",
+					component: OrderDetails,
 				},
 			],
 		},
