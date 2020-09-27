@@ -162,13 +162,17 @@ export default {
       let val = text;
 
       if (col.type && col.type === "image")
-        val = `<div class='img-box'><div class='img-box__display' style='width: ${
-          col.size
-        }px; height: ${col.size}px;'><img src='${val}' alt='${
-          item[col.alt]
-        }'/></div></div>`;
+        val = `<div class='img-box'>
+                <div class='img-box__display' style='width: ${
+                  col.size
+                }px; height: ${col.size}px;'>
+                  <div class="img-box__img">
+                    <img src='${val}' alt='${item[col.alt]}'/>
+                  </div>
+                </div>
+              </div>`;
 
-      return col.formatter ? col.formatter(val, originVal) : val;
+      return col.formatter ? col.formatter(val, originVal, item) : val;
     },
   },
   mounted() {
