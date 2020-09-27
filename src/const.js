@@ -345,6 +345,8 @@ const itemCondition = {
 	IC004: "http://schema.org/UsedCondition",
 };
 
+const defaultUserImg = "/img/default-user-img.png";
+
 export default {
 	data() {
 		return {
@@ -353,6 +355,7 @@ export default {
 				payMtd,
 				userLevel,
 				itemCondition,
+				defaultUserImg,
 			},
 		};
 	},
