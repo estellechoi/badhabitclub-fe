@@ -35,7 +35,9 @@
 
             <div class="img-box">
               <div class="img-box__display">
-                <img :src="item.imgList[0].path" :alt="item.imgList[0].alt" />
+                <div class="img-box__img">
+                  <img :src="item.imgList[0].path" :alt="item.imgList[0].alt" />
+                </div>
               </div>
             </div>
           </div>
