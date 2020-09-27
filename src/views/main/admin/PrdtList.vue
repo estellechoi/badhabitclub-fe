@@ -3,6 +3,12 @@
     <div class="container">
       <h1 class="blind-box">상품 조회</h1>
 
+      <div class="centering-box centering-box--big-font prdt-add-btn-box">
+        <button class="btn btn--primary" aria-label="새상품 등록" @click="goAddPrdt">
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
+
       <div class="shadow-box admin-prdt-search-box">
         <h2 class="title title--min">상품 검색</h2>
 
@@ -203,6 +209,9 @@ export default {
     };
   },
   methods: {
+    goAddPrdt() {
+      this.$router.push({ path: "prdt" });
+    },
     reorderTable(val) {
       console.log("reorderTable", val);
       // api + val.orderBy val.col
