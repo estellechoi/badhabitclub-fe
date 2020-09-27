@@ -39,14 +39,14 @@ export default {
           path: "dashboard",
         },
         {
-          label: "상품조회",
+          label: "상품관리",
           value: "",
           path: "prdt-list",
         },
         {
-          label: "상품등록",
+          label: "주문관리",
           value: "",
-          path: "prdt",
+          path: "order-list",
         },
         {
           label: "리뷰",
