@@ -12,6 +12,7 @@ import DonutChart from "./DonutChart.vue";
 import LineChart from "./LineChart.vue";
 import Progress3dBar from "./Progress3dBar.vue";
 import CommentList from "./CommentList.vue";
+import CreditCard from "./CreditCard.vue";
 
 export default {
 	components: {
@@ -29,5 +30,6 @@ export default {
 		LineChart,
 		Progress3dBar,
 		CommentList,
+		CreditCard,
 	},
 };
