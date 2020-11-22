@@ -1,4 +1,4 @@
-const API_KEY = "AIzaSyCTQIlxBn5AfKGvsfJiormAE1esN3fcCkg";
+const API_KEY = process.env.VUE_APP_GOOGLEMAP_KEY;
 const CALLBACK = "getMap";
 
 let resolvePromise;
